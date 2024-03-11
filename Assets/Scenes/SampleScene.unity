@@ -538,7 +538,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 584732961}
-  - component: {fileID: 584732960}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -546,20 +545,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &584732960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 584732959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 850aba00e4e7b8443ac9d2013caa4423, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHoldDuration: 3
-  minHoldDuration: 1
 --- !u!4 &584732961
 Transform:
   m_ObjectHideFlags: 0
@@ -670,7 +655,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -918,7 +903,7 @@ GameObject:
   - component: {fileID: 1049608363}
   m_Layer: 0
   m_Name: Player Input
-  m_TagString: Untagged
+  m_TagString: PlayerInput
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
