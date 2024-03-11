@@ -1,19 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MemoryFishing.Gameplay.Fishing.Fish
 {
     public abstract class FishBehaviour : MonoBehaviour
     {
-        public abstract Vector2 UpdateFishDirection(float delta);
+        public abstract Vector3 UpdateFishDirection(float delta);
+        public abstract Vector3 GetFishDirection();
+
         public abstract void InitiateFishing();
 
-        public virtual float UpdateExhaustion(float delta, Vector2 input)
+        public virtual float UpdateExhaustion(float delta, Vector3 input)
         {
-            float dot = Vector2.Dot(input, UpdateFishDirection(delta));
+            float dot = Vector3.Dot(input, GetFishDirection());
 
-            return dot * GetExhaustionMultiplier(dot);
+            return dot * GetExhaustionMultiplier(dot) * delta;
         }
 
         public abstract float GetExhaustionMultiplier(float dot);

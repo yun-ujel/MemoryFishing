@@ -6,13 +6,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 {
     public class BasicFish : FishBehaviour
     {
-        private Vector2 direction;
-
-        private float currentRotationDeg;
-
-        private float prevRotationDeg;
-        private float targetRotationDeg;
-
+        [Header("Direction")]
         [SerializeField, Range(0f, 720f)] private float maxAngleRange = 360f;
         [SerializeField, Range(0f, 360f)] private float angleOffset = 0f;
 
@@ -20,6 +14,15 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         [SerializeField, Range(0f, 10f)] private float maxHoldDuration = 3f;
         [SerializeField, Range(0f, 10f)] private float minHoldDuration = 1f;
+
+        [Header("Exhaustion")]
+        [SerializeField, Range(0f, 1f)] private float positiveExhaustMultiplier = 0.1f;
+        [SerializeField, Range(0f, 1f)] private float negativeExhaustMultiplier = 0.05f;
+
+        private float currentRotationDeg;
+
+        private float prevRotationDeg;
+        private float targetRotationDeg;
 
         private float targetHoldDuration;
         private float currentHoldDuration;
@@ -30,7 +33,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         }
 
-        public override Vector2 UpdateFishDirection(float delta)
+        public override Vector3 UpdateFishDirection(float delta)
         {
             currentHoldDuration += delta;
             if (currentHoldDuration >= targetHoldDuration)
@@ -38,18 +41,24 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
                 GetNewRotation();
             }
 
-            LerpRotation();
-            return GeneralUtils.DegreesToVector(currentRotationDeg + angleOffset);
+            LerpRotation(currentHoldDuration / targetHoldDuration);
+            return GetFishDirection();
+        }
+
+        public override Vector3 GetFishDirection()
+        {
+            Vector2 direction = GeneralUtils.DegreesToVector(currentRotationDeg + angleOffset);
+            return direction.OnZAxis();
         }
 
         public override float GetExhaustionMultiplier(float dot)
         {
             if (dot < 0f)
             {
-                return 0.5f;
+                return negativeExhaustMultiplier;
             }
 
-            return 1f;
+            return positiveExhaustMultiplier;
         }
         #endregion
 
@@ -63,10 +72,8 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
             currentHoldDuration = 0f;
         }
 
-        private void LerpRotation()
+        private void LerpRotation(float t)
         {
-            float t = currentHoldDuration / targetHoldDuration;
-
             currentRotationDeg = Mathf.Lerp(prevRotationDeg, targetRotationDeg, t);
         }
         #endregion

@@ -31,8 +31,7 @@ namespace MemoryFishing.Gameplay.Player
 
             MousePoint = GetMousePoint(lookRay);
 
-            LookDirection = (MousePoint - transform.position).ExcludeYAxis();
-            LookDirection.Normalize();
+            LookDirection = (MousePoint - transform.position).ExcludeYAxis().normalized;
         }
 
         private Vector3 GetMousePoint(Ray lookRay)
