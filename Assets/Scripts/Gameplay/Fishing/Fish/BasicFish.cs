@@ -81,7 +81,8 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         private float CalculateAngleOffset(Vector3 playerPos, Vector3 fishPos)
         {
-            float angleToPlayer = Vector3.Angle((playerPos - fishPos).ExcludeYAxis().normalized, Vector3.right);
+            Vector3 direction = (playerPos - fishPos).ExcludeYAxis().normalized;
+            float angleToPlayer = GeneralUtils.VectorToDegrees(direction.OnYAxis());
 
             bool flipAngle = fishPos.z > playerPos.z;
             angleToPlayer = flipAngle ? (360 - angleToPlayer) : angleToPlayer;
