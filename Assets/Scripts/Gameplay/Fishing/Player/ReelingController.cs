@@ -26,14 +26,17 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         [SerializeField] private PlayerDirection player;
         [Space, SerializeField] private FishBehaviour startFish;
-        [SerializeField, Range(0f, 1f)] private float fishExhaustion;
+        private float fishExhaustion;
 
         public event System.EventHandler<OnStartReelingEventArgs> OnStartReelingEvent;
 
         private bool reeling;
         private FishBehaviour currentFish;
 
+        private Vector3 startingFishPosition;
+
         #endregion
+
         public override void Start()
         {
             base.Start();
@@ -57,26 +60,34 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             fishExhaustion = 0;
 
             Vector3 playerPos = transform.position;
-            Vector3 fishPos = fish.transform.position;
+            startingFishPosition = fish.transform.position;
 
-            fish.InitiateFishing(playerPos, fishPos);
-            OnStartReelingEvent?.Invoke(this, new OnStartReelingEventArgs(fish, playerPos, fishPos));
+            fish.InitiateFishing(playerPos, startingFishPosition);
+            OnStartReelingEvent?.Invoke(this, new OnStartReelingEventArgs(fish, playerPos, startingFishPosition));
         }
 
         private void UpdateReeling()
         {
-            _ = currentFish.UpdateFishDirection(Time.deltaTime);
-            fishExhaustion += currentFish.UpdateExhaustion(Time.deltaTime, -player.LookDirection);
+            currentFish.UpdateFish(Time.deltaTime);
+            Vector3 lookDirection = player.GetLookDirection(currentFish.transform.position);
 
-            Debug.DrawRay(currentFish.transform.position, currentFish.GetFishDirection(), Color.red);
-            Debug.DrawRay(currentFish.transform.position, player.LookDirection, Color.green);
+            fishExhaustion += currentFish.UpdateFishExhaustion(Time.deltaTime, -lookDirection);
+            fishExhaustion = Mathf.Clamp01(fishExhaustion);
+            
+            DrawDirections(currentFish.transform.position, lookDirection);
 
-            Debug.DrawRay(currentFish.transform.position + new Vector3(-1, 0, 2), 2 * fishExhaustion * Vector3.right);
-
-            if (fishExhaustion > 1f)
+            if (fishExhaustion >= 1f)
             {
                 EndReeling();
             }
+        }
+
+        private void DrawDirections(Vector3 fishPos, Vector3 playerDirection)
+        {
+            Debug.DrawRay(fishPos, currentFish.GetFishDirection(), Color.red);
+            Debug.DrawRay(fishPos, playerDirection, Color.green);
+
+            Debug.DrawRay(fishPos + new Vector3(-1, 0, 2), 2 * fishExhaustion * Vector3.right);
         }
 
         private void EndReeling()

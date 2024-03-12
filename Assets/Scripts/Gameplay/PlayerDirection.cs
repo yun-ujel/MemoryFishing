@@ -15,8 +15,19 @@ namespace MemoryFishing.Gameplay.Player
         private Vector2 stickDirection;
 
         public Vector3 LookDirection { get; private set; }
-        public Vector3 MousePoint { get; private set; }
 
+        private Vector3 mousePoint;
+        private bool mouseUsedLast;
+
+        public Vector3 GetLookDirection(Vector3 fromPosition)
+        {
+            if (mouseUsedLast)
+            {
+                return (mousePoint - fromPosition).ExcludeYAxis().normalized;
+            }
+
+            return LookDirection;
+        }
 
         public override void SubscribeToInputActions()
         {
@@ -29,9 +40,10 @@ namespace MemoryFishing.Gameplay.Player
         {
             Ray lookRay = lookCamera.ScreenPointToRay(ctx.ReadValue<Vector2>());
 
-            MousePoint = GetMousePoint(lookRay);
+            mousePoint = GetMousePoint(lookRay);
 
-            LookDirection = (MousePoint - transform.position).ExcludeYAxis().normalized;
+            LookDirection = (mousePoint - transform.position).ExcludeYAxis().normalized;
+            mouseUsedLast = true;
         }
 
         private Vector3 GetMousePoint(Ray lookRay)
@@ -64,6 +76,7 @@ namespace MemoryFishing.Gameplay.Player
             }
 
             LookDirection = stickDirection.normalized.OnZAxis();
+            mouseUsedLast = false;
         }
     }
 }
