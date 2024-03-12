@@ -7,7 +7,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         public abstract Vector3 UpdateFishDirection(float delta);
         public abstract Vector3 GetFishDirection();
 
-        public abstract void InitiateFishing();
+        public abstract void InitiateFishing(Vector3 playerPos, Vector3 fishPos);
 
         public virtual float UpdateExhaustion(float delta, Vector3 input)
         {

@@ -28,7 +28,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         private float currentHoldDuration;
 
         #region Override Methods
-        public override void InitiateFishing()
+        public override void InitiateFishing(Vector3 playerPos, Vector3 fishPos)
         {
 
         }
