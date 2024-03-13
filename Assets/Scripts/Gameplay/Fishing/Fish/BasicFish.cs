@@ -142,6 +142,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         private void GetNewTarget()
         {
+            currentRotationDeg = targetRotationDeg;
             prevRotationDeg = currentRotationDeg;
 
             targetRotationDeg = Random.value * maxAngleRange;

@@ -37,5 +37,10 @@ namespace MemoryFishing.Utilities
             float radians = Mathf.Acos(vector.x);
             return radians * Mathf.Rad2Deg;
         }
+
+        public static float VectorToDegrees(Vector3 vector)
+        {
+            return VectorToDegrees(vector.OnYAxis());
+        }
     }
 }

@@ -15,8 +15,8 @@ namespace MemoryFishing.UI.Fishing
 
         [Space]
 
-        [SerializeField, Range(0, 1)] private float minSpriteAlpha = 0.2f;
-        [SerializeField, Range(0, 1)] private float maxSpriteAlpha = 0.6f;
+        [SerializeField] private Color circleColorMin;
+        [SerializeField] private Color circleColorMax;
 
         private bool reeling;
 
@@ -24,18 +24,6 @@ namespace MemoryFishing.UI.Fishing
         {
             get => radialSprite.fillAmount;
             set => radialSprite.fillAmount = value;
-        }
-
-        private float Alpha
-        {
-            get => radialSprite.color.a;
-            set
-            {
-                Color color = radialSprite.color;
-                color.a = value;
-
-                radialSprite.color = color;
-            }
         }
 
         private void Start()
@@ -49,7 +37,7 @@ namespace MemoryFishing.UI.Fishing
             reeling = true;
 
             FillAmount = 0;
-            Alpha = minSpriteAlpha;
+            radialSprite.color = circleColorMin;
         }
 
         private void EndReeling(object sender, ReelingController.OnEndReelingEventArgs args)
@@ -57,7 +45,7 @@ namespace MemoryFishing.UI.Fishing
             reeling = false;
 
             FillAmount = 1;
-            Alpha = maxSpriteAlpha;
+            radialSprite.color = circleColorMax;
         }
 
         private void Update()
@@ -67,7 +55,7 @@ namespace MemoryFishing.UI.Fishing
                 float exhaustion = reelingController.FishExhaustion;
 
                 FillAmount = exhaustion;
-                Alpha = Mathf.Lerp(minSpriteAlpha, maxSpriteAlpha, exhaustion);
+                radialSprite.color = Color.Lerp(circleColorMin, circleColorMax, exhaustion);
             }
         }
     }

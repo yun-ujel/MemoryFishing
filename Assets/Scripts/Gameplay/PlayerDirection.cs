@@ -15,7 +15,7 @@ namespace MemoryFishing.Gameplay.Player
         [Space, SerializeField] private LayerMask mouseHitLayers;
         private Vector2 stickDirection;
 
-        public Vector3 LookDirection { get; private set; }
+        public Vector3 LookDirection { get; private set; } = Vector3.forward;
 
         private Vector3 mousePoint;
         private bool mouseUsedLast;
