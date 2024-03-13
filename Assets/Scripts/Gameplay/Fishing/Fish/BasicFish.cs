@@ -67,6 +67,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         public override float UpdateFishExhaustion(float delta, Vector3 input)
         {
             currentExhaustion += base.UpdateFishExhaustion(delta, input);
+            currentExhaustion = Mathf.Clamp01(currentExhaustion);
 
             return base.UpdateFishExhaustion(delta, input);
         }
