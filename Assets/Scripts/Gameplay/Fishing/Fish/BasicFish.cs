@@ -4,9 +4,10 @@ using MemoryFishing.Utilities;
 
 namespace MemoryFishing.Gameplay.Fishing.Fish
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class BasicFish : FishBehaviour
     {
-        [SerializeField] private Rigidbody body;
+        private Rigidbody body;
 
         [Header("Direction")]
         [SerializeField, Range(0f, 720f)] private float maxAngleRange = 270f;
@@ -19,6 +20,11 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         [Header("Movement")]
         [SerializeField, Range(0f, 10f)] private float maxDistanceFromStart = 3f;
         [SerializeField, Range(0f, 10f)] private float speed = 2f;
+        [SerializeField] private float acceleration = 20f;
+
+        [Space]
+
+        [SerializeField, Range(0f, 10f)] private float idleFriction = 1f;
 
         [Header("Exhaustion")]
         [SerializeField, Range(0f, 1f)] private float positiveExhaustMultiplier = 0.1f;
@@ -32,11 +38,33 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         private float currentExhaustion;
 
         private Vector3 startPos;
+        private Vector3 playerPos;
+
+        private void Start()
+        {
+            body = GetComponent<Rigidbody>();
+        }
+
+        private void FixedUpdate()
+        {
+            if (!isReeling)
+            {
+                // Apply Friction
+                body.AddForce(body.velocity * -idleFriction);
+            }
+        }
 
         #region Override Methods
-        public override void InitiateFishing(Vector3 playerPos, Vector3 fishPos)
+        public override void InitiateReeling(Vector3 playerPos, Vector3 fishPos)
         {
+            base.InitiateReeling(playerPos, fishPos);
+
+            currentExhaustion = 0f;
+            GetNewTarget();
+
             startPos = fishPos;
+            this.playerPos = playerPos;
+
             angleOffset = CalculateAngleOffset(playerPos, fishPos);
         }
 
@@ -58,10 +86,12 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
             float maxDistance = Mathf.Lerp(maxDistanceFromStart, 0f, currentExhaustion);
             Vector3 directionToCenter = (startPos - transform.position).normalized;
 
+            Vector3 desiredDirection = GetFishDirection();
+
             float t = VectorUtils.SqrDistance(transform.position, startPos) / Mathf.Pow(maxDistance, 2);
 
-            Vector3 direction = Vector3.Lerp(GetFishDirection(), directionToCenter, t).ExcludeYAxis();
-            body.velocity = direction * speed;
+            Vector3 direction = Vector3.Lerp(desiredDirection, directionToCenter, t).ExcludeYAxis();
+            body.velocity = Vector3.MoveTowards(body.velocity, direction * speed, acceleration * delta);
         }
 
         public override float UpdateFishExhaustion(float delta, Vector3 input)
@@ -88,9 +118,10 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
             return positiveExhaustMultiplier;
         }
 
-        public override void StopFishing()
+        public override void StopReeling()
         {
-            body.velocity = Vector3.zero;
+            base.StopReeling();
+            DriftToCenter();
         }
 
         #endregion
@@ -122,6 +153,17 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         {
             currentRotationDeg = Mathf.Lerp(prevRotationDeg, targetRotationDeg, t);
         }
+
+        private void DriftToCenter()
+        {
+            Vector3 towardsStart = (startPos - transform.position).normalized;
+            Vector3 towardsPlayer = (playerPos - transform.position).normalized;
+
+            float dot = Mathf.Clamp01(Vector3.Dot(towardsStart, towardsPlayer));
+
+            body.velocity *= dot;
+        }
+
         #endregion
     }
 }

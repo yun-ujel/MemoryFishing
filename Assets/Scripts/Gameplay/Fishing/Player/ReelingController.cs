@@ -24,9 +24,15 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         public class OnEndReelingEventArgs : System.EventArgs
         {
-            public OnEndReelingEventArgs()
-            {
+            public FishBehaviour FishBehaviour { get; private set; }
+            public Vector3 PlayerPos { get; private set; }
+            public Vector3 FishPos { get; private set; }
 
+            public OnEndReelingEventArgs(FishBehaviour fishBehaviour, Vector3 playerPos, Vector3 fishPos)
+            {
+                FishBehaviour = fishBehaviour;
+                PlayerPos = playerPos;
+                FishPos = fishPos;
             }
         }
 
@@ -69,7 +75,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             }
         }
 
-        private void StartReeling(FishBehaviour fish)
+        public void StartReeling(FishBehaviour fish)
         {
             currentFish = fish;
             reeling = true;
@@ -79,7 +85,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             Vector3 playerPos = transform.position;
             startingFishPosition = fish.transform.position;
 
-            fish.InitiateFishing(playerPos, startingFishPosition);
+            fish.InitiateReeling(playerPos, startingFishPosition);
             OnStartReelingEvent?.Invoke(this, new OnStartReelingEventArgs(fish, playerPos, startingFishPosition));
         }
 
@@ -103,14 +109,12 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         {
             Debug.DrawRay(fishPos, currentFish.GetFishDirection(), Color.red);
             Debug.DrawRay(fishPos, playerDirection, Color.green);
-
-            //Debug.DrawRay(fishPos + new Vector3(-1, 0, 2), 2 * FishExhaustion * Vector3.right);
         }
 
         private void EndReeling()
         {
-            currentFish.StopFishing();
-            OnEndReelingEvent?.Invoke(this, new());
+            currentFish.StopReeling();
+            OnEndReelingEvent?.Invoke(this, new(currentFish, transform.position, currentFish.transform.position));
 
             reeling = false;
             currentFish = null;

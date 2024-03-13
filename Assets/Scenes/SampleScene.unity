@@ -170,12 +170,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca95602b5cf92948a3262358dccc002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 79276915}
   maxAngleRange: 270
   maxHoldDuration: 3
   minHoldDuration: 1
-  maxDistanceFromStart: 6
-  speed: 2
+  maxDistanceFromStart: 4
+  speed: 4
+  acceleration: 20
+  idleFriction: 0.2
   positiveExhaustMultiplier: 0.1
   negativeExhaustMultiplier: 0.1
 --- !u!54 &79276915
@@ -1522,6 +1523,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2006554642}
   - component: {fileID: 2006554644}
+  - component: {fileID: 2006554645}
   m_Layer: 0
   m_Name: Fishing
   m_TagString: Untagged
@@ -1558,3 +1560,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1623768384}
   startFish: {fileID: 79276914}
+--- !u!114 &2006554645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006554641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 218293485b9b03546854893dff4fa417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1623768384}
+  reelingController: {fileID: 2006554644}
+  flingForce: 4
+  flingDuration: 1
+  catchFishRadius: 2
