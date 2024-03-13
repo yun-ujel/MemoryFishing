@@ -1,9 +1,13 @@
 using UnityEngine;
 
+using MemoryFishing.Utilities;
+
 namespace MemoryFishing.Gameplay.Fishing.Fish
 {
     public class BasicFish : FishBehaviour
     {
+        [SerializeField] private Rigidbody body;
+
         [Header("Direction")]
         [SerializeField, Range(0f, 720f)] private float maxAngleRange = 270f;
 
@@ -43,14 +47,21 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
             if (currentHoldDuration >= targetHoldDuration)
             {
-                GetNewRotation();
+                GetNewTarget();
             }
 
             LerpRotation(t);
+        }
 
-            Vector3 targetPos = transform.position + GetFishDirection();
-            Vector3 clampedPos = ClampToCircle(targetPos, startPos, Mathf.Lerp(maxDistanceFromStart, 0f, currentExhaustion));
-            transform.position = Vector3.MoveTowards(transform.position, clampedPos, speed * delta);
+        public override void MoveFish(float delta)
+        {
+            float maxDistance = Mathf.Lerp(maxDistanceFromStart, 0f, currentExhaustion);
+            Vector3 directionToCenter = (startPos - transform.position).normalized;
+
+            float t = VectorUtils.SqrDistance(transform.position, startPos) / Mathf.Pow(maxDistance, 2);
+
+            Vector3 direction = Vector3.Lerp(GetFishDirection(), directionToCenter, t).ExcludeYAxis();
+            body.velocity = direction * speed;
         }
 
         public override float UpdateFishExhaustion(float delta, Vector3 input)
@@ -62,7 +73,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         public override Vector3 GetFishDirection()
         {
-            Vector2 direction = GeneralUtils.DegreesToVector(currentRotationDeg + angleOffset);
+            Vector2 direction = VectorUtils.DegreesToVector(currentRotationDeg + angleOffset);
             return direction.OnZAxis();
         }
 
@@ -75,6 +86,12 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
             return positiveExhaustMultiplier;
         }
+
+        public override void StopFishing()
+        {
+            body.velocity = Vector3.zero;
+        }
+
         #endregion
 
         #region Private Methods
@@ -82,7 +99,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         private float CalculateAngleOffset(Vector3 playerPos, Vector3 fishPos)
         {
             Vector3 direction = (playerPos - fishPos).ExcludeYAxis().normalized;
-            float angleToPlayer = GeneralUtils.VectorToDegrees(direction.OnYAxis());
+            float angleToPlayer = VectorUtils.VectorToDegrees(direction.OnYAxis());
 
             bool flipAngle = fishPos.z > playerPos.z;
             angleToPlayer = flipAngle ? (360 - angleToPlayer) : angleToPlayer;
@@ -91,7 +108,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
             return offset + angleToPlayer;
         }
 
-        private void GetNewRotation()
+        private void GetNewTarget()
         {
             prevRotationDeg = currentRotationDeg;
 
@@ -103,19 +120,6 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         private void LerpRotation(float t)
         {
             currentRotationDeg = Mathf.Lerp(prevRotationDeg, targetRotationDeg, t);
-        }
-
-        private Vector3 ClampToCircle(Vector3 position, Vector3 center, float radius)
-        {
-            Ray ray = new Ray(center, position - center);
-            float sqrDistance = Vector3.SqrMagnitude(position - center);
-
-            if (sqrDistance > Mathf.Pow(radius, 2))
-            {
-                return ray.GetPoint(radius);
-            }
-
-            return position;
         }
         #endregion
     }

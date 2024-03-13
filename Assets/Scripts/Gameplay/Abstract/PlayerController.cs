@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+using MemoryFishing.Utilities;
+
 namespace MemoryFishing.Gameplay
 {
     public abstract class PlayerController : MonoBehaviour

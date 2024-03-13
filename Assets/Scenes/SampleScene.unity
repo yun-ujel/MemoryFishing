@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 79276913}
   - component: {fileID: 79276914}
+  - component: {fileID: 79276915}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -168,13 +169,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca95602b5cf92948a3262358dccc002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 79276915}
   maxAngleRange: 270
-  maxHoldDuration: 0.8
-  minHoldDuration: 0.4
-  maxDistanceFromStart: 3
+  maxHoldDuration: 3
+  minHoldDuration: 1
+  maxDistanceFromStart: 6
   speed: 2
   positiveExhaustMultiplier: 0.1
   negativeExhaustMultiplier: 0.1
+--- !u!54 &79276915
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79276912}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1 &155174366
 GameObject:
   m_ObjectHideFlags: 0

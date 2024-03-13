@@ -52,6 +52,14 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             }
         }
 
+        private void FixedUpdate()
+        {
+            if (reeling)
+            {
+                currentFish.MoveFish(Time.fixedDeltaTime);
+            }
+        }
+
         private void StartReeling(FishBehaviour fish)
         {
             currentFish = fish;
@@ -92,6 +100,8 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         private void EndReeling()
         {
+            currentFish.StopFishing();
+
             reeling = false;
             currentFish = null;
         }
