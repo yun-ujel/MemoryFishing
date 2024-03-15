@@ -32,7 +32,11 @@ Material:
     - _Amplitude: 2
     - _Glossiness: 0.5
     - _Metallic: 0
+    - _NormalStrength: 1
+    - _Shininess: -5
+    - _Smoothness: 1
+    - _Speed: 2
     - _Wavelength: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.43867922, g: 0.7284472, b: 1, a: 1}
   m_BuildTextureStacks: []
