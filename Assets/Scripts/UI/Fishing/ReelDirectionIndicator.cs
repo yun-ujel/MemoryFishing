@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using MemoryFishing.Gameplay.Fishing.Player;
 using MemoryFishing.Gameplay.Fishing.Fish;
 using MemoryFishing.Utilities;
-using MemoryFishing.Gameplay.Player;
+using MemoryFishing.Gameplay;
 
 namespace MemoryFishing.UI.Fishing
 {
@@ -55,6 +55,7 @@ namespace MemoryFishing.UI.Fishing
         private Vector3 currentFishDirection;
 
         private bool isReeling;
+        private bool isFishing;
 
         private void Start()
         {
@@ -65,6 +66,7 @@ namespace MemoryFishing.UI.Fishing
         private void OnStartReeling(object sender, ReelingController.OnStartReelingEventArgs args)
         {
             isReeling = true;
+            isFishing = true;
 
             fishBehaviour = args.FishBehaviour;
         }
@@ -81,6 +83,11 @@ namespace MemoryFishing.UI.Fishing
 
         private void AnimateArrows(float delta)
         {
+            if (!isFishing)
+            {
+                return;
+            }
+
             if (isReeling)
             {
                 FishAlpha = Mathf.MoveTowards(FishAlpha, 1f, delta * 10f);

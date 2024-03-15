@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 using MemoryFishing.Gameplay.Fishing.Fish;
-using MemoryFishing.Gameplay.Player;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {
@@ -38,8 +37,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         #region Properties
 
-        [SerializeField] private PlayerDirection player;
-        [Space, SerializeField] private FishBehaviour startFish;
+        [SerializeField] private PlayerDirection direction;
 
         public event System.EventHandler<OnStartReelingEventArgs> OnStartReelingEvent;
         public event System.EventHandler<OnEndReelingEventArgs> OnEndReelingEvent;
@@ -56,7 +54,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         {
             base.Start();
 
-            StartReeling(startFish);
+            //StartReeling(startFish);
         }
 
         private void Update()
@@ -71,7 +69,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         {
             if (reeling)
             {
-                currentFish.MoveFish(Time.fixedDeltaTime);
+                currentFish.MoveFishReeling(Time.fixedDeltaTime);
             }
         }
 
@@ -91,8 +89,8 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         private void UpdateReeling()
         {
-            currentFish.UpdateFish(Time.deltaTime);
-            Vector3 lookDirection = player.GetLookDirection(currentFish.transform.position);
+            currentFish.UpdateFishReeling(Time.deltaTime);
+            Vector3 lookDirection = direction.GetLookDirection(currentFish.transform.position);
 
             FishExhaustion += currentFish.UpdateFishExhaustion(Time.deltaTime, -lookDirection);
             FishExhaustion = Mathf.Clamp01(FishExhaustion);

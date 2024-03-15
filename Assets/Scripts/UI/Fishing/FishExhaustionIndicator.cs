@@ -30,6 +30,9 @@ namespace MemoryFishing.UI.Fishing
         {
             reelingController.OnStartReelingEvent += StartReeling;
             reelingController.OnEndReelingEvent += EndReeling;
+
+            FillAmount = 0;
+            radialSprite.color = circleColorMin;
         }
 
         private void StartReeling(object sender, ReelingController.OnStartReelingEventArgs args)

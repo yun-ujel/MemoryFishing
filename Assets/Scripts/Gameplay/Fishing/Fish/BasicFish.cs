@@ -55,6 +55,8 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         }
 
         #region Override Methods
+        
+        #region Reeling
         public override void InitiateReeling(Vector3 playerPos, Vector3 fishPos)
         {
             base.InitiateReeling(playerPos, fishPos);
@@ -68,7 +70,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
             angleOffset = CalculateAngleOffset(playerPos, fishPos);
         }
 
-        public override void UpdateFish(float delta)
+        public override void UpdateFishReeling(float delta)
         {
             currentHoldDuration += delta;
             float t = currentHoldDuration / targetHoldDuration;
@@ -81,7 +83,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
             LerpRotation(t);
         }
 
-        public override void MoveFish(float delta)
+        public override void MoveFishReeling(float delta)
         {
             float maxDistance = Mathf.Lerp(maxDistanceFromStart, 0f, currentExhaustion);
             Vector3 directionToCenter = (startPos - transform.position).normalized;
@@ -123,6 +125,25 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
             base.StopReeling();
             DriftToCenter();
         }
+
+        #endregion
+
+        #region Approaching
+
+        public override float GetApproachTime(Vector3 bobberPos)
+        {
+            Vector3 randomDir = VectorUtils.DegreesToVector(Random.value * 360f).OnZAxis();
+            transform.position = bobberPos + (randomDir * 10f);
+
+            return 1f;
+        }
+
+        public override void ApproachBobber(Vector3 bobberPos, float delta)
+        {
+
+        }
+
+        #endregion
 
         #endregion
 

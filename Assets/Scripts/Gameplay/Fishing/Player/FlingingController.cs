@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-using MemoryFishing.Gameplay.Player;
 using MemoryFishing.Utilities;
 using MemoryFishing.Gameplay.Fishing.Fish;
 
@@ -10,7 +8,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
     public class FlingingController : PlayerController
     {
         [Header("References")]
-        [SerializeField] private PlayerDirection player;
+        [SerializeField] private PlayerDirection direction;
         [SerializeField] private ReelingController reelingController;
 
         [Header("Settings")]
@@ -100,8 +98,8 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         private void StartFling()
         {
-            Vector3 direction = player.GetLookDirection(fishBody.position);
-            fishBody.velocity = direction * flingForce;
+            Vector3 flingDir = direction.GetLookDirection(fishBody.position);
+            fishBody.velocity = flingDir * flingForce;
 
             flingCounter = flingDuration;
 

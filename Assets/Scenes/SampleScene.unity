@@ -1827,6 +1827,7 @@ GameObject:
   - component: {fileID: 2006554642}
   - component: {fileID: 2006554644}
   - component: {fileID: 2006554645}
+  - component: {fileID: 2006554646}
   m_Layer: 0
   m_Name: Fishing
   m_TagString: Untagged
@@ -1861,8 +1862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34f4349e6631c548adf32d6a0bf4af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1623768384}
-  startFish: {fileID: 79276914}
+  direction: {fileID: 1623768384}
 --- !u!114 &2006554645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1875,8 +1875,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218293485b9b03546854893dff4fa417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1623768384}
+  direction: {fileID: 1623768384}
   reelingController: {fileID: 2006554644}
   flingForce: 4
   flingDuration: 1
   catchFishRadius: 4
+--- !u!114 &2006554646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006554641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d680ce3ffdda63c4d91a3f646ac93ba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {fileID: 1623768384}
+  reelingController: {fileID: 2006554644}
+  startFish: {fileID: 79276914}
+  timeToCastFully: 4
+  maxCastDistance: 10
+  minCastDistance: 1
+  castCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

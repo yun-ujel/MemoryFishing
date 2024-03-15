@@ -2,7 +2,7 @@ using MemoryFishing.Utilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace MemoryFishing.Gameplay.Player
+namespace MemoryFishing.Gameplay
 {
     public class PlayerDirection : PlayerController
     {
@@ -70,7 +70,7 @@ namespace MemoryFishing.Gameplay.Player
         private void OnLook(InputAction.CallbackContext ctx)
         {
             stickDirection = ctx.ReadValue<Vector2>();
-            
+
             if (stickDirection.sqrMagnitude <= 0)
             {
                 return;

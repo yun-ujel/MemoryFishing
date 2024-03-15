@@ -16,13 +16,17 @@ namespace MemoryFishing.FX.Fishing
 
         [SerializeField] private AnimationCurve lineCurve;
 
+        private bool isFishing;
+
         private Transform player;
         private Transform fish;
 
         private void Start()
         {
             line = GetComponent<LineRenderer>();
+
             reelingController.OnStartReelingEvent += StartReeling;
+            reelingController.OnEndReelingEvent += EndReeling;
         }
 
         private void StartReeling(object sender, ReelingController.OnStartReelingEventArgs args)
@@ -31,10 +35,21 @@ namespace MemoryFishing.FX.Fishing
 
             player = reelingController.transform;
             fish = args.FishBehaviour.transform;
+
+            isFishing = true;
+        }
+
+        private void EndReeling(object sender, ReelingController.OnEndReelingEventArgs args)
+        {
+            isFishing = false;
         }
 
         private void Update()
         {
+            if (!isFishing)
+            {
+                return;
+            }
             SetLinePositions(player.position, fish.position);
         }
 

@@ -6,8 +6,9 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
     {
         protected bool isReeling;
 
-        public abstract void MoveFish(float delta);
-        public abstract void UpdateFish(float delta);
+        #region Reeling
+        public abstract void MoveFishReeling(float delta);
+        public abstract void UpdateFishReeling(float delta);
         public abstract Vector3 GetFishDirection();
 
         public virtual void InitiateReeling(Vector3 playerPos, Vector3 fishPos)
@@ -27,5 +28,14 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         }
 
         public abstract float GetExhaustionMultiplier(float dot);
+        #endregion
+
+        #region Approaching
+
+        public abstract float GetApproachTime(Vector3 bobberPos);
+
+        public abstract void ApproachBobber(Vector3 bobberPos, float delta);
+
+        #endregion
     }
 }
