@@ -3,68 +3,122 @@ using UnityEngine;
 using MemoryFishing.Gameplay.Fishing.Player;
 using MemoryFishing.Gameplay.Fishing.Fish;
 
+using static MemoryFishing.Utilities.GeneralUtils;
+
 namespace MemoryFishing.FX.Fishing
 {
-    [RequireComponent(typeof(LineRenderer))]
     public class FishingLineFX : MonoBehaviour
     {
-        private LineRenderer line;
-        
+        [Header("References")]
         [SerializeField] private ReelingController reelingController;
+        [SerializeField] private BobberCastController castController;
 
-        [Space]
+        [Space, SerializeField] private LineRenderer line;
 
+        [Header("Cast Settings")]
+        [SerializeField] private float peakHeightMultiplier;
+        [SerializeField, Range(0f, 1f)] private float peak;
+
+        [Space, SerializeField] private AnimationCurve risingHeightCurve;
+        [SerializeField] private AnimationCurve fallingHeightCurve;
+
+        [Header("Line Settings")]
         [SerializeField] private AnimationCurve lineCurve;
+        [SerializeField] private Transform rodEnd;
 
-        private bool isFishing;
+        private bool isCasting;
+        private bool isWaiting;
+        private bool isReeling;
 
-        private Transform player;
+        private float timeSinceCastStart;
+        private float castTimeToLand;
+        private float castPeakHeight;
+
+        private Vector3 targetCastPosition;
+        private Vector3 startingCastPosition;
+
         private Transform fish;
 
         private void Start()
         {
-            line = GetComponent<LineRenderer>();
+            reelingController.OnStartReelingEvent += OnStartReeling;
+            reelingController.OnEndReelingEvent += OnEndReeling;
 
-            reelingController.OnStartReelingEvent += StartReeling;
-            reelingController.OnEndReelingEvent += EndReeling;
+            castController.OnCastBobberEvent += OnCastBobber;
+            castController.OnBobberLandEvent += OnBobberLand;
         }
 
-        private void StartReeling(object sender, ReelingController.OnStartReelingEventArgs args)
+        private void OnCastBobber(object sender, BobberCastController.OnCastBobberEventArgs args)
         {
-            MonoBehaviour reelingController = (MonoBehaviour)sender;
+            isCasting = true;
+            timeSinceCastStart = 0f;
 
-            player = reelingController.transform;
+            castTimeToLand = args.TimeToLand;
+            castPeakHeight = args.Magnitude * peakHeightMultiplier;
+
+            targetCastPosition = args.TargetPosition + (Vector3.down * 0.5f);
+            startingCastPosition = rodEnd.position;
+        }
+
+        private void OnBobberLand(object sender, BobberCastController.OnBobberLandEventArgs args)
+        {
+            isCasting = false;
+
+            SetLinePositions(rodEnd.position, targetCastPosition);
+        }
+
+        private void OnStartReeling(object sender, ReelingController.OnStartReelingEventArgs args)
+        {
             fish = args.FishBehaviour.transform;
 
-            isFishing = true;
+            isReeling = true;
         }
 
-        private void EndReeling(object sender, ReelingController.OnEndReelingEventArgs args)
+        private void OnEndReeling(object sender, ReelingController.OnEndReelingEventArgs args)
         {
-            isFishing = false;
+            isReeling = false;
         }
 
         private void Update()
         {
-            if (!isFishing)
+            if (isCasting)
             {
+                timeSinceCastStart += Time.deltaTime;
+                float t = timeSinceCastStart / castTimeToLand;
+
+                Vector3 bobberPos = Vector3.Lerp(startingCastPosition, targetCastPosition, t);
+
+                if (t <= peak)
+                {
+                    float curveT = risingHeightCurve.Evaluate(t.Remap01(0, peak));
+                    bobberPos.y = Mathf.LerpUnclamped(startingCastPosition.y, startingCastPosition.y + castPeakHeight, curveT);
+                }
+                else
+                {
+                    float curveT = fallingHeightCurve.Evaluate(t.Remap01(peak, 1));
+                    bobberPos.y = Mathf.LerpUnclamped(startingCastPosition.y + castPeakHeight, targetCastPosition.y, curveT);
+                }
+
+                SetLinePositions(rodEnd.position, bobberPos);
                 return;
             }
-            SetLinePositions(player.position, fish.position);
+
+            if (isReeling)
+            {
+                SetLinePositions(rodEnd.position, fish.position);
+                return;
+            }
         }
 
-        private void SetLinePositions(Vector3 playerPos, Vector3 fishPos)
+        private void SetLinePositions(Vector3 playerPos, Vector3 bobberPos)
         {
-            float t = 0;
-            float curveT = 0;
-
             for (int i = 0; i < line.positionCount; i++)
             {
-                t = (float)i / (line.positionCount - 1);
-                curveT = lineCurve.Evaluate(t);
+                float t = (float)i / (line.positionCount - 1);
+                float curveT = lineCurve.Evaluate(t);
 
-                Vector3 pos = Vector3.Lerp(playerPos, fishPos, t);
-                pos.y = Mathf.Lerp(playerPos.y, fishPos.y, curveT);
+                Vector3 pos = Vector3.Lerp(playerPos, bobberPos, t);
+                pos.y = Mathf.Lerp(playerPos.y, bobberPos.y, curveT);
 
                 line.SetPosition(i, pos);
             }

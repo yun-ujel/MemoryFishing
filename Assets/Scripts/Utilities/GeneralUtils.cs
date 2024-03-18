@@ -18,5 +18,15 @@ namespace MemoryFishing.Utilities
 
             return cachedPlayerInput;
         }
+
+        public static float Remap(this float input, float inputMin, float inputMax, float outputMin, float outputMax)
+        {
+            return (input - inputMin) / (inputMax - inputMin) * (outputMax - outputMin) + outputMin;
+        }
+
+        public static float Remap01(this float input, float inputMin, float inputMax)
+        {
+            return Remap(input, inputMin, inputMax, 0.0f, 1.0f);
+        }
     }
 }
