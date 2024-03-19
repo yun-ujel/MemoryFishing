@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using MemoryFishing.Utilities;
 using MemoryFishing.Gameplay.Fishing.Fish;
+using MemoryFishing.Gameplay.Fishing.Enumerations;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {
-    public class FlingingController : PlayerController
+    public class FlingingController : FishingController
     {
         [Header("References")]
         [SerializeField] private PlayerDirection direction;
@@ -25,10 +26,12 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         private bool flingAvailable, isFlinging;
         private float flingCounter;
 
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             UnityEditor.Handles.DrawWireDisc(Vector3.zero, Vector3.up, catchFishRadius);
         }
+#endif
 
         #region Initialisation Methods
 
@@ -62,6 +65,8 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         private void OnEndReeling(object sender, ReelingController.OnEndReelingEventArgs args)
         {
+            State = FishingState.Flinging;
+
             if (args.FishBehaviour != fish)
             {
                 fish = args.FishBehaviour;
@@ -86,6 +91,8 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             {
                 return;
             }
+
+            BobberPos = fishBody.position;
 
             if (flingCounter < 0f || FishInRange(transform.position, fishBody.position))
             {
@@ -113,11 +120,17 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
             if (FishInRange(transform.position, fishBody.position))
             {
-                fishBody.velocity = Vector3.zero;
+                CatchFish();
                 return;
             }
 
             reelingController.StartReeling(fish);
+        }
+
+        private void CatchFish()
+        {
+            fishBody.velocity = Vector3.zero;
+            State = FishingState.None;
         }
 
         private bool FishInRange(Vector3 playerPosition, Vector3 fishPosition)

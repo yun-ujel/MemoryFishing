@@ -15,6 +15,7 @@ namespace MemoryFishing.UI.Fishing
         [SerializeField] private PlayerDirection playerDirection;
 
         [Header("Display")]
+        [SerializeField] private Vector3 offset;
         [SerializeField, Range(0f, 100f)] private float arrowAcceleration;
 
         [Space]
@@ -85,8 +86,11 @@ namespace MemoryFishing.UI.Fishing
         {
             if (!isFishing)
             {
+                PlayerAlpha = Mathf.MoveTowards(PlayerAlpha, 0f, delta * 10f);
                 return;
             }
+
+            PlayerAlpha = Mathf.MoveTowards(PlayerAlpha, 1f, delta * 10f);
 
             if (isReeling)
             {
@@ -100,6 +104,7 @@ namespace MemoryFishing.UI.Fishing
                 FishAlpha = Mathf.MoveTowards(FishAlpha, 0f, delta * 10f);
             }
 
+            transform.position = fishBehaviour.transform.position + offset;
             playerParent.forward = playerDirection.GetLookDirection(fishBehaviour.transform.position);
         }
     }

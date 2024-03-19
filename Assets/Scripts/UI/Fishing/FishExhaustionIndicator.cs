@@ -20,18 +20,12 @@ namespace MemoryFishing.UI.Fishing
 
         private bool reeling;
 
-        private float FillAmount
-        {
-            get => radialSprite.fillAmount;
-            set => radialSprite.fillAmount = value;
-        }
-
         private void Start()
         {
             reelingController.OnStartReelingEvent += StartReeling;
             reelingController.OnEndReelingEvent += EndReeling;
 
-            FillAmount = 0;
+            SetFillAmount(0);
             radialSprite.color = circleColorMin;
         }
 
@@ -39,7 +33,7 @@ namespace MemoryFishing.UI.Fishing
         {
             reeling = true;
 
-            FillAmount = 0;
+            SetFillAmount(0);
             radialSprite.color = circleColorMin;
         }
 
@@ -47,7 +41,7 @@ namespace MemoryFishing.UI.Fishing
         {
             reeling = false;
 
-            FillAmount = 1;
+            SetFillAmount(1);
             radialSprite.color = circleColorMax;
         }
 
@@ -57,9 +51,14 @@ namespace MemoryFishing.UI.Fishing
             {
                 float exhaustion = reelingController.FishExhaustion;
 
-                FillAmount = exhaustion;
+                SetFillAmount(exhaustion);
                 radialSprite.color = Color.Lerp(circleColorMin, circleColorMax, exhaustion);
             }
+        }
+
+        private void SetFillAmount(float value)
+        {
+            radialSprite.fillAmount = value;
         }
     }
 }

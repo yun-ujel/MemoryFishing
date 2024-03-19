@@ -6,6 +6,7 @@ namespace MemoryFishing.Gameplay.Fishing.Enumerations
         WindUp,
         Casting,
         Waiting,
-        Reeling
+        Reeling,
+        Flinging
     }
 }

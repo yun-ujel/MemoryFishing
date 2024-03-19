@@ -2,6 +2,7 @@ using UnityEngine;
 
 using MemoryFishing.Gameplay.Fishing.Player;
 using MemoryFishing.Gameplay.Fishing.Fish;
+using MemoryFishing.Gameplay.Fishing.Enumerations;
 
 using static MemoryFishing.Utilities.GeneralUtils;
 
@@ -10,7 +11,7 @@ namespace MemoryFishing.FX.Fishing
     public class FishingLineFX : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private ReelingController reelingController;
+        [SerializeField] private PlayerFishingManager fishingManager;
         [SerializeField] private BobberCastController castController;
 
         [Space, SerializeField] private LineRenderer line;
@@ -24,11 +25,9 @@ namespace MemoryFishing.FX.Fishing
 
         [Header("Line Settings")]
         [SerializeField] private AnimationCurve lineCurve;
-        [SerializeField] private Transform rodEnd;
-
-        private bool isCasting;
-        private bool isWaiting;
-        private bool isReeling;
+        
+        [Space, SerializeField] private Transform rodEnd;
+        [SerializeField] private Transform bobber;
 
         private float timeSinceCastStart;
         private float castTimeToLand;
@@ -37,20 +36,13 @@ namespace MemoryFishing.FX.Fishing
         private Vector3 targetCastPosition;
         private Vector3 startingCastPosition;
 
-        private Transform fish;
-
         private void Start()
         {
-            reelingController.OnStartReelingEvent += OnStartReeling;
-            reelingController.OnEndReelingEvent += OnEndReeling;
-
             castController.OnCastBobberEvent += OnCastBobber;
-            castController.OnBobberLandEvent += OnBobberLand;
         }
 
         private void OnCastBobber(object sender, BobberCastController.OnCastBobberEventArgs args)
         {
-            isCasting = true;
             timeSinceCastStart = 0f;
 
             castTimeToLand = args.TimeToLand;
@@ -60,28 +52,9 @@ namespace MemoryFishing.FX.Fishing
             startingCastPosition = rodEnd.position;
         }
 
-        private void OnBobberLand(object sender, BobberCastController.OnBobberLandEventArgs args)
-        {
-            isCasting = false;
-
-            SetLinePositions(rodEnd.position, targetCastPosition);
-        }
-
-        private void OnStartReeling(object sender, ReelingController.OnStartReelingEventArgs args)
-        {
-            fish = args.FishBehaviour.transform;
-
-            isReeling = true;
-        }
-
-        private void OnEndReeling(object sender, ReelingController.OnEndReelingEventArgs args)
-        {
-            isReeling = false;
-        }
-
         private void Update()
         {
-            if (isCasting)
+            if (fishingManager.State == FishingState.Casting)
             {
                 timeSinceCastStart += Time.deltaTime;
                 float t = timeSinceCastStart / castTimeToLand;
@@ -103,9 +76,9 @@ namespace MemoryFishing.FX.Fishing
                 return;
             }
 
-            if (isReeling)
+            if (fishingManager.State != FishingState.None)
             {
-                SetLinePositions(rodEnd.position, fish.position);
+                SetLinePositions(rodEnd.position, bobber.position);
                 return;
             }
         }

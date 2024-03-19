@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 using MemoryFishing.Gameplay.Fishing.Fish;
+using MemoryFishing.Gameplay.Fishing.Enumerations;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {
-    public class ReelingController : PlayerController
+    public class ReelingController : FishingController
     {
         public class OnStartReelingEventArgs : System.EventArgs
         {
@@ -37,13 +38,12 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         #region Properties
 
-        [SerializeField] private PlayerDirection direction;
-
         public event System.EventHandler<OnStartReelingEventArgs> OnStartReelingEvent;
         public event System.EventHandler<OnEndReelingEventArgs> OnEndReelingEvent;
         public float FishExhaustion { get; private set; }
 
-        private bool reeling;
+        [Space, SerializeField] private PlayerDirection direction;
+
         private FishBehaviour currentFish;
 
         private Vector3 startingFishPosition;
@@ -53,13 +53,11 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         public override void Start()
         {
             base.Start();
-
-            //StartReeling(startFish);
         }
 
         private void Update()
         {
-            if (reeling)
+            if (State == FishingState.Reeling)
             {
                 UpdateReeling();
             }
@@ -67,7 +65,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         private void FixedUpdate()
         {
-            if (reeling)
+            if (State == FishingState.Reeling)
             {
                 currentFish.MoveFishReeling(Time.fixedDeltaTime);
             }
@@ -76,7 +74,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         public void StartReeling(FishBehaviour fish)
         {
             currentFish = fish;
-            reeling = true;
+            State = FishingState.Reeling;
 
             FishExhaustion = 0;
 
@@ -96,6 +94,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             FishExhaustion = Mathf.Clamp01(FishExhaustion);
             
             DrawDirections(currentFish.transform.position, lookDirection);
+            BobberPos = currentFish.transform.position;
 
             if (FishExhaustion >= 1f)
             {
@@ -114,7 +113,6 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             currentFish.StopReeling();
             OnEndReelingEvent?.Invoke(this, new(currentFish, transform.position, currentFish.transform.position));
 
-            reeling = false;
             currentFish = null;
         }
     }

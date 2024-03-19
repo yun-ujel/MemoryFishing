@@ -3,10 +3,11 @@ using UnityEngine.InputSystem;
 
 using MemoryFishing.Gameplay.Fishing.Fish;
 using MemoryFishing.Utilities;
+using MemoryFishing.Gameplay.Fishing.Enumerations;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {
-    public class BobberCastController : PlayerController
+    public class BobberCastController : FishingController
     {
         public class OnCastBobberEventArgs : System.EventArgs
         {
@@ -27,7 +28,12 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         public class OnBobberLandEventArgs : System.EventArgs
         {
+            public Vector3 BobberPosition { get; private set; }
 
+            public OnBobberLandEventArgs(Vector3 bobberPosition)
+            {
+                BobberPosition = bobberPosition;
+            }
         }
 
         public event System.EventHandler<OnCastBobberEventArgs> OnCastBobberEvent;
@@ -36,8 +42,6 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         [Header("References")]
         [SerializeField] private PlayerDirection direction;
         [SerializeField] private ReelingController reelingController;
-
-        [Space, SerializeField] private FishBehaviour startFish;
 
         [Header("Bobber Casting: Wind Up")]
         [SerializeField, Range(0.01f, 10f)] private float timeToWindUp;
@@ -48,24 +52,17 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         [Space, SerializeField, Range(0.01f, 10f)] private float timeToLand;
 
-        [Header("Waiting")]
-        [SerializeField] private LayerMask fishLayer;
-        [SerializeField, Range(0f, 10f)] private float sphereCheckRadius;
+        private Vector3 targetBobberPos;
 
         private Vector3 castDirection;
         private float castMagnitude;
 
-        private bool inCastWindup;
-        private float windUpCounter;
+        private float counter;
 
-        private bool isCasting;
-        private float castTimeCounter;
-
-        private bool isWaiting;
-        private float waitTimeCounter;
-        private float fishApproachTime;
+        private bool fishApproaching;
 
         private FishBehaviour approachingFish;
+        private float fishApproachTime;
 
         public override void SubscribeToInputActions()
         {
@@ -76,47 +73,64 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         private void OnFlingPressed(InputAction.CallbackContext ctx)
         {
-            inCastWindup = true;
+            if (State == FishingState.None)
+            {
+                State = FishingState.WindUp;
 
-            windUpCounter = 0f;
-            castMagnitude = 0f;
+                counter = 0f;
+                castMagnitude = 0f;
+            }
         }
 
         private void OnFlingReleased(InputAction.CallbackContext ctx)
         {
-            inCastWindup = false;
-            CastBobber();
+            if (State == FishingState.WindUp)
+            {
+                CastBobber();
+            }
         }
 
         private void Update()
         {
-            if (inCastWindup)
+            if (State == FishingState.WindUp)
             {
                 castDirection = direction.GetLookDirection(transform.position);
                 WindUpCast();
                 return;
             }
 
-            if (isCasting)
+            if (State == FishingState.Casting)
             {
-                castTimeCounter += Time.deltaTime;
-                if (castTimeCounter > timeToLand)
+                counter += Time.deltaTime;
+                if (counter > timeToLand)
                 {
                     BobberLanding();
                 }
                 return;
             }
 
-            if (isWaiting)
+            if (fishApproaching)
             {
-                waitTimeCounter += Time.deltaTime;
+                counter += Time.deltaTime;
+                float t = counter / fishApproachTime;
+
+                approachingFish.ApproachBobber(targetBobberPos, t);
+
+                if (t >= 1f)
+                {
+                    reelingController.StartReeling(approachingFish);
+                    
+                    fishApproaching = false;
+                }
+
+                return;
             }
         }
 
         private void WindUpCast()
         {
-            windUpCounter += Time.deltaTime;
-            float t = windUpCurve.Evaluate(windUpCounter / timeToWindUp);
+            counter += Time.deltaTime;
+            float t = windUpCurve.Evaluate(counter / timeToWindUp);
 
             castMagnitude = Mathf.Lerp(0f, castDistance, t) + startingCastDistance;
 
@@ -126,54 +140,32 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         private void CastBobber()
         {
-            inCastWindup = false;
-            isCasting = true;
+            State = FishingState.Casting;
 
-            castTimeCounter = 0f;
+            counter = 0f;
 
-            OnCastBobberEvent?.Invoke(this, new(transform.position + (castDirection * castMagnitude), castDirection, castMagnitude, timeToLand));
+            targetBobberPos = transform.position + (castDirection * castMagnitude);
+            OnCastBobberEvent?.Invoke(this, new(targetBobberPos, castDirection, castMagnitude, timeToLand));
         }
 
         private void BobberLanding()
         {
-            isCasting = false;
+            State = FishingState.Waiting;
 
-            waitTimeCounter = 0f;
-            isWaiting = true;
+            counter = 0f;
 
-            Vector3 bobberPos = transform.position + (castDirection * castMagnitude);
-            approachingFish = GetFastestFish(bobberPos, out fishApproachTime, GetFishInArea(bobberPos));
-
-            OnBobberLandEvent?.Invoke(this, new());
+            BobberPos = targetBobberPos;
+            OnBobberLandEvent?.Invoke(this, new(targetBobberPos));
         }
 
-        private FishBehaviour[] GetFishInArea(Vector3 position)
+        public void FishGainedInterest(FishBehaviour fish, float approachTime)
         {
-            Collider[] results = Physics.OverlapSphere(position, sphereCheckRadius, fishLayer, QueryTriggerInteraction.Collide);
-            FishBehaviour[] fish = new FishBehaviour[results.Length];
+            fishApproaching = true;
 
-            for (int i = 0; i < results.Length; i++)
-            {
-                results[i].TryGetComponent(out fish[i]);
-            }
+            approachingFish = fish;
+            fishApproachTime = approachTime;
 
-            return fish;
-        }
-
-        private FishBehaviour GetFastestFish(Vector3 position, out float approachTime, params FishBehaviour[] fish)
-        {
-            FishBehaviour fastestFish = fish[0];
-            approachTime = fish[0].GetApproachTime(position);
-
-            for (int i = 1; i < fish.Length; i++)
-            {
-                if (fish[i].GetApproachTime(position) < approachTime)
-                {
-                    fastestFish = fish[i];
-                }
-            }
-
-            return fastestFish;
+            counter = 0f;
         }
     }
 }

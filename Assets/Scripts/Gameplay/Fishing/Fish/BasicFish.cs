@@ -144,7 +144,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         public override void ApproachBobber(Vector3 bobberPos, float t)
         {
-            transform.position = Vector3.Lerp(bobberPos, approachStartPos, t);
+            transform.position = Vector3.Lerp(approachStartPos, bobberPos, t);
         }
 
         #endregion
