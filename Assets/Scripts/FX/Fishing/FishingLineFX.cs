@@ -56,7 +56,7 @@ namespace MemoryFishing.FX.Fishing
             castTimeToLand = args.TimeToLand;
             castPeakHeight = args.Magnitude * peakHeightMultiplier;
 
-            targetCastPosition = args.TargetPosition + (Vector3.down * 0.5f);
+            targetCastPosition = args.TargetPosition;
             startingCastPosition = rodEnd.position;
         }
 

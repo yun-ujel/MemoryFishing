@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 using MemoryFishing.Gameplay.Fishing.Fish;
+using MemoryFishing.Utilities;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {
@@ -47,6 +48,10 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         [Space, SerializeField, Range(0.01f, 10f)] private float timeToLand;
 
+        [Header("Waiting")]
+        [SerializeField] private LayerMask fishLayer;
+        [SerializeField, Range(0f, 10f)] private float sphereCheckRadius;
+
         private Vector3 castDirection;
         private float castMagnitude;
 
@@ -55,6 +60,12 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         private bool isCasting;
         private float castTimeCounter;
+
+        private bool isWaiting;
+        private float waitTimeCounter;
+        private float fishApproachTime;
+
+        private FishBehaviour approachingFish;
 
         public override void SubscribeToInputActions()
         {
@@ -95,6 +106,11 @@ namespace MemoryFishing.Gameplay.Fishing.Player
                 }
                 return;
             }
+
+            if (isWaiting)
+            {
+                waitTimeCounter += Time.deltaTime;
+            }
         }
 
         private void WindUpCast()
@@ -120,9 +136,44 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         private void BobberLanding()
         {
-            castTimeCounter = 0f;
+            isCasting = false;
+
+            waitTimeCounter = 0f;
+            isWaiting = true;
+
+            Vector3 bobberPos = transform.position + (castDirection * castMagnitude);
+            approachingFish = GetFastestFish(bobberPos, out fishApproachTime, GetFishInArea(bobberPos));
 
             OnBobberLandEvent?.Invoke(this, new());
+        }
+
+        private FishBehaviour[] GetFishInArea(Vector3 position)
+        {
+            Collider[] results = Physics.OverlapSphere(position, sphereCheckRadius, fishLayer, QueryTriggerInteraction.Collide);
+            FishBehaviour[] fish = new FishBehaviour[results.Length];
+
+            for (int i = 0; i < results.Length; i++)
+            {
+                results[i].TryGetComponent(out fish[i]);
+            }
+
+            return fish;
+        }
+
+        private FishBehaviour GetFastestFish(Vector3 position, out float approachTime, params FishBehaviour[] fish)
+        {
+            FishBehaviour fastestFish = fish[0];
+            approachTime = fish[0].GetApproachTime(position);
+
+            for (int i = 1; i < fish.Length; i++)
+            {
+                if (fish[i].GetApproachTime(position) < approachTime)
+                {
+                    fastestFish = fish[i];
+                }
+            }
+
+            return fastestFish;
         }
     }
 }

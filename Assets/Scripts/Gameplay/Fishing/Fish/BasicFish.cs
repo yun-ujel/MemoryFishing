@@ -37,8 +37,10 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         private float currentExhaustion;
 
-        private Vector3 startPos;
+        private Vector3 reelStartPos;
         private Vector3 playerPos;
+
+        private Vector3 approachStartPos;
 
         private void Start()
         {
@@ -64,7 +66,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
             currentExhaustion = 0f;
             GetNewTarget();
 
-            startPos = fishPos;
+            reelStartPos = fishPos;
             this.playerPos = playerPos;
 
             angleOffset = CalculateAngleOffset(playerPos, fishPos);
@@ -86,11 +88,11 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         public override void MoveFishReeling(float delta)
         {
             float maxDistance = Mathf.Lerp(maxDistanceFromStart, 0f, currentExhaustion);
-            Vector3 directionToCenter = (startPos - transform.position).normalized;
+            Vector3 directionToCenter = (reelStartPos - transform.position).normalized;
 
             Vector3 desiredDirection = GetFishDirection();
 
-            float t = VectorUtils.SqrDistance(transform.position, startPos) / Mathf.Pow(maxDistance, 2);
+            float t = VectorUtils.SqrDistance(transform.position, reelStartPos) / Mathf.Pow(maxDistance, 2);
 
             Vector3 direction = Vector3.Lerp(desiredDirection, directionToCenter, t).ExcludeYAxis();
             body.velocity = Vector3.MoveTowards(body.velocity, direction * speed, acceleration * delta);
@@ -133,14 +135,16 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         public override float GetApproachTime(Vector3 bobberPos)
         {
             Vector3 randomDir = VectorUtils.DegreesToVector(Random.value * 360f).OnZAxis();
-            transform.position = bobberPos + (randomDir * 10f);
+            
+            approachStartPos = bobberPos + (randomDir * 10f);
+            transform.position = approachStartPos;
 
             return 1f;
         }
 
-        public override void ApproachBobber(Vector3 bobberPos, float delta)
+        public override void ApproachBobber(Vector3 bobberPos, float t)
         {
-
+            transform.position = Vector3.Lerp(bobberPos, approachStartPos, t);
         }
 
         #endregion
@@ -178,7 +182,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         private void DriftToCenter()
         {
-            Vector3 towardsStart = (startPos - transform.position).normalized;
+            Vector3 towardsStart = (reelStartPos - transform.position).normalized;
             Vector3 towardsPlayer = (playerPos - transform.position).normalized;
 
             float dot = Mathf.Clamp01(Vector3.Dot(towardsStart, towardsPlayer));
