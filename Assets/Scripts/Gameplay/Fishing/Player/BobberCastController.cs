@@ -26,7 +26,21 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             }
         }
 
-        public class OnBobberLandEventArgs : System.EventArgs
+        public class OnRecallBobberEventArgs : System.EventArgs
+        {
+            public Vector3 BobberPosition { get; private set; }
+            public Vector3 Direction { get; private set; }
+            public float TimeToRecall { get; private set; }
+
+            public OnRecallBobberEventArgs(Vector3 bobberPosition, Vector3 direction, float timeToRecall)
+            {
+                BobberPosition = bobberPosition;
+                Direction = direction;
+                TimeToRecall = timeToRecall;
+            }
+        }
+
+            public class OnBobberLandEventArgs : System.EventArgs
         {
             public Vector3 BobberPosition { get; private set; }
 
@@ -38,6 +52,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         public event System.EventHandler<OnCastBobberEventArgs> OnCastBobberEvent;
         public event System.EventHandler<OnBobberLandEventArgs> OnBobberLandEvent;
+        public event System.EventHandler<OnRecallBobberEventArgs> OnRecallBobberEvent;
 
         [Header("References")]
         [SerializeField] private PlayerDirection direction;
@@ -51,6 +66,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         [SerializeField] private float startingCastDistance;
 
         [Space, SerializeField, Range(0.01f, 10f)] private float timeToLand;
+        [SerializeField, Range(0.01f, 10f)] private float timeToRecall;
 
         private Vector3 targetBobberPos;
 
@@ -79,6 +95,13 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
                 counter = 0f;
                 castMagnitude = 0f;
+                
+                return;
+            }
+
+            if (State == FishingState.Waiting)
+            {
+                RecallBobber();
             }
         }
 
@@ -105,6 +128,17 @@ namespace MemoryFishing.Gameplay.Fishing.Player
                 if (counter > timeToLand)
                 {
                     BobberLanding();
+                }
+                return;
+            }
+
+            if (State == FishingState.Recall)
+            {
+                counter += Time.deltaTime;
+
+                if (counter > timeToRecall)
+                {
+                    State = FishingState.None;
                 }
                 return;
             }
@@ -156,6 +190,16 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
             BobberPos = targetBobberPos;
             OnBobberLandEvent?.Invoke(this, new(targetBobberPos));
+        }
+
+        private void RecallBobber()
+        {
+            State = FishingState.Recall;
+
+            fishApproaching = false;
+            counter = 0f;
+
+            OnRecallBobberEvent?.Invoke(this, new(targetBobberPos, castDirection, timeToLand));
         }
 
         public void FishGainedInterest(FishBehaviour fish, float approachTime)

@@ -5,8 +5,10 @@ namespace MemoryFishing.Gameplay.Fishing.Enumerations
         None,
         WindUp,
         Casting,
+        Recall,
+
         Waiting,
         Reeling,
-        Flinging
+        Exhausted
     }
 }

@@ -65,7 +65,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         private void OnEndReeling(object sender, ReelingController.OnEndReelingEventArgs args)
         {
-            State = FishingState.Flinging;
+            State = FishingState.Exhausted;
 
             if (args.FishBehaviour != fish)
             {

@@ -23,60 +23,97 @@ namespace MemoryFishing.FX.Fishing
         [Space, SerializeField] private AnimationCurve risingHeightCurve;
         [SerializeField] private AnimationCurve fallingHeightCurve;
 
+        [Header("Recall Settings")]
+        [SerializeField] private AnimationCurve recallCurve;
+
         [Header("Line Settings")]
         [SerializeField] private AnimationCurve lineCurve;
         
         [Space, SerializeField] private Transform rodEnd;
         [SerializeField] private Transform bobber;
 
-        private float timeSinceCastStart;
-        private float castTimeToLand;
-        private float castPeakHeight;
+        private float counter;
+        private float timeToLand;
+        private float peakHeight;
 
-        private Vector3 targetCastPosition;
-        private Vector3 startingCastPosition;
+        private float timeToRecall;
+
+        private Vector3 targetPos;
+        private Vector3 startPos;
 
         private void Start()
         {
             castController.OnCastBobberEvent += OnCastBobber;
+            castController.OnRecallBobberEvent += RecallBobber;
         }
 
         private void OnCastBobber(object sender, BobberCastController.OnCastBobberEventArgs args)
         {
-            timeSinceCastStart = 0f;
+            counter = 0f;
 
-            castTimeToLand = args.TimeToLand;
-            castPeakHeight = args.Magnitude * peakHeightMultiplier;
+            timeToLand = args.TimeToLand;
+            peakHeight = args.Magnitude * peakHeightMultiplier;
 
-            targetCastPosition = args.TargetPosition;
-            startingCastPosition = rodEnd.position;
+            startPos = rodEnd.position;
+            targetPos = args.TargetPosition;
+        }
+
+        private void RecallBobber(object sender, BobberCastController.OnRecallBobberEventArgs args)
+        {
+            timeToRecall = args.TimeToRecall;
+            counter = 0f;
+
+            startPos = args.BobberPosition;
+            targetPos = rodEnd.position;
         }
 
         private void Update()
         {
+            if (fishingManager.State == FishingState.None)
+            {
+                if (counter > 0f)
+                {
+                    counter = 0f;
+                    SetLinePositions(rodEnd.position, rodEnd.position);
+                }
+
+                return;
+            }
+
             if (fishingManager.State == FishingState.Casting)
             {
-                timeSinceCastStart += Time.deltaTime;
-                float t = timeSinceCastStart / castTimeToLand;
+                counter += Time.deltaTime;
+                float t = counter / timeToLand;
 
-                Vector3 bobberPos = Vector3.Lerp(startingCastPosition, targetCastPosition, t);
+                Vector3 bobberPos = Vector3.Lerp(startPos, targetPos, t);
 
                 if (t <= peak)
                 {
                     float curveT = risingHeightCurve.Evaluate(t.Remap01(0, peak));
-                    bobberPos.y = Mathf.LerpUnclamped(startingCastPosition.y, startingCastPosition.y + castPeakHeight, curveT);
+                    bobberPos.y = Mathf.LerpUnclamped(startPos.y, startPos.y + peakHeight, curveT);
                 }
                 else
                 {
                     float curveT = fallingHeightCurve.Evaluate(t.Remap01(peak, 1));
-                    bobberPos.y = Mathf.LerpUnclamped(startingCastPosition.y + castPeakHeight, targetCastPosition.y, curveT);
+                    bobberPos.y = Mathf.LerpUnclamped(startPos.y + peakHeight, targetPos.y, curveT);
                 }
 
                 SetLinePositions(rodEnd.position, bobberPos);
                 return;
             }
 
-            if (fishingManager.State != FishingState.None)
+            if (fishingManager.State == FishingState.Recall)
+            {
+                counter += Time.deltaTime;
+
+                float t = recallCurve.Evaluate(counter / timeToRecall);
+
+                Vector3 bobberPos = Vector3.Lerp(startPos, targetPos, t);
+                SetLinePositions(rodEnd.position, bobberPos);
+                return;
+            }
+
+            if (fishingManager.State != FishingState.WindUp)
             {
                 SetLinePositions(rodEnd.position, bobber.position);
                 return;
