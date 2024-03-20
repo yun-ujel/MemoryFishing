@@ -132,6 +132,8 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         {
             fishBody.velocity = Vector3.zero;
             State = FishingState.None;
+
+            fishingManager.CatchFishEvent(new(fish.GetItem(), fish, fishBody.position));
         }
 
         private bool FishInRange(Vector3 playerPosition, Vector3 fishPosition)

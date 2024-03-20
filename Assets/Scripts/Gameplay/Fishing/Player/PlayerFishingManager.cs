@@ -22,6 +22,8 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         public event System.EventHandler<OnBobberLandEventArgs> OnBobberLandEvent;
         public event System.EventHandler<OnRecallBobberEventArgs> OnRecallBobberEvent;
 
+        public event System.EventHandler<OnCatchFishEventArgs> OnCatchFishEvent;
+
         public void StartReelingEvent(OnStartReelingEventArgs args)
         {
             OnStartReelingEvent?.Invoke(this, args);
@@ -45,6 +47,11 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         public void RecallBobberEvent(OnRecallBobberEventArgs args)
         {
             OnRecallBobberEvent?.Invoke(this, args);
+        }
+
+        public void CatchFishEvent(OnCatchFishEventArgs args)
+        {
+            OnCatchFishEvent?.Invoke(this, args);
         }
     }
 }

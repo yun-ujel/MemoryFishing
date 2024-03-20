@@ -1,5 +1,7 @@
 using UnityEngine;
 
+using MemoryFishing.Gameplay.Inventory;
+
 namespace MemoryFishing.Gameplay.Fishing.Fish
 {
     public abstract class FishBehaviour : MonoBehaviour
@@ -35,6 +37,12 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         public abstract float GetApproachTime(Vector3 bobberPos);
 
         public abstract void ApproachBobber(Vector3 bobberPos, float delta);
+
+        #endregion
+
+        #region Catching
+
+        public abstract InventoryItem GetItem();
 
         #endregion
     }

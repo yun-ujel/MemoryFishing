@@ -1,6 +1,7 @@
 using UnityEngine;
 
 using MemoryFishing.Utilities;
+using MemoryFishing.Gameplay.Inventory;
 
 namespace MemoryFishing.Gameplay.Fishing.Fish
 {
@@ -145,6 +146,15 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         public override void ApproachBobber(Vector3 bobberPos, float t)
         {
             transform.position = Vector3.Lerp(approachStartPos, bobberPos, t);
+        }
+
+        #endregion
+
+        #region Catching
+
+        public override InventoryItem GetItem()
+        {
+            return null;
         }
 
         #endregion
