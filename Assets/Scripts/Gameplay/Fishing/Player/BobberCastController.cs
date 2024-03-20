@@ -4,56 +4,12 @@ using UnityEngine.InputSystem;
 using MemoryFishing.Gameplay.Fishing.Fish;
 using MemoryFishing.Utilities;
 using MemoryFishing.Gameplay.Fishing.Enumerations;
+using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {
-    public class BobberCastController : FishingController
+    public partial class BobberCastController : FishingController
     {
-        public class OnCastBobberEventArgs : System.EventArgs
-        {
-            public Vector3 TargetPosition { get; private set; }
-            public Vector3 Direction { get; private set; }
-            public float Magnitude { get; private set; }
-
-            public float TimeToLand { get; private set; }
-
-            public OnCastBobberEventArgs(Vector3 targetPosition, Vector3 direction, float magnitude, float timeToLand)
-            {
-                TargetPosition = targetPosition;
-                Direction = direction;
-                Magnitude = magnitude;
-                TimeToLand = timeToLand;
-            }
-        }
-
-        public class OnRecallBobberEventArgs : System.EventArgs
-        {
-            public Vector3 BobberPosition { get; private set; }
-            public Vector3 Direction { get; private set; }
-            public float TimeToRecall { get; private set; }
-
-            public OnRecallBobberEventArgs(Vector3 bobberPosition, Vector3 direction, float timeToRecall)
-            {
-                BobberPosition = bobberPosition;
-                Direction = direction;
-                TimeToRecall = timeToRecall;
-            }
-        }
-
-            public class OnBobberLandEventArgs : System.EventArgs
-        {
-            public Vector3 BobberPosition { get; private set; }
-
-            public OnBobberLandEventArgs(Vector3 bobberPosition)
-            {
-                BobberPosition = bobberPosition;
-            }
-        }
-
-        public event System.EventHandler<OnCastBobberEventArgs> OnCastBobberEvent;
-        public event System.EventHandler<OnBobberLandEventArgs> OnBobberLandEvent;
-        public event System.EventHandler<OnRecallBobberEventArgs> OnRecallBobberEvent;
-
         [Header("References")]
         [SerializeField] private PlayerDirection direction;
         [SerializeField] private ReelingController reelingController;
@@ -179,7 +135,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             counter = 0f;
 
             targetBobberPos = transform.position + (castDirection * castMagnitude);
-            OnCastBobberEvent?.Invoke(this, new(targetBobberPos, castDirection, castMagnitude, timeToLand));
+            fishingManager.CastBobberEvent(new(targetBobberPos, castDirection, castMagnitude, timeToLand));
         }
 
         private void BobberLanding()
@@ -189,7 +145,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             counter = 0f;
 
             BobberPos = targetBobberPos;
-            OnBobberLandEvent?.Invoke(this, new(targetBobberPos));
+            fishingManager.BobberLandEvent(new(targetBobberPos));
         }
 
         private void RecallBobber()
@@ -199,7 +155,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             fishApproaching = false;
             counter = 0f;
 
-            OnRecallBobberEvent?.Invoke(this, new(targetBobberPos, castDirection, timeToLand));
+            fishingManager.RecallBobberEvent(new(targetBobberPos, castDirection, timeToLand));
         }
 
         public void FishGainedInterest(FishBehaviour fish, float approachTime)

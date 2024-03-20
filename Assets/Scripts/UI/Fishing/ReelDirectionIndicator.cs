@@ -5,13 +5,14 @@ using MemoryFishing.Gameplay.Fishing.Player;
 using MemoryFishing.Gameplay.Fishing.Fish;
 using MemoryFishing.Utilities;
 using MemoryFishing.Gameplay;
+using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
 
 namespace MemoryFishing.UI.Fishing
 {
     public class ReelDirectionIndicator : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private ReelingController reelingController;
+        [SerializeField] private PlayerFishingManager fishingManager;
         [SerializeField] private PlayerDirection playerDirection;
 
         [Header("Display")]
@@ -60,11 +61,11 @@ namespace MemoryFishing.UI.Fishing
 
         private void Start()
         {
-            reelingController.OnStartReelingEvent += OnStartReeling;
-            reelingController.OnEndReelingEvent += OnEndReeling;
+            fishingManager.OnStartReelingEvent += OnStartReeling;
+            fishingManager.OnEndReelingEvent += OnEndReeling;
         }
 
-        private void OnStartReeling(object sender, ReelingController.OnStartReelingEventArgs args)
+        private void OnStartReeling(object sender, OnStartReelingEventArgs args)
         {
             isReeling = true;
             isFishing = true;
@@ -72,7 +73,7 @@ namespace MemoryFishing.UI.Fishing
             fishBehaviour = args.FishBehaviour;
         }
 
-        private void OnEndReeling(object sender, ReelingController.OnEndReelingEventArgs args)
+        private void OnEndReeling(object sender, OnEndReelingEventArgs args)
         {
             isReeling = false;
         }

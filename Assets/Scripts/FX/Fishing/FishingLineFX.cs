@@ -5,6 +5,7 @@ using MemoryFishing.Gameplay.Fishing.Fish;
 using MemoryFishing.Gameplay.Fishing.Enumerations;
 
 using static MemoryFishing.Utilities.GeneralUtils;
+using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
 
 namespace MemoryFishing.FX.Fishing
 {
@@ -12,7 +13,6 @@ namespace MemoryFishing.FX.Fishing
     {
         [Header("References")]
         [SerializeField] private PlayerFishingManager fishingManager;
-        [SerializeField] private BobberCastController castController;
 
         [Space, SerializeField] private LineRenderer line;
 
@@ -43,11 +43,11 @@ namespace MemoryFishing.FX.Fishing
 
         private void Start()
         {
-            castController.OnCastBobberEvent += OnCastBobber;
-            castController.OnRecallBobberEvent += RecallBobber;
+            fishingManager.OnCastBobberEvent += OnCastBobber;
+            fishingManager.OnRecallBobberEvent += RecallBobber;
         }
 
-        private void OnCastBobber(object sender, BobberCastController.OnCastBobberEventArgs args)
+        private void OnCastBobber(object sender, OnCastBobberEventArgs args)
         {
             counter = 0f;
 
@@ -58,7 +58,7 @@ namespace MemoryFishing.FX.Fishing
             targetPos = args.TargetPosition;
         }
 
-        private void RecallBobber(object sender, BobberCastController.OnRecallBobberEventArgs args)
+        private void RecallBobber(object sender, OnRecallBobberEventArgs args)
         {
             timeToRecall = args.TimeToRecall;
             counter = 0f;

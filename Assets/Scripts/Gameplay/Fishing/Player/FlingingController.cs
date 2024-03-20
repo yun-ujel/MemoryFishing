@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using MemoryFishing.Utilities;
 using MemoryFishing.Gameplay.Fishing.Fish;
 using MemoryFishing.Gameplay.Fishing.Enumerations;
+using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {
@@ -39,7 +40,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         {
             base.Start();
 
-            reelingController.OnEndReelingEvent += OnEndReeling;
+            fishingManager.OnEndReelingEvent += OnEndReeling;
         }
 
         public override void SubscribeToInputActions()
@@ -63,7 +64,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             StartFling();
         }
 
-        private void OnEndReeling(object sender, ReelingController.OnEndReelingEventArgs args)
+        private void OnEndReeling(object sender, OnEndReelingEventArgs args)
         {
             State = FishingState.Exhausted;
 

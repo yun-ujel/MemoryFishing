@@ -2,12 +2,14 @@ using UnityEngine;
 
 using MemoryFishing.Gameplay.Fishing.Player;
 using UnityEngine.UI;
+using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
 
 namespace MemoryFishing.UI.Fishing
 {
     public class FishExhaustionIndicator : MonoBehaviour
     {
         [Header("References")]
+        [SerializeField] private PlayerFishingManager fishingManager;
         [SerializeField] private ReelingController reelingController;
 
         [Header("Display")]
@@ -22,14 +24,14 @@ namespace MemoryFishing.UI.Fishing
 
         private void Start()
         {
-            reelingController.OnStartReelingEvent += StartReeling;
-            reelingController.OnEndReelingEvent += EndReeling;
+            fishingManager.OnStartReelingEvent += StartReeling;
+            fishingManager.OnEndReelingEvent += EndReeling;
 
             SetFillAmount(0);
             radialSprite.color = circleColorMin;
         }
 
-        private void StartReeling(object sender, ReelingController.OnStartReelingEventArgs args)
+        private void StartReeling(object sender, OnStartReelingEventArgs args)
         {
             reeling = true;
 
@@ -37,7 +39,7 @@ namespace MemoryFishing.UI.Fishing
             radialSprite.color = circleColorMin;
         }
 
-        private void EndReeling(object sender, ReelingController.OnEndReelingEventArgs args)
+        private void EndReeling(object sender, OnEndReelingEventArgs args)
         {
             reeling = false;
 

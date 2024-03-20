@@ -3,14 +3,16 @@ using UnityEngine;
 using MemoryFishing.Gameplay.Fishing.Player;
 using MemoryFishing.Utilities;
 using MemoryFishing.Gameplay.Fishing.Fish;
+using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
 
 namespace MemoryFishing.Gameplay.Fishing
 {
     public class FishingSpot : MonoBehaviour
     {
+        [SerializeField] private PlayerFishingManager fishingManager;
         [SerializeField] private BobberCastController bobberCastController;
         
-        [SerializeField] private GameObject fishPrefab;
+        [Space, SerializeField] private GameObject fishPrefab;
         private FishBehaviour fishBehaviour;
 
         [Space, SerializeField, Range(0f, 10f)] private float spotRadius;
@@ -24,11 +26,11 @@ namespace MemoryFishing.Gameplay.Fishing
 
         private void Start()
         {
-            bobberCastController.OnBobberLandEvent += OnBobberLand;
+            fishingManager.OnBobberLandEvent += OnBobberLand;
             fishBehaviour = fishPrefab.GetComponent<FishBehaviour>();
         }
 
-        private void OnBobberLand(object sender, BobberCastController.OnBobberLandEventArgs args)
+        private void OnBobberLand(object sender, OnBobberLandEventArgs args)
         {
             float sqrDist = VectorUtils.SqrDistance(args.BobberPosition, transform.position);
             

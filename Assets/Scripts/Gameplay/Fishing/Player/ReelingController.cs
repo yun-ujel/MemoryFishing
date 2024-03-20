@@ -3,43 +3,13 @@ using UnityEngine.InputSystem;
 
 using MemoryFishing.Gameplay.Fishing.Fish;
 using MemoryFishing.Gameplay.Fishing.Enumerations;
+using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {
-    public class ReelingController : FishingController
+    public partial class ReelingController : FishingController
     {
-        public class OnStartReelingEventArgs : System.EventArgs
-        {
-            public FishBehaviour FishBehaviour { get; private set; }
-            public Vector3 PlayerPos { get; private set; }
-            public Vector3 FishPos { get; private set; }
-
-            public OnStartReelingEventArgs(FishBehaviour fishBehaviour, Vector3 playerPos, Vector3 fishPos)
-            {
-                FishBehaviour = fishBehaviour;
-                PlayerPos = playerPos;
-                FishPos = fishPos;
-            }
-        }
-
-        public class OnEndReelingEventArgs : System.EventArgs
-        {
-            public FishBehaviour FishBehaviour { get; private set; }
-            public Vector3 PlayerPos { get; private set; }
-            public Vector3 FishPos { get; private set; }
-
-            public OnEndReelingEventArgs(FishBehaviour fishBehaviour, Vector3 playerPos, Vector3 fishPos)
-            {
-                FishBehaviour = fishBehaviour;
-                PlayerPos = playerPos;
-                FishPos = fishPos;
-            }
-        }
-
         #region Properties
-
-        public event System.EventHandler<OnStartReelingEventArgs> OnStartReelingEvent;
-        public event System.EventHandler<OnEndReelingEventArgs> OnEndReelingEvent;
         public float FishExhaustion { get; private set; }
 
         [Space, SerializeField] private PlayerDirection direction;
@@ -82,7 +52,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             startingFishPosition = fish.transform.position;
 
             fish.InitiateReeling(playerPos, startingFishPosition);
-            OnStartReelingEvent?.Invoke(this, new OnStartReelingEventArgs(fish, playerPos, startingFishPosition));
+            fishingManager.StartReelingEvent(new OnStartReelingEventArgs(fish, playerPos, startingFishPosition));
         }
 
         private void UpdateReeling()
@@ -111,7 +81,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         private void EndReeling()
         {
             currentFish.StopReeling();
-            OnEndReelingEvent?.Invoke(this, new(currentFish, transform.position, currentFish.transform.position));
+            fishingManager.EndReelingEvent(new(currentFish, transform.position, currentFish.transform.position));
 
             currentFish = null;
         }
