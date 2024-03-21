@@ -731,28 +731,6 @@
                 },
                 {
                     "name": "",
-                    "id": "73180e83-668c-4a61-abd0-63969bfac04f",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e6691d57-4d86-40a0-bbc5-35e4c357184c",
-                    "path": "<Gamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8e0b9a4b-9ef5-4458-891a-1d70c264a446",
                     "path": "<Gamepad>/select",
                     "interactions": "",

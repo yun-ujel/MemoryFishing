@@ -8,10 +8,31 @@ namespace MemoryFishing.Gameplay.Inventory
 {
     public class InventoryManager : PlayerController
     {
+        public class OnReceiveItemEventArgs : System.EventArgs
+        {
+            public InventoryItem Item { get; private set; }
+            public int Slot { get; private set; }
+
+            public OnReceiveItemEventArgs(InventoryItem item, int slot)
+            {
+                Item = item;
+                Slot = slot;
+            }
+        }
+
+        public class OnInventoryOpenedEventArgs : System.EventArgs
+        {
+
+        }
+
         [SerializeField] private PlayerFishingManager fishingManager;
 
         private Inventory inventory;
         public Inventory Inventory => inventory;
+        public bool InventoryOpen { get; private set; }
+
+        public event System.EventHandler<OnInventoryOpenedEventArgs> OnInventoryOpenedEvent;
+        public event System.EventHandler<OnInventoryOpenedEventArgs> OnInventoryClosedEvent;
 
         private void Awake()
         {
@@ -29,13 +50,23 @@ namespace MemoryFishing.Gameplay.Inventory
         {
             base.SubscribeToInputActions();
 
-            playerInput.actions["Player/Inventory"].performed += ReceiveInventoryInput;
-            playerInput.actions["UI/Inventory"].performed += ReceiveInventoryInput;
+            playerInput.actions["Player/Inventory"].performed += PlayerInventoryInput;
+            playerInput.actions["UI/Inventory"].performed += UIInventoryInput;
         }
 
-        private void ReceiveInventoryInput(InputAction.CallbackContext ctx)
+        private void PlayerInventoryInput(InputAction.CallbackContext ctx)
         {
+            InventoryOpen = true;
+            OnInventoryOpenedEvent?.Invoke(this, new());
 
+            playerInput.SwitchCurrentActionMap("UI");
+        }
+        private void UIInventoryInput(InputAction.CallbackContext ctx)
+        {
+            InventoryOpen = false;
+            OnInventoryClosedEvent?.Invoke(this, new());
+
+            playerInput.SwitchCurrentActionMap("Player");
         }
 
         private void OnCatchFish(object sender, OnCatchFishEventArgs args)
