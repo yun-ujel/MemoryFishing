@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca95602b5cf92948a3262358dccc002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 8aa753e597ad6644c810cab9cc4d3f8d, type: 2}
   maxAngleRange: 270
   maxHoldDuration: 3
   minHoldDuration: 1

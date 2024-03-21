@@ -10,6 +10,8 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
     {
         private Rigidbody body;
 
+        [SerializeField] private InventoryItem item;
+
         [Header("Direction")]
         [SerializeField, Range(0f, 720f)] private float maxAngleRange = 270f;
 
@@ -154,7 +156,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         public override InventoryItem GetItem()
         {
-            return null;
+            return item;
         }
 
         #endregion

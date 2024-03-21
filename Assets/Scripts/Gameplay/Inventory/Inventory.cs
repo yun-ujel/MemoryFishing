@@ -26,16 +26,21 @@ namespace MemoryFishing.Gameplay.Inventory
             return true;
         }
 
-        public bool TryAddItem(InventoryItem item)
+        public bool TryAddItem(InventoryItem item, out int index)
         {
-            int emptySpace = GetFirstEmptySpace();
+            index = GetFirstEmptySpace();
             
-            if (emptySpace == Capacity)
+            if (index == Capacity)
             {
                 return false;
             }
 
-            return TryAddItem(item, emptySpace);
+            return TryAddItem(item, index);
+        }
+
+        public bool TryAddItem(InventoryItem item)
+        {
+            return TryAddItem(item, out int _);
         }
 
         public InventoryItem SwapItem(InventoryItem item, int space)

@@ -8,12 +8,12 @@ namespace MemoryFishing.Gameplay.Inventory
 {
     public class InventoryManager : PlayerController
     {
-        public class OnReceiveItemEventArgs : System.EventArgs
+        public class OnGetItemEventArgs : System.EventArgs
         {
             public InventoryItem Item { get; private set; }
             public int Slot { get; private set; }
 
-            public OnReceiveItemEventArgs(InventoryItem item, int slot)
+            public OnGetItemEventArgs(InventoryItem item, int slot)
             {
                 Item = item;
                 Slot = slot;
@@ -33,6 +33,8 @@ namespace MemoryFishing.Gameplay.Inventory
 
         public event System.EventHandler<OnInventoryOpenedEventArgs> OnInventoryOpenedEvent;
         public event System.EventHandler<OnInventoryOpenedEventArgs> OnInventoryClosedEvent;
+
+        public event System.EventHandler<OnGetItemEventArgs> OnGetItemEvent;
 
         private void Awake()
         {
@@ -81,8 +83,9 @@ namespace MemoryFishing.Gameplay.Inventory
 
         private void PickupItem(InventoryItem item)
         {
-            if (inventory.TryAddItem(item))
+            if (inventory.TryAddItem(item, out int slot))
             {
+                OnGetItemEvent?.Invoke(this, new(item, slot));
                 return;
             }
 
