@@ -51,6 +51,11 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
                 counter = 0f;
                 castMagnitude = 0f;
+                fishingManager.StartWindUpEvent(new(direction.GetLookDirection(transform.position),
+                                                    timeToWindUp,
+                                                    windUpCurve,
+                                                    startingCastDistance,
+                                                    castDistance));
                 
                 return;
             }

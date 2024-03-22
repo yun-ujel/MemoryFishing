@@ -27,6 +27,14 @@ namespace MemoryFishing.UI.Fishing
             fishingManager.OnStartReelingEvent += StartReeling;
             fishingManager.OnEndReelingEvent += EndReeling;
 
+            fishingManager.OnCatchFishEvent += Hide;
+
+            SetFillAmount(0);
+            radialSprite.color = circleColorMin;
+        }
+
+        private void Hide(object sender, OnCatchFishEventArgs args)
+        {
             SetFillAmount(0);
             radialSprite.color = circleColorMin;
         }

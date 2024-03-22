@@ -8,9 +8,10 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
     [RequireComponent(typeof(Rigidbody))]
     public class BasicFish : FishBehaviour
     {
+        private static int fishCaught = -1;
         private Rigidbody body;
 
-        [SerializeField] private InventoryItem item;
+        [SerializeField] private InventoryItem[] items;
 
         [Header("Direction")]
         [SerializeField, Range(0f, 720f)] private float maxAngleRange = 270f;
@@ -156,7 +157,13 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         public override InventoryItem GetItem()
         {
-            return item;
+            fishCaught++;
+            if (fishCaught >= items.Length)
+            {
+                fishCaught = 0;
+            }
+
+            return items[fishCaught];
         }
 
         #endregion

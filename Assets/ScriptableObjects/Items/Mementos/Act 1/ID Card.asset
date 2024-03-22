@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a18310b2d6ade6544a6e1251da0db56a, type: 3}
+  m_Name: ID Card
+  m_EditorClassIdentifier: 
+  <Texture>k__BackingField: {fileID: 2800000, guid: b86f9bebb7aca384d93ac980d8880992, type: 3}
+  <Description>k__BackingField: "A wallet. It's stuffed with old lottery tickets,
+    liquor store receipts and expired gift cards. I should clear it out soon.\r"

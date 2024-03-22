@@ -63,6 +63,13 @@ namespace MemoryFishing.UI.Fishing
         {
             fishingManager.OnStartReelingEvent += OnStartReeling;
             fishingManager.OnEndReelingEvent += OnEndReeling;
+
+            fishingManager.OnCatchFishEvent += Hide;
+        }
+
+        private void Hide(object sender, OnCatchFishEventArgs args)
+        {
+            isFishing = false;
         }
 
         private void OnStartReeling(object sender, OnStartReelingEventArgs args)
