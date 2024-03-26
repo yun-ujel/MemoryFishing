@@ -2,10 +2,10 @@ using UnityEngine;
 
 using MemoryFishing.Gameplay.Fishing.Player;
 using MemoryFishing.Gameplay.Fishing.Fish;
-using MemoryFishing.Gameplay.Fishing.Enumerations;
 
 using static MemoryFishing.Utilities.GeneralUtils;
 using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
+using MemoryFishing.Gameplay.Enumerations;
 
 namespace MemoryFishing.FX.Fishing
 {

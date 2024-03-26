@@ -3,8 +3,8 @@ using UnityEngine.InputSystem;
 
 using MemoryFishing.Gameplay.Fishing.Fish;
 using MemoryFishing.Utilities;
-using MemoryFishing.Gameplay.Fishing.Enumerations;
 using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
+using MemoryFishing.Gameplay.Enumerations;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {
@@ -39,8 +39,8 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         public override void SubscribeToInputActions()
         {
             base.SubscribeToInputActions();
-            playerInput.actions["Player/Fling"].performed += OnFlingPressed;
-            playerInput.actions["Player/Fling"].canceled += OnFlingReleased;
+            playerInput.actions["Player/CastReel"].performed += OnFlingPressed;
+            playerInput.actions["Player/CastReel"].canceled += OnFlingReleased;
         }
 
         private void OnFlingPressed(InputAction.CallbackContext ctx)

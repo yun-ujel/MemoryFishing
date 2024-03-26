@@ -1,4 +1,4 @@
-namespace MemoryFishing.Gameplay.Fishing.Enumerations
+namespace MemoryFishing.Gameplay.Enumerations
 {
     public enum FishingState
     {

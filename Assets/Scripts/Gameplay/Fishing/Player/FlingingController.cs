@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using MemoryFishing.Utilities;
 using MemoryFishing.Gameplay.Fishing.Fish;
-using MemoryFishing.Gameplay.Fishing.Enumerations;
 using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
+using MemoryFishing.Gameplay.Enumerations;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {
@@ -47,7 +47,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         {
             base.SubscribeToInputActions();
 
-            playerInput.actions["Player/Fling"].performed += ReceiveFlingInput;
+            playerInput.actions["Player/CastReel"].performed += ReceiveFlingInput;
         }
 
         #endregion

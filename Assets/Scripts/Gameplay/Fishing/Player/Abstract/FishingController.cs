@@ -1,6 +1,5 @@
 using UnityEngine;
-
-using MemoryFishing.Gameplay.Fishing.Enumerations;
+using MemoryFishing.Gameplay.Enumerations;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {

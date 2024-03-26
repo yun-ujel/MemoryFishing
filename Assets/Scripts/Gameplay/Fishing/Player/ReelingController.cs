@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 using MemoryFishing.Gameplay.Fishing.Fish;
-using MemoryFishing.Gameplay.Fishing.Enumerations;
 using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
+using MemoryFishing.Gameplay.Enumerations;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {
