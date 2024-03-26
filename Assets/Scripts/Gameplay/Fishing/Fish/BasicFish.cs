@@ -41,7 +41,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         private float currentExhaustion;
 
-        private Vector3 reelStartPos;
+        private Vector3 fightStartPos;
         private Vector3 playerPos;
 
         private Vector3 approachStartPos;
@@ -53,7 +53,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         private void FixedUpdate()
         {
-            if (!isReeling)
+            if (!isFighting)
             {
                 // Apply Friction
                 body.AddForce(body.velocity * -idleFriction);
@@ -62,21 +62,21 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         #region Override Methods
         
-        #region Reeling
-        public override void InitiateReeling(Vector3 playerPos, Vector3 fishPos)
+        #region Fighting
+        public override void InitiateFighting(Vector3 playerPos, Vector3 fishPos)
         {
-            base.InitiateReeling(playerPos, fishPos);
+            base.InitiateFighting(playerPos, fishPos);
 
             currentExhaustion = 0f;
             GetNewTarget();
 
-            reelStartPos = fishPos;
+            fightStartPos = fishPos;
             this.playerPos = playerPos;
 
             angleOffset = CalculateAngleOffset(playerPos, fishPos);
         }
 
-        public override void UpdateFishReeling(float delta)
+        public override void UpdateFishFighting(float delta)
         {
             currentHoldDuration += delta;
             float t = currentHoldDuration / targetHoldDuration;
@@ -89,14 +89,14 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
             LerpRotation(t);
         }
 
-        public override void MoveFishReeling(float delta)
+        public override void MoveFishFighting(float delta)
         {
             float maxDistance = Mathf.Lerp(maxDistanceFromStart, 0f, currentExhaustion);
-            Vector3 directionToCenter = (reelStartPos - transform.position).normalized;
+            Vector3 directionToCenter = (fightStartPos - transform.position).normalized;
 
             Vector3 desiredDirection = GetFishDirection();
 
-            float t = VectorUtils.SqrDistance(transform.position, reelStartPos) / Mathf.Pow(maxDistance, 2);
+            float t = VectorUtils.SqrDistance(transform.position, fightStartPos) / Mathf.Pow(maxDistance, 2);
 
             Vector3 direction = Vector3.Lerp(desiredDirection, directionToCenter, t).ExcludeYAxis();
             body.velocity = Vector3.MoveTowards(body.velocity, direction * speed, acceleration * delta);
@@ -126,9 +126,9 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
             return positiveExhaustMultiplier;
         }
 
-        public override void StopReeling()
+        public override void StopFighting()
         {
-            base.StopReeling();
+            base.StopFighting();
             DriftToCenter();
         }
 
@@ -201,7 +201,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         private void DriftToCenter()
         {
-            Vector3 towardsStart = (reelStartPos - transform.position).normalized;
+            Vector3 towardsStart = (fightStartPos - transform.position).normalized;
             Vector3 towardsPlayer = (playerPos - transform.position).normalized;
 
             float dot = Mathf.Clamp01(Vector3.Dot(towardsStart, towardsPlayer));

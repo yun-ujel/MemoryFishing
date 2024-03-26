@@ -10,7 +10,7 @@ namespace MemoryFishing.UI.Fishing
     {
         [Header("References")]
         [SerializeField] private PlayerFishingManager fishingManager;
-        [SerializeField] private ReelingController reelingController;
+        [SerializeField] private FishFightController fightController;
 
         [Header("Display")]
         [SerializeField] private Image radialSprite;
@@ -20,12 +20,12 @@ namespace MemoryFishing.UI.Fishing
         [SerializeField] private Color circleColorMin;
         [SerializeField] private Color circleColorMax;
 
-        private bool reeling;
+        private bool fighting;
 
         private void Start()
         {
-            fishingManager.OnStartReelingEvent += StartReeling;
-            fishingManager.OnEndReelingEvent += EndReeling;
+            fishingManager.OnStartFightingEvent += StartFighting;
+            fishingManager.OnEndFightingEvent += EndFighting;
 
             fishingManager.OnCatchFishEvent += Hide;
 
@@ -39,17 +39,17 @@ namespace MemoryFishing.UI.Fishing
             radialSprite.color = circleColorMin;
         }
 
-        private void StartReeling(object sender, OnStartReelingEventArgs args)
+        private void StartFighting(object sender, OnStartFightingEventArgs args)
         {
-            reeling = true;
+            fighting = true;
 
             SetFillAmount(0);
             radialSprite.color = circleColorMin;
         }
 
-        private void EndReeling(object sender, OnEndReelingEventArgs args)
+        private void EndFighting(object sender, OnEndFightingEventArgs args)
         {
-            reeling = false;
+            fighting = false;
 
             SetFillAmount(1);
             radialSprite.color = circleColorMax;
@@ -57,9 +57,9 @@ namespace MemoryFishing.UI.Fishing
 
         private void Update()
         {
-            if (reeling)
+            if (fighting)
             {
-                float exhaustion = reelingController.FishExhaustion;
+                float exhaustion = fightController.FishExhaustion;
 
                 SetFillAmount(exhaustion);
                 radialSprite.color = Color.Lerp(circleColorMin, circleColorMax, exhaustion);

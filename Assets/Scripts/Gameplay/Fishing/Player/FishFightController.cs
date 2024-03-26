@@ -7,7 +7,7 @@ using MemoryFishing.Gameplay.Enumerations;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {
-    public partial class ReelingController : FishingController
+    public class FishFightController : FishingController
     {
         #region Properties
         public float FishExhaustion { get; private set; }
@@ -27,37 +27,37 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         private void Update()
         {
-            if (State == FishingState.Reeling)
+            if (State == FishingState.Fighting)
             {
-                UpdateReeling();
+                UpdateFighting();
             }
         }
 
         private void FixedUpdate()
         {
-            if (State == FishingState.Reeling)
+            if (State == FishingState.Fighting)
             {
-                currentFish.MoveFishReeling(Time.fixedDeltaTime);
+                currentFish.MoveFishFighting(Time.fixedDeltaTime);
             }
         }
 
-        public void StartReeling(FishBehaviour fish)
+        public void StartFighting(FishBehaviour fish)
         {
             currentFish = fish;
-            State = FishingState.Reeling;
+            State = FishingState.Fighting;
 
             FishExhaustion = 0;
 
             Vector3 playerPos = transform.position;
             startingFishPosition = fish.transform.position;
 
-            fish.InitiateReeling(playerPos, startingFishPosition);
-            fishingManager.StartReelingEvent(new OnStartReelingEventArgs(fish, playerPos, startingFishPosition));
+            fish.InitiateFighting(playerPos, startingFishPosition);
+            fishingManager.StartFightingEvent(new OnStartFightingEventArgs(fish, playerPos, startingFishPosition));
         }
 
-        private void UpdateReeling()
+        private void UpdateFighting()
         {
-            currentFish.UpdateFishReeling(Time.deltaTime);
+            currentFish.UpdateFishFighting(Time.deltaTime);
             Vector3 lookDirection = direction.GetLookDirection(currentFish.transform.position);
 
             FishExhaustion += currentFish.UpdateFishExhaustion(Time.deltaTime, -lookDirection);
@@ -68,7 +68,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
             if (FishExhaustion >= 1f)
             {
-                EndReeling();
+                EndFighting();
             }
         }
 
@@ -78,10 +78,10 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             Debug.DrawRay(fishPos, playerDirection, Color.green);
         }
 
-        private void EndReeling()
+        private void EndFighting()
         {
-            currentFish.StopReeling();
-            fishingManager.EndReelingEvent(new(currentFish, transform.position, currentFish.transform.position));
+            currentFish.StopFighting();
+            fishingManager.EndFightingEvent(new(currentFish, transform.position, currentFish.transform.position));
 
             currentFish = null;
         }

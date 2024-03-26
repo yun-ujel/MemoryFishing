@@ -6,20 +6,20 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 {
     public abstract class FishBehaviour : MonoBehaviour
     {
-        protected bool isReeling;
+        protected bool isFighting;
 
-        #region Reeling
-        public abstract void MoveFishReeling(float delta);
-        public abstract void UpdateFishReeling(float delta);
+        #region Fighting
+        public abstract void MoveFishFighting(float delta);
+        public abstract void UpdateFishFighting(float delta);
         public abstract Vector3 GetFishDirection();
 
-        public virtual void InitiateReeling(Vector3 playerPos, Vector3 fishPos)
+        public virtual void InitiateFighting(Vector3 playerPos, Vector3 fishPos)
         {
-            isReeling = true;
+            isFighting = true;
         }
-        public virtual void StopReeling()
+        public virtual void StopFighting()
         {
-            isReeling = false;
+            isFighting = false;
         }
 
         public virtual float UpdateFishExhaustion(float delta, Vector3 input)

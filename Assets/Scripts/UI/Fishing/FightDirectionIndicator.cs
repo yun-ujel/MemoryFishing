@@ -9,7 +9,7 @@ using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
 
 namespace MemoryFishing.UI.Fishing
 {
-    public class ReelDirectionIndicator : MonoBehaviour
+    public class FightDirectionIndicator : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private PlayerFishingManager fishingManager;
@@ -56,13 +56,13 @@ namespace MemoryFishing.UI.Fishing
         private FishBehaviour fishBehaviour;
         private Vector3 currentFishDirection;
 
-        private bool isReeling;
+        private bool isFighting;
         private bool isFishing;
 
         private void Start()
         {
-            fishingManager.OnStartReelingEvent += OnStartReeling;
-            fishingManager.OnEndReelingEvent += OnEndReeling;
+            fishingManager.OnStartFightingEvent += OnStartFighting;
+            fishingManager.OnEndFightingEvent += OnEndFighting;
 
             fishingManager.OnCatchFishEvent += Hide;
         }
@@ -72,17 +72,17 @@ namespace MemoryFishing.UI.Fishing
             isFishing = false;
         }
 
-        private void OnStartReeling(object sender, OnStartReelingEventArgs args)
+        private void OnStartFighting(object sender, OnStartFightingEventArgs args)
         {
-            isReeling = true;
+            isFighting = true;
             isFishing = true;
 
             fishBehaviour = args.FishBehaviour;
         }
 
-        private void OnEndReeling(object sender, OnEndReelingEventArgs args)
+        private void OnEndFighting(object sender, OnEndFightingEventArgs args)
         {
-            isReeling = false;
+            isFighting = false;
         }
 
         private void Update()
@@ -100,7 +100,7 @@ namespace MemoryFishing.UI.Fishing
 
             PlayerAlpha = Mathf.MoveTowards(PlayerAlpha, 1f, delta * 10f);
 
-            if (isReeling)
+            if (isFighting)
             {
                 FishAlpha = Mathf.MoveTowards(FishAlpha, 1f, delta * 10f);
                 

@@ -11,7 +11,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
     {
         [Header("References")]
         [SerializeField] private PlayerDirection direction;
-        [SerializeField] private ReelingController reelingController;
+        [SerializeField] private FishFightController fightController;
 
         [Header("Settings")]
         [SerializeField, Range(0f, 50f)] private float flingForce;
@@ -40,7 +40,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         {
             base.Start();
 
-            fishingManager.OnEndReelingEvent += OnEndReeling;
+            fishingManager.OnEndFightingEvent += OnEndReeling;
         }
 
         public override void SubscribeToInputActions()
@@ -64,7 +64,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             StartFling();
         }
 
-        private void OnEndReeling(object sender, OnEndReelingEventArgs args)
+        private void OnEndReeling(object sender, OnEndFightingEventArgs args)
         {
             State = FishingState.Exhausted;
 
@@ -125,7 +125,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
                 return;
             }
 
-            reelingController.StartReeling(fish);
+            fightController.StartFighting(fish);
         }
 
         private void CatchFish()

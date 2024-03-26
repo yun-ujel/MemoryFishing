@@ -11438,7 +11438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishingManager: {fileID: 2006554647}
-  reelingController: {fileID: 2006554644}
+  fightController: {fileID: 2006554644}
   radialSprite: {fileID: 2223472352555935843}
   circleColorMin: {r: 1, g: 1, b: 1, a: 0.2}
   circleColorMax: {r: 1, g: 1, b: 1, a: 0.6}
@@ -22169,7 +22169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {fileID: 1623768384}
-  reelingController: {fileID: 2006554644}
+  fightController: {fileID: 2006554644}
   flingForce: 5
   flingDuration: 2
   catchFishRadius: 4
@@ -22186,7 +22186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {fileID: 1623768384}
-  reelingController: {fileID: 2006554644}
+  fightController: {fileID: 2006554644}
   timeToWindUp: 1
   windUpCurve:
     serializedVersion: 2

@@ -14,8 +14,8 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             set => bobber.position = value;
         }
 
-        public event System.EventHandler<OnStartReelingEventArgs> OnStartReelingEvent;
-        public event System.EventHandler<OnEndReelingEventArgs> OnEndReelingEvent;
+        public event System.EventHandler<OnStartFightingEventArgs> OnStartFightingEvent;
+        public event System.EventHandler<OnEndFightingEventArgs> OnEndFightingEvent;
 
         public event System.EventHandler<OnStartWindUpEventArgs> OnStartWindUpEvent;
         public event System.EventHandler<OnCastBobberEventArgs> OnCastBobberEvent;
@@ -24,14 +24,14 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         public event System.EventHandler<OnCatchFishEventArgs> OnCatchFishEvent;
 
-        public void StartReelingEvent(OnStartReelingEventArgs args)
+        public void StartFightingEvent(OnStartFightingEventArgs args)
         {
-            OnStartReelingEvent?.Invoke(this, args);
+            OnStartFightingEvent?.Invoke(this, args);
         }
 
-        public void EndReelingEvent(OnEndReelingEventArgs args)
+        public void EndFightingEvent(OnEndFightingEventArgs args)
         {
-            OnEndReelingEvent?.Invoke(this, args);
+            OnEndFightingEvent?.Invoke(this, args);
         }
 
         public void StartWindUpEvent(OnStartWindUpEventArgs args)

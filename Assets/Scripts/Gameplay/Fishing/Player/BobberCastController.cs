@@ -8,11 +8,11 @@ using MemoryFishing.Gameplay.Enumerations;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {
-    public partial class BobberCastController : FishingController
+    public class BobberCastController : FishingController
     {
         [Header("References")]
         [SerializeField] private PlayerDirection direction;
-        [SerializeField] private ReelingController reelingController;
+        [SerializeField] private FishFightController fightController;
 
         [Header("Bobber Casting: Wind Up")]
         [SerializeField, Range(0.01f, 10f)] private float timeToWindUp;
@@ -113,7 +113,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
                 if (t >= 1f)
                 {
-                    reelingController.StartReeling(approachingFish);
+                    fightController.StartFighting(approachingFish);
                     
                     fishApproaching = false;
                 }
