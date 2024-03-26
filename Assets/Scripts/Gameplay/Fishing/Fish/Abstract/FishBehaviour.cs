@@ -8,6 +8,14 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
     {
         protected bool isFighting;
 
+        #region Approaching
+
+        public abstract float GetApproachTime(Vector3 bobberPos);
+
+        public abstract void ApproachBobber(Vector3 bobberPos, float delta);
+
+        #endregion
+
         #region Fighting
         public abstract void MoveFishFighting(float delta);
         public abstract void UpdateFishFighting(float delta);
@@ -30,13 +38,12 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         }
 
         public abstract float GetExhaustionMultiplier(float dot);
+
         #endregion
 
-        #region Approaching
+        #region Reeling
 
-        public abstract float GetApproachTime(Vector3 bobberPos);
-
-        public abstract void ApproachBobber(Vector3 bobberPos, float delta);
+        public abstract float UpdateReawakenDuration(float startingDistance, float distanceLeft, float delta);
 
         #endregion
 

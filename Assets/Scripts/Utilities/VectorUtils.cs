@@ -42,5 +42,16 @@ namespace MemoryFishing.Utilities
         {
             return VectorToDegrees(vector.OnYAxis());
         }
+
+        public static void DirectionMagnitude(this Vector3 vector, out Vector3 normalized, out float magnitude)
+        {
+            magnitude = vector.magnitude;
+            
+            vector.x /= magnitude;
+            vector.y /= magnitude;
+            vector.z /= magnitude;
+
+            normalized = vector;
+        }
     }
 }

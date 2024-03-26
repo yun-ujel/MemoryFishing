@@ -34,6 +34,9 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         [SerializeField, Range(0f, 1f)] private float positiveExhaustMultiplier = 0.1f;
         [SerializeField, Range(0f, 1f)] private float negativeExhaustMultiplier = 0.05f;
 
+        [SerializeField, Range(1, 5)] private int reawakenStages = 1;
+        private int stagesLeft;
+
         private float angleOffset = 0f;
 
         private float currentRotationDeg, prevRotationDeg, targetRotationDeg;
@@ -49,6 +52,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         private void Start()
         {
             body = GetComponent<Rigidbody>();
+            stagesLeft = reawakenStages;
         }
 
         private void FixedUpdate()
@@ -61,7 +65,26 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         }
 
         #region Override Methods
-        
+
+        #region Approaching
+
+        public override float GetApproachTime(Vector3 bobberPos)
+        {
+            Vector3 randomDir = VectorUtils.DegreesToVector(Random.value * 360f).OnZAxis();
+
+            approachStartPos = bobberPos + (randomDir * 10f);
+            transform.position = approachStartPos;
+
+            return 1f;
+        }
+
+        public override void ApproachBobber(Vector3 bobberPos, float t)
+        {
+            transform.position = Vector3.Lerp(approachStartPos, bobberPos, t);
+        }
+
+        #endregion
+
         #region Fighting
         public override void InitiateFighting(Vector3 playerPos, Vector3 fishPos)
         {
@@ -129,26 +152,28 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         public override void StopFighting()
         {
             base.StopFighting();
+            
+            stagesLeft--;
             DriftToCenter();
         }
 
         #endregion
 
-        #region Approaching
+        #region Reeling
 
-        public override float GetApproachTime(Vector3 bobberPos)
+        public override float UpdateReawakenDuration(float startingDistance, float distanceLeft, float delta)
         {
-            Vector3 randomDir = VectorUtils.DegreesToVector(Random.value * 360f).OnZAxis();
-            
-            approachStartPos = bobberPos + (randomDir * 10f);
-            transform.position = approachStartPos;
+            if (stagesLeft == 0)
+            {
+                return 1f;
+            }
 
-            return 1f;
-        }
+            float targetDistance = startingDistance / reawakenStages * stagesLeft;
+            float t = Mathf.Clamp(distanceLeft - targetDistance, 0, startingDistance);
 
-        public override void ApproachBobber(Vector3 bobberPos, float t)
-        {
-            transform.position = Vector3.Lerp(approachStartPos, bobberPos, t);
+            Debug.Log($"Starting: {startingDistance}; Fish-Player: {distanceLeft}; Target: {targetDistance}; T: {t}");
+
+            return Mathf.Lerp(0f, 1f, t);
         }
 
         #endregion

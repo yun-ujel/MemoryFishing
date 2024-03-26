@@ -22117,7 +22117,7 @@ GameObject:
   - component: {fileID: 2006554642}
   - component: {fileID: 2006554647}
   - component: {fileID: 2006554644}
-  - component: {fileID: 2006554645}
+  - component: {fileID: 2006554648}
   - component: {fileID: 2006554646}
   m_Layer: 0
   m_Name: Fishing
@@ -22156,23 +22156,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {fileID: 1623768384}
---- !u!114 &2006554645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2006554641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 218293485b9b03546854893dff4fa417, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  direction: {fileID: 1623768384}
-  fightController: {fileID: 2006554644}
-  flingForce: 5
-  flingDuration: 2
-  catchFishRadius: 4
 --- !u!114 &2006554646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22229,6 +22212,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bobber: {fileID: 199725076}
+--- !u!114 &2006554648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006554641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ea91627b17158146904766ca03511f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {fileID: 1623768384}
+  fightController: {fileID: 2006554644}
+  catchFishRadius: 2
+  timeToReelFully: 2
+  reelAcceleration: 5
 --- !u!223 &383941406862445622
 Canvas:
   m_ObjectHideFlags: 0

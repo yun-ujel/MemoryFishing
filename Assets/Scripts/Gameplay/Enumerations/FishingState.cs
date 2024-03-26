@@ -9,6 +9,7 @@ namespace MemoryFishing.Gameplay.Enumerations
 
         Waiting,
         Fighting,
-        Exhausted
+        Exhausted,
+        Reeling
     }
 }
