@@ -207,7 +207,8 @@ MonoBehaviour:
   idleFriction: 0.2
   positiveExhaustMultiplier: 1
   negativeExhaustMultiplier: 0.1
-  reawakenStages: 2
+  reawakenStages: 5
+  minReawakenDistance: 2
 --- !u!54 &5673960302260626053
 Rigidbody:
   m_ObjectHideFlags: 0

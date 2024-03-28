@@ -15,6 +15,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         [Space, SerializeField] private PlayerDirection direction;
 
         private FishBehaviour currentFish;
+        private int currentFishFightCount;
 
         private Vector3 startingFishPosition;
 
@@ -41,8 +42,17 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             }
         }
 
-        public void StartFighting(FishBehaviour fish)
+        public void StartFighting(FishBehaviour fish, bool firstFight)
         {
+            if (firstFight)
+            {
+                currentFishFightCount = 0;
+            }
+            else
+            {
+                currentFishFightCount++;
+            }
+
             currentFish = fish;
             State = FishingState.Fighting;
 
@@ -51,8 +61,8 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             Vector3 playerPos = transform.position;
             startingFishPosition = fish.transform.position;
 
-            fish.InitiateFighting(playerPos, startingFishPosition);
-            fishingManager.StartFightingEvent(new OnStartFightingEventArgs(fish, playerPos, startingFishPosition));
+            fish.InitiateFighting(playerPos, startingFishPosition, currentFishFightCount);
+            fishingManager.StartFightingEvent(new OnStartFightingEventArgs(fish, playerPos, startingFishPosition, currentFishFightCount));
         }
 
         private void UpdateFighting()
@@ -81,7 +91,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         private void EndFighting()
         {
             currentFish.StopFighting();
-            fishingManager.EndFightingEvent(new(currentFish, transform.position, currentFish.transform.position));
+            fishingManager.EndFightingEvent(new(currentFish, transform.position, currentFish.transform.position, currentFishFightCount));
 
             currentFish = null;
         }

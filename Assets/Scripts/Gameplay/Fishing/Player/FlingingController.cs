@@ -125,7 +125,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
                 return;
             }
 
-            fightController.StartFighting(fish);
+            fightController.StartFighting(fish, true);
         }
 
         private void CatchFish()

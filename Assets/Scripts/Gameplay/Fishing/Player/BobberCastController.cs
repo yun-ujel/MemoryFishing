@@ -113,7 +113,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
                 if (t >= 1f)
                 {
-                    fightController.StartFighting(approachingFish);
+                    fightController.StartFighting(approachingFish, true);
                     
                     fishApproaching = false;
                 }

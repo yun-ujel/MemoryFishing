@@ -35,6 +35,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         [SerializeField, Range(0f, 1f)] private float negativeExhaustMultiplier = 0.05f;
 
         [SerializeField, Range(1, 5)] private int reawakenStages = 1;
+        [SerializeField] private float minReawakenDistance;
         private int stagesLeft;
 
         private float angleOffset = 0f;
@@ -86,15 +87,17 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         #endregion
 
         #region Fighting
-        public override void InitiateFighting(Vector3 playerPos, Vector3 fishPos)
+        public override void InitiateFighting(Vector3 playerPos, Vector3 fishPos, int fightCount)
         {
-            base.InitiateFighting(playerPos, fishPos);
+            base.InitiateFighting(playerPos, fishPos, fightCount);
 
             currentExhaustion = 0f;
             GetNewTarget();
 
             fightStartPos = fishPos;
             this.playerPos = playerPos;
+
+            stagesLeft = reawakenStages - (fightCount + 1);
 
             angleOffset = CalculateAngleOffset(playerPos, fishPos);
         }
@@ -152,8 +155,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         public override void StopFighting()
         {
             base.StopFighting();
-            
-            stagesLeft--;
+
             DriftToCenter();
         }
 
@@ -168,10 +170,13 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
                 return 1f;
             }
 
-            float targetDistance = startingDistance / reawakenStages * stagesLeft;
+            float targetDistance = (startingDistance - minReawakenDistance) / reawakenStages * stagesLeft;
+            targetDistance += minReawakenDistance;
+
             float t = Mathf.Clamp(distanceLeft - targetDistance, 0, startingDistance);
 
-            Debug.Log($"Starting: {startingDistance}; Fish-Player: {distanceLeft}; Target: {targetDistance}; T: {t}");
+
+            Debug.Log($"Fish-Player: {distanceLeft}; Target: ({startingDistance} / {reawakenStages} Max Stages) * {stagesLeft} Stages Left = {targetDistance}; T: {t}");
 
             return Mathf.Lerp(0f, 1f, t);
         }

@@ -21,7 +21,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         public abstract void UpdateFishFighting(float delta);
         public abstract Vector3 GetFishDirection();
 
-        public virtual void InitiateFighting(Vector3 playerPos, Vector3 fishPos)
+        public virtual void InitiateFighting(Vector3 playerPos, Vector3 fishPos, int fightCount)
         {
             isFighting = true;
         }

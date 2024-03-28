@@ -95,6 +95,7 @@ namespace MemoryFishing.UI.Fishing
             if (!isFishing)
             {
                 PlayerAlpha = Mathf.MoveTowards(PlayerAlpha, 0f, delta * 10f);
+                FishAlpha = Mathf.MoveTowards(FishAlpha, 0f, delta * 10f);
                 return;
             }
 

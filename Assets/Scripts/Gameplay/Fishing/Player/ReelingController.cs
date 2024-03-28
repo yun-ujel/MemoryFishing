@@ -6,6 +6,7 @@ using MemoryFishing.Gameplay.Enumerations;
 using MemoryFishing.Gameplay.Fishing.Fish;
 
 using static MemoryFishing.Utilities.VectorUtils;
+using MemoryFishing.Utilities;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {
@@ -89,11 +90,14 @@ namespace MemoryFishing.Gameplay.Fishing.Player
                 fish = args.FishBehaviour;
                 fishBody = fish.GetComponent<Rigidbody>();
             }
-
-            startingDistance = Vector3.Distance(args.PlayerPos, args.FishPos);
+            
             currentReelSpeed = fishBody.velocity.magnitude;
 
-            maxReelSpeed = startingDistance / timeToReelFully;
+            if (args.FirstFight)
+            {
+                startingDistance = Vector3.Distance(args.PlayerPos, args.FishPos);
+                maxReelSpeed = startingDistance / timeToReelFully;
+            }
         }
 
         #endregion
@@ -103,6 +107,16 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         private void FixedUpdate()
         {
             UpdateFishVelocity(Time.fixedDeltaTime);
+        }
+
+        private void Update()
+        {
+            if (State != FishingState.Exhausted && State != FishingState.Reeling)
+            {
+                return;
+            }
+
+            BobberPos = fishBody.position;
         }
 
         private void UpdateFishVelocity(float delta)
@@ -118,7 +132,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
             if (fishReawakenDuration <= 0f)
             {
-                fightController.StartFighting(fish);
+                fightController.StartFighting(fish, false);
                 return;
             }
 
@@ -133,6 +147,32 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             }
 
             fishBody.velocity = direction * currentReelSpeed;
+
+            if (FishInRange(transform.position, fishBody.position))
+            {
+                CatchFish();
+                return;
+            }
+        }
+
+        private void CatchFish()
+        {
+            fishBody.velocity = Vector3.zero;
+            State = FishingState.None;
+
+            fishingManager.CatchFishEvent(new(fish.GetItem(), fish, fishBody.position));
+        }
+
+        private bool FishInRange(Vector3 playerPosition, Vector3 fishPosition)
+        {
+            float sqrDistance = VectorUtils.SqrDistance(playerPosition.ExcludeYAxis(), fishPosition.ExcludeYAxis());
+
+            if (sqrDistance < Mathf.Pow(catchFishRadius, 2))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         #endregion
