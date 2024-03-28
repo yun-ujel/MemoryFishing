@@ -37,9 +37,12 @@ namespace MemoryFishing.FX.Fishing
         private float peakHeight;
 
         private float timeToRecall;
+        private bool recalling;
 
         private Vector3 targetPos;
         private Vector3 startPos;
+
+        private Vector3 bobberPos;
 
         private void Start()
         {
@@ -62,15 +65,30 @@ namespace MemoryFishing.FX.Fishing
         {
             timeToRecall = args.TimeToRecall;
             counter = 0f;
+            recalling = true;
 
-            startPos = args.BobberPosition;
+            startPos = bobberPos;
             targetPos = rodEnd.position;
         }
 
         private void Update()
         {
-            if (fishingManager.State == FishingState.None)
+            if (fishingManager.State == FishingState.None || fishingManager.State == FishingState.WindUp)
             {
+                if (recalling)
+                {
+                    counter += Time.deltaTime;
+
+                    float t = recallCurve.Evaluate(counter / timeToRecall);
+
+                    bobberPos = Vector3.Lerp(startPos, targetPos, t);
+                    SetLinePositions(rodEnd.position, bobberPos);
+
+                    recalling = counter < timeToRecall;
+
+                    return;
+                }
+
                 if (counter > 0f)
                 {
                     counter = 0f;
@@ -85,7 +103,7 @@ namespace MemoryFishing.FX.Fishing
                 counter += Time.deltaTime;
                 float t = counter / timeToLand;
 
-                Vector3 bobberPos = Vector3.Lerp(startPos, targetPos, t);
+                bobberPos = Vector3.Lerp(startPos, targetPos, t);
 
                 if (t <= peak)
                 {
@@ -101,34 +119,17 @@ namespace MemoryFishing.FX.Fishing
                 SetLinePositions(rodEnd.position, bobberPos);
                 return;
             }
-
-            if (fishingManager.State == FishingState.Recall)
-            {
-                counter += Time.deltaTime;
-
-                float t = recallCurve.Evaluate(counter / timeToRecall);
-
-                Vector3 bobberPos = Vector3.Lerp(startPos, targetPos, t);
-                SetLinePositions(rodEnd.position, bobberPos);
-                return;
-            }
-
-            if (fishingManager.State != FishingState.WindUp)
-            {
-                SetLinePositions(rodEnd.position, bobber.position);
-                return;
-            }
         }
 
-        private void SetLinePositions(Vector3 playerPos, Vector3 bobberPos)
+        private void SetLinePositions(Vector3 start, Vector3 end)
         {
             for (int i = 0; i < line.positionCount; i++)
             {
                 float t = (float)i / (line.positionCount - 1);
                 float curveT = lineCurve.Evaluate(t);
 
-                Vector3 pos = Vector3.Lerp(playerPos, bobberPos, t);
-                pos.y = Mathf.Lerp(playerPos.y, bobberPos.y, curveT);
+                Vector3 pos = Vector3.Lerp(start, end, t);
+                pos.y = Mathf.Lerp(start.y, end.y, curveT);
 
                 line.SetPosition(i, pos);
             }

@@ -5,7 +5,6 @@ namespace MemoryFishing.Gameplay.Enumerations
         None,
         WindUp,
         Casting,
-        Recall,
 
         Waiting,
         Fighting,
