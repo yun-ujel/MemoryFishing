@@ -6172,7 +6172,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.05
+    widthMultiplier: 0.03
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -22195,8 +22195,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  castDistance: 9
-  startingCastDistance: 1
+  castDistance: 8
+  startingCastDistance: 2
   timeToLand: 0.4
   timeToRecall: 0.3
 --- !u!114 &2006554647
@@ -22227,8 +22227,9 @@ MonoBehaviour:
   direction: {fileID: 1623768384}
   fightController: {fileID: 2006554644}
   catchFishRadius: 2
-  timeToReelFully: 2
-  reelAcceleration: 5
+  timeToReelFully: 1
+  reelAcceleration: 4
+  reelDeceleration: 1
 --- !u!223 &383941406862445622
 Canvas:
   m_ObjectHideFlags: 0
@@ -22311,7 +22312,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &919132149589081892
@@ -22326,8 +22327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd890991326553542a1f8cf760b32769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnAcceleration: 1.2
-  turnRate: 0.6
+  turnAcceleration: 2
+  turnRate: 1.5
   moveAcceleration: 1
   maxForwardSpeed: 6
   maxReverseSpeed: 3

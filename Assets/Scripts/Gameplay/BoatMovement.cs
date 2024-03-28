@@ -61,7 +61,7 @@ namespace MemoryFishing.Gameplay
             moveDir = ctx.ReadValue<Vector2>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             RotateBoat();
             AccelerateBoat();
@@ -69,13 +69,13 @@ namespace MemoryFishing.Gameplay
 
         private void RotateBoat()
         {
-            currentRotationSpeed = Mathf.MoveTowards(currentRotationSpeed, moveDir.x, Time.deltaTime * turnAcceleration);
+            currentRotationSpeed = Mathf.MoveTowards(currentRotationSpeed, moveDir.x, Time.fixedDeltaTime * turnAcceleration);
             YRotation += currentRotationSpeed * turnRate;
         }
 
         private void AccelerateBoat()
         {
-            currentMovementSpeed = Mathf.MoveTowards(currentMovementSpeed, moveDir.y, Time.deltaTime * moveAcceleration);
+            currentMovementSpeed = Mathf.MoveTowards(currentMovementSpeed, moveDir.y, Time.fixedDeltaTime * moveAcceleration);
 
             float speed = currentMovementSpeed < 0 ? maxReverseSpeed : maxForwardSpeed;
             speed *= currentMovementSpeed;
