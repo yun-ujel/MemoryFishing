@@ -15,9 +15,8 @@ namespace MemoryFishing.Gameplay
             SubscribeToInputActions();
         }
 
-        public virtual void SubscribeToInputActions()
-        {
+        public abstract void SubscribeToInputActions();
 
-        }
+        public abstract void UnsubscribeFromInputActions();
     }
 }

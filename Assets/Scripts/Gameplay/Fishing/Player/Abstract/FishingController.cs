@@ -1,10 +1,12 @@
 using UnityEngine;
+using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
 using MemoryFishing.Gameplay.Enumerations;
+using MemoryFishing.Utilities;
 
 namespace MemoryFishing.Gameplay.Fishing.Player
 {
     [RequireComponent(typeof(PlayerFishingManager))]
-    public class FishingController : PlayerController
+    public abstract class FishingController : PlayerController
     {
         protected PlayerFishingManager fishingManager;
         protected FishingState State
@@ -18,12 +20,27 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             set => fishingManager.BobberPos = value;
         }
 
-
         public override void Start()
         {
-            base.Start();
+            playerInput = GeneralUtils.GetPlayerInput();
 
             fishingManager = GetComponent<PlayerFishingManager>();
+            fishingManager.OnDisableFishingEvent += OnDisableFishing;
+            fishingManager.OnEnableFishingEvent += OnEnableFishing;
         }
+
+        protected virtual void OnEnableFishing(object sender, OnEnableFishingEventArgs args)
+        {
+            SubscribeToInputActions();
+        }
+
+        protected virtual void OnDisableFishing(object sender, OnEnableFishingEventArgs args)
+        {
+            UnsubscribeFromInputActions();
+        }
+
+        public abstract override void SubscribeToInputActions();
+
+        public abstract override void UnsubscribeFromInputActions();
     }
 }

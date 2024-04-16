@@ -38,9 +38,13 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         public override void SubscribeToInputActions()
         {
-            base.SubscribeToInputActions();
             playerInput.actions["Player/CastReel"].performed += OnCastPressed;
             playerInput.actions["Player/CastReel"].canceled += OnCastReleased;
+        }
+        public override void UnsubscribeFromInputActions()
+        {
+            playerInput.actions["Player/CastReel"].performed -= OnCastPressed;
+            playerInput.actions["Player/CastReel"].canceled -= OnCastReleased;
         }
 
         private void OnCastPressed(InputAction.CallbackContext ctx)
@@ -56,7 +60,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
                                                     windUpCurve,
                                                     startingCastDistance,
                                                     castDistance));
-                
+
                 return;
             }
 
@@ -71,6 +75,32 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             if (State == FishingState.WindUp)
             {
                 CastBobber();
+            }
+        }
+
+        protected override void OnEnableFishing(object sender, OnEnableFishingEventArgs args)
+        {
+            base.OnEnableFishing(sender, args);
+
+            counter = 0f;
+        }
+
+        protected override void OnDisableFishing(object sender, OnEnableFishingEventArgs args)
+        {
+            base.OnDisableFishing(sender, args);
+            
+            counter = 0f;
+
+            if (State == FishingState.Waiting || State == FishingState.Casting)
+            {
+                RecallBobber();
+                return;
+            }
+
+            if (State == FishingState.WindUp)
+            {
+                State = FishingState.None;
+                return;
             }
         }
 
@@ -111,11 +141,6 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             }
         }
 
-        private void OnDisable()
-        {
-            RecallBobber();
-        }
-
         private void WindUpCast()
         {
             counter += Time.deltaTime;
@@ -147,14 +172,14 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             fishingManager.BobberLandEvent(new(targetBobberPos));
         }
 
-        private void RecallBobber()
+        public void RecallBobber()
         {
             State = FishingState.None;
 
             fishApproaching = false;
             counter = 0f;
 
-            fishingManager.RecallBobberEvent(new(targetBobberPos, castDirection, timeToLand));
+            fishingManager.RecallBobberEvent(new(BobberPos, castDirection, timeToLand));
         }
 
         public void FishGainedInterest(FishBehaviour fish, float approachTime)

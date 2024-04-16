@@ -39,10 +39,12 @@ namespace MemoryFishing.UI.Fishing
         private void Start()
         {
             fishingManager.OnStartWindUpEvent += StartWindUp;
-            fishingManager.OnCastBobberEvent += CastBobber;
+            fishingManager.OnCastBobberEvent += (sender, args) => HideArrow();
+
+            fishingManager.OnDisableFishingEvent += (sender, args) => HideArrow();
         }
 
-        private void CastBobber(object sender, OnCastBobberEventArgs args)
+        private void HideArrow()
         {
             windingUp = false;
             arrowParent.gameObject.SetActive(false);

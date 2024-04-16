@@ -13,6 +13,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         public float FishExhaustion { get; private set; }
 
         [Space, SerializeField] private PlayerDirection direction;
+        [SerializeField] private BobberCastController castController;
 
         private FishBehaviour currentFish;
         private int currentFishFightCount;
@@ -94,6 +95,27 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             fishingManager.EndFightingEvent(new(currentFish, transform.position, currentFish.transform.position, currentFishFightCount));
 
             currentFish = null;
+        }
+
+        protected override void OnDisableFishing(object sender, OnEnableFishingEventArgs args)
+        {
+            base.OnDisableFishing(sender, args);
+
+            if (State == FishingState.Fighting)
+            {
+                castController.RecallBobber();
+                Destroy(currentFish.gameObject);
+            }
+        }
+
+        public override void SubscribeToInputActions()
+        {
+
+        }
+
+        public override void UnsubscribeFromInputActions()
+        {
+
         }
     }
 }

@@ -12306,8 +12306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37eb98803fb56894bb81b4ebe0aaa272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boatMovment: {fileID: 919132149589081892}
-  fishingHandler: {fileID: 2006554641}
+  boatMovement: {fileID: 919132149589081892}
+  fishingManager: {fileID: 2006554647}
 --- !u!1 &1648643435
 GameObject:
   m_ObjectHideFlags: 0
@@ -22115,7 +22115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2006554642
 Transform:
   m_ObjectHideFlags: 0
@@ -22146,6 +22146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {fileID: 1623768384}
+  castController: {fileID: 2006554646}
 --- !u!114 &2006554646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22202,6 +22203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bobber: {fileID: 199725076}
+  <State>k__BackingField: 0
 --- !u!114 &2006554648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22216,6 +22218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {fileID: 1623768384}
   fightController: {fileID: 2006554644}
+  castController: {fileID: 2006554646}
   catchFishRadius: 2
   timeToReelFully: 1
   reelAcceleration: 4

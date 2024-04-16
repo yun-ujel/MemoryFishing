@@ -50,10 +50,14 @@ namespace MemoryFishing.Gameplay.Inventory
 
         public override void SubscribeToInputActions()
         {
-            base.SubscribeToInputActions();
-
             playerInput.actions["Player/Inventory"].performed += PlayerInventoryInput;
             playerInput.actions["UI/Inventory"].performed += UIInventoryInput;
+        }
+
+        public override void UnsubscribeFromInputActions()
+        {
+            playerInput.actions["Player/Inventory"].performed -= PlayerInventoryInput;
+            playerInput.actions["UI/Inventory"].performed -= UIInventoryInput;
         }
 
         private void PlayerInventoryInput(InputAction.CallbackContext ctx)

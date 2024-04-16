@@ -14,6 +14,8 @@ namespace MemoryFishing.Gameplay
         private float currentRotationSpeed;
         private float currentMovementSpeed;
 
+        public bool ReceiveInputs { get; set; }
+
         [Header("Turning")]
         [SerializeField, Range(0f, 10f)] private float turnAcceleration = 1f;
         [SerializeField, Range(0f, 10f)] private float turnRate = 0.1f;
@@ -50,10 +52,14 @@ namespace MemoryFishing.Gameplay
 
         public override void SubscribeToInputActions()
         {
-            base.SubscribeToInputActions();
-
             playerInput.actions["Player/Move"].performed += ReceiveMoveInput;
             playerInput.actions["Player/Move"].canceled += ReceiveMoveInput;
+        }
+
+        public override void UnsubscribeFromInputActions()
+        {
+            playerInput.actions["Player/Move"].performed -= ReceiveMoveInput;
+            playerInput.actions["Player/Move"].canceled -= ReceiveMoveInput;
         }
 
         private void ReceiveMoveInput(InputAction.CallbackContext ctx)
@@ -63,17 +69,23 @@ namespace MemoryFishing.Gameplay
 
         private void FixedUpdate()
         {
-            RotateBoat();
-            AccelerateBoat();
+            if (!ReceiveInputs)
+            {
+                RotateBoat(Vector2.zero);
+                AccelerateBoat(Vector2.zero);
+                return;
+            }
+            RotateBoat(moveDir);
+            AccelerateBoat(moveDir);
         }
 
-        private void RotateBoat()
+        private void RotateBoat(Vector2 moveDir)
         {
             currentRotationSpeed = Mathf.MoveTowards(currentRotationSpeed, moveDir.x, Time.fixedDeltaTime * turnAcceleration);
             YRotation += currentRotationSpeed * turnRate;
         }
 
-        private void AccelerateBoat()
+        private void AccelerateBoat(Vector2 moveDir)
         {
             currentMovementSpeed = Mathf.MoveTowards(currentMovementSpeed, moveDir.y, Time.fixedDeltaTime * moveAcceleration);
 

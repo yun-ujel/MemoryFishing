@@ -67,6 +67,8 @@ namespace MemoryFishing.FX.Fishing
             counter = 0f;
             recalling = true;
 
+            bobberPos = args.BobberPosition;
+
             startPos = bobberPos;
             targetPos = rodEnd.position;
         }
@@ -119,6 +121,8 @@ namespace MemoryFishing.FX.Fishing
                 SetLinePositions(rodEnd.position, bobberPos);
                 return;
             }
+
+            SetLinePositions(rodEnd.position, bobber.position);
         }
 
         private void SetLinePositions(Vector3 start, Vector3 end)

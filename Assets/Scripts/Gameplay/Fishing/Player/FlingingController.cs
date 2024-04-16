@@ -45,9 +45,12 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         public override void SubscribeToInputActions()
         {
-            base.SubscribeToInputActions();
-
             playerInput.actions["Player/CastReel"].performed += ReceiveFlingInput;
+        }
+
+        public override void UnsubscribeFromInputActions()
+        {
+            playerInput.actions["Player/CastReel"].performed -= ReceiveFlingInput;
         }
 
         #endregion

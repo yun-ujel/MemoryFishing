@@ -7,7 +7,8 @@ namespace MemoryFishing.Gameplay.Fishing.Player
     public class PlayerFishingManager : MonoBehaviour
     {
         [Space, SerializeField] private Transform bobber;
-        public FishingState State { get; set; } = FishingState.None;
+        public bool FishingEnabled { get; private set; }
+        [field: SerializeField] public FishingState State { get; set; } = FishingState.None;
         public Vector3 BobberPos
         {
             get => bobber.position;
@@ -23,6 +24,21 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         public event System.EventHandler<OnRecallBobberEventArgs> OnRecallBobberEvent;
 
         public event System.EventHandler<OnCatchFishEventArgs> OnCatchFishEvent;
+
+        public event System.EventHandler<OnEnableFishingEventArgs> OnDisableFishingEvent;
+        public event System.EventHandler<OnEnableFishingEventArgs> OnEnableFishingEvent;
+
+        public void EnableFishing()
+        {
+            FishingEnabled = true;
+            OnEnableFishingEvent?.Invoke(this, new());
+        }
+
+        public void DisableFishing()
+        {
+            FishingEnabled = false;
+            OnDisableFishingEvent?.Invoke(this, new());
+        }
 
         public void StartFightingEvent(OnStartFightingEventArgs args)
         {

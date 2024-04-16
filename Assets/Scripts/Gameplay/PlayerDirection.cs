@@ -33,8 +33,13 @@ namespace MemoryFishing.Gameplay
         public override void SubscribeToInputActions()
         {
             playerInput.actions["Player/Look"].performed += OnLook;
-
             playerInput.actions["Player/MouseLook"].performed += MouseLook;
+        }
+
+        public override void UnsubscribeFromInputActions()
+        {
+            playerInput.actions["Player/Look"].performed -= OnLook;
+            playerInput.actions["Player/MouseLook"].performed -= MouseLook;
         }
 
         private void MouseLook(InputAction.CallbackContext ctx)

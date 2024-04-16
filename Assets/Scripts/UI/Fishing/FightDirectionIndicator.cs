@@ -64,10 +64,11 @@ namespace MemoryFishing.UI.Fishing
             fishingManager.OnStartFightingEvent += OnStartFighting;
             fishingManager.OnEndFightingEvent += OnEndFighting;
 
-            fishingManager.OnCatchFishEvent += Hide;
+            fishingManager.OnCatchFishEvent += (sender, args) => Hide();
+            fishingManager.OnDisableFishingEvent += (sender, args) => Hide();
         }
 
-        private void Hide(object sender, OnCatchFishEventArgs args)
+        private void Hide()
         {
             isFishing = false;
         }

@@ -12,8 +12,13 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 {
     public class ReelingController : FishingController
     {
+        [Header("References")]
         [SerializeField] private PlayerDirection direction;
+
+        [Space]
+
         [SerializeField] private FishFightController fightController;
+        [SerializeField] private BobberCastController castController;
 
         [Header("Settings")]
         [SerializeField, Range(0f, 10f)] private float catchFishRadius = 2f;
@@ -55,10 +60,14 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         public override void SubscribeToInputActions()
         {
-            base.SubscribeToInputActions();
-
             playerInput.actions["Player/CastReel"].performed += ReelPressedInput;
             playerInput.actions["Player/CastReel"].canceled += ReelPressedInput;
+        }
+
+        public override void UnsubscribeFromInputActions()
+        {
+            playerInput.actions["Player/CastReel"].performed -= ReelPressedInput;
+            playerInput.actions["Player/CastReel"].canceled -= ReelPressedInput;
         }
 
         #region Event Methods
@@ -98,6 +107,15 @@ namespace MemoryFishing.Gameplay.Fishing.Player
                 startingDistance = Vector3.Distance(args.PlayerPos, args.FishPos);
                 maxReelSpeed = startingDistance / timeToReelFully;
             }
+        }
+
+        protected override void OnDisableFishing(object sender, OnEnableFishingEventArgs args)
+        {
+            base.OnDisableFishing(sender, args);
+
+            castController.RecallBobber();
+
+            Destroy(fish.gameObject);
         }
 
         #endregion
@@ -161,11 +179,13 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             State = FishingState.None;
 
             fishingManager.CatchFishEvent(new(fish.GetItem(), fish, fishBody.position));
+
+            Destroy(fish.gameObject);
         }
 
         private bool FishInRange(Vector3 playerPosition, Vector3 fishPosition)
         {
-            float sqrDistance = VectorUtils.SqrDistance(playerPosition.ExcludeYAxis(), fishPosition.ExcludeYAxis());
+            float sqrDistance = SqrDistance(playerPosition.ExcludeYAxis(), fishPosition.ExcludeYAxis());
 
             if (sqrDistance < Mathf.Pow(catchFishRadius, 2))
             {

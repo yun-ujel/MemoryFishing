@@ -27,16 +27,19 @@ namespace MemoryFishing.UI.Fishing
             fishingManager.OnStartFightingEvent += StartFighting;
             fishingManager.OnEndFightingEvent += EndFighting;
 
-            fishingManager.OnCatchFishEvent += Hide;
+            fishingManager.OnCatchFishEvent += (sender, args) => Hide();
+            fishingManager.OnDisableFishingEvent += (sender, args) => Hide();
 
             SetFillAmount(0);
             radialSprite.color = circleColorMin;
         }
 
-        private void Hide(object sender, OnCatchFishEventArgs args)
+        private void Hide()
         {
-            SetFillAmount(0);
+            fighting = false;
             radialSprite.color = circleColorMin;
+
+            SetFillAmount(0);
         }
 
         private void StartFighting(object sender, OnStartFightingEventArgs args)
