@@ -92,7 +92,7 @@ namespace MemoryFishing.Gameplay
             float speed = currentMovementSpeed < 0 ? maxReverseSpeed : maxForwardSpeed;
             speed *= currentMovementSpeed;
 
-            body.velocity = transform.right * speed;
+            body.velocity = transform.forward * speed;
         }
     }
 }
