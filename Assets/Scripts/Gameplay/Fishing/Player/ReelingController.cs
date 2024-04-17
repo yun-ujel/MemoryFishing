@@ -113,8 +113,12 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         {
             base.OnDisableFishing(sender, args);
 
-            castController.RecallBobber();
+            if (State != FishingState.Exhausted && State != FishingState.Reeling)
+            {
+                return;
+            }
 
+            castController.RecallBobber();
             Destroy(fish.gameObject);
         }
 
