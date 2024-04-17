@@ -2730,17 +2730,17 @@ MonoBehaviour:
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}
   - regularTypeface: {fileID: 0}
-    italicTypeface: {fileID: 0}
+    italicTypeface: {fileID: 11400000, guid: 2357a67ff9a943a4ea23ad68b83caa61, type: 2}
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}
-  - regularTypeface: {fileID: 0}
-    italicTypeface: {fileID: 0}
-  - regularTypeface: {fileID: 0}
-    italicTypeface: {fileID: 0}
-  - regularTypeface: {fileID: 0}
-    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 11400000, guid: 227c1e5324864e1418aaf53c648dc22d, type: 2}
+    italicTypeface: {fileID: 11400000, guid: 548c5986784f08946b0114df6319c817, type: 2}
+  - regularTypeface: {fileID: 11400000, guid: 227c1e5324864e1418aaf53c648dc22d, type: 2}
+    italicTypeface: {fileID: 11400000, guid: 548c5986784f08946b0114df6319c817, type: 2}
+  - regularTypeface: {fileID: 11400000, guid: 227c1e5324864e1418aaf53c648dc22d, type: 2}
+    italicTypeface: {fileID: 11400000, guid: 548c5986784f08946b0114df6319c817, type: 2}
   fontWeights: []
   normalStyle: 0
   normalSpacingOffset: 0
