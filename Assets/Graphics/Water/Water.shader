@@ -48,6 +48,8 @@ Shader "Custom/Water"
             struct Interpolators
             {
 	            float4 positionCS : SV_POSITION;
+
+                float3 normal : TEXCOORD1;
                 float3 positionWS : TEXCOORD2;
             };
 
@@ -99,6 +101,7 @@ Shader "Custom/Water"
 
                 VertexPositionInputs firstInputs = GetVertexPositionInputs(input.positionOS.xyz);
                 float3 h = 0.0f;
+                float3 n = 0.0f;
 
                 for (int wi = 0; wi < _WaveCount; wi++)
 				{
@@ -111,12 +114,24 @@ Shader "Custom/Water"
                 output.positionWS = newInputs.positionWS.xyz;
                 output.positionCS = newInputs.positionCS;
 
+                for (int wi = 0; wi < _WaveCount; wi++)
+                {
+                    n += CalculateNormal(newInputs.positionWS.xyz, _Waves[wi]);
+                }
+
+                output.normal = normalize(TransformObjectToWorldNormal(normalize(float3(-n.x, 1.0f, -n.y))));
+
 	            return output;
             }
 
             float4 Fragment(Interpolators input) : SV_TARGET
             {
-	            return _Color;
+                float4 shadowCoord = TransformWorldToShadowCoord(input.positionWS);
+                Light light = GetMainLight(shadowCoord);
+
+                float d = dot(input.normal, light.direction);
+
+	            return d;
             }
             ENDHLSL
         }

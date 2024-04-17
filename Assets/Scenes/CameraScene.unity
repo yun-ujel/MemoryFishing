@@ -6007,7 +6007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &642878424
 Transform:
   m_ObjectHideFlags: 0
@@ -6207,7 +6207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &718704315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12047,7 +12047,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1212790196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12934,7 +12934,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1623768382
 Transform:
   m_ObjectHideFlags: 0
@@ -13134,7 +13134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1648643436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23038,9 +23038,9 @@ MonoBehaviour:
   wavelengthRange: 1
   medianDirection: 0
   directionalRange: 30
-  medianAmplitude: 1
+  medianAmplitude: 0.2
   steepness: 0
-  medianSpeed: 1
+  medianSpeed: 0.4
   speedRange: 0.1
 --- !u!4 &1922177827
 Transform:
