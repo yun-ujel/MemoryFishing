@@ -2,7 +2,12 @@ Shader "Custom/Water"
 {
     Properties
     {
-        _Color ("Color", Color) = (1, 1, 1, 1)
+        _Color ("Base Color", Color) = (1, 1, 1, 1)
+        _Smoothness("Smoothness", Float) = 1
+
+        _NormalStrength("Normal Strength", Float) = 10
+        _DiffuseReflectance("Diffuse Reflectance", Float) = 1
+        _SpecularReflectance("Specular Reflectance", Float) = 1
     }
     SubShader
     {
@@ -25,6 +30,11 @@ Shader "Custom/Water"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
             float4 _Color;
+            float _Smoothness;
+
+            float _NormalStrength;
+            float _DiffuseReflectance;
+            float _SpecularReflectance;
 
 			struct Wave
 			{
@@ -124,14 +134,36 @@ Shader "Custom/Water"
 	            return output;
             }
 
+            float Specular(float3 lightDir, float3 normal, float3 positionWS, float smoothness)
+            {
+                float3 viewDir = normalize(_WorldSpaceCameraPos - positionWS);
+                float3 halfwayDir = normalize(lightDir + viewDir);
+                float NdotH = saturate(dot(normal, halfwayDir));
+
+                return pow(NdotH, smoothness);
+            }
+
             float4 Fragment(Interpolators input) : SV_TARGET
             {
                 float4 shadowCoord = TransformWorldToShadowCoord(input.positionWS);
                 Light light = GetMainLight(shadowCoord);
 
-                float d = dot(input.normal, light.direction);
+                float3 normal = input.normal;
+                normal.xz *= _NormalStrength;
+                normal = normalize(normal);
 
-	            return d;
+                float3 lightDir = normalize(light.direction);
+
+                float NdotL = dot(normal, lightDir);
+                float diffuseReflectance = _DiffuseReflectance / PI;
+                float3 diffuse = light.color * NdotL * diffuseReflectance;
+
+                float spec = Specular(lightDir, normal, input.positionWS, _Smoothness) * NdotL;
+                float3 specular = light.color * _SpecularReflectance * spec;
+
+                float3 output = _Color + specular + diffuse;
+
+	            return float4(output, 1.0f);
             }
             ENDHLSL
         }

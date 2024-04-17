@@ -6102,7 +6102,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
+  m_Color: {r: 1, g: 0.95044935, b: 0.8443396, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -11901,7 +11901,7 @@ Transform:
   m_GameObject: {fileID: 1122681235}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_LocalScale: {x: 5, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 584952862}
@@ -23032,13 +23032,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterMaterial: {fileID: 2100000, guid: 16babdfba8035ec4996c47e7ce5b6819, type: 2}
-  waveCount: 4
-  planeLength: 20
+  waveCount: 8
+  planeLength: 10
   medianWavelength: 1
   wavelengthRange: 1
   medianDirection: 0
   directionalRange: 30
-  medianAmplitude: 0.2
+  medianAmplitude: 0.1
   steepness: 0
   medianSpeed: 0.4
   speedRange: 0.1
