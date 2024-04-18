@@ -18305,10 +18305,10 @@ MonoBehaviour:
   vertexWaveCount: 12
   fragmentWaveCount: 12
   seed: 0
-  seedIteration: 1253.121
+  seedIteration: 1253.213
   frequency: 0.2
   frequencyMultiplier: 1.18
-  amplitude: 1
+  amplitude: 4
   amplitudeMultiplier: 0.82
   speed: 0.5
   speedMultiplier: 1.07

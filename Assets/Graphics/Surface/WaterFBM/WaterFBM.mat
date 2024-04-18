@@ -26,7 +26,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _DiffuseReflectance: 0.2
-    - _NormalStrength: 60
+    - _NormalStrength: 15
     - _Smoothness: 15
     - _SpecularReflectance: 0.4
     m_Colors:

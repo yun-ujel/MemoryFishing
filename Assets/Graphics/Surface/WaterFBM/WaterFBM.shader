@@ -113,8 +113,6 @@ Shader "Custom/WaterFBM"
 
                 float3 worldPos = input.positionWS;
 
-                float amplitudeSum = 0.0f;
-
                 float2 n = 0.0f;
 
                 for (int i = 0; i < _FragmentWaveCount; i++)
@@ -129,7 +127,6 @@ Shader "Custom/WaterFBM"
 
                     n += dw;
                     
-                    amplitudeSum += a;
                     f *= _FrequencyMultiplier;
                     a *= _AmplitudeMultiplier;
                     speed *= _SpeedMultiplier;
