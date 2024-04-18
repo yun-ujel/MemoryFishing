@@ -76,8 +76,11 @@ namespace MemoryFishing.FX.Camera
                 case FishingState.Fighting:
                     return CameraState.Fighting;
 
+                case FishingState.Exhausted:
+                    return CameraState.Fighting;
+
                 case FishingState.Reeling:
-                    return CameraState.Reeling;
+                    return CameraState.Fighting;
             }
         }
     }

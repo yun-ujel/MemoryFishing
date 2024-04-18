@@ -6314,6 +6314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 30}
   angle: {x: 60, y: 0, z: 0}
+  speed: 10
 --- !u!1 &754600140
 GameObject:
   m_ObjectHideFlags: 3
@@ -23262,7 +23263,7 @@ MonoBehaviour:
   castDistance: 8
   startingCastDistance: 2
   timeToLand: 0.7
-  timeToRecall: 0.3
+  timeToRecall: 0.1
 --- !u!114 &2006554647
 MonoBehaviour:
   m_ObjectHideFlags: 0

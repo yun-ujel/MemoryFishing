@@ -8,12 +8,15 @@ namespace MemoryFishing.FX.Camera
         [SerializeField] private Vector3 offset = new Vector3(0f, 0f, 30f);
         [SerializeField] private Vector3 angle = new Vector3(60f, 0f, 0f);
 
+        [Header("Smoothing")]
+        [SerializeField] private float speed = 10f;
+
         public override void UpdatePosition(Vector3 playerPos, Quaternion playerRotation, Vector3 bobberPos, float delta)
         {
-            Vector3 position = bobberPos;
-            position += Quaternion.Euler(angle) * -offset;
+            Vector3 target = bobberPos;
+            target += Quaternion.Euler(angle) * -offset;
 
-            transform.position = position;
+            transform.position = Vector3.MoveTowards(transform.position, target, speed * delta);
         }
     }
 }

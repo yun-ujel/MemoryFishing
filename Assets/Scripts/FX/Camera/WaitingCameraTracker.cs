@@ -22,8 +22,9 @@ namespace MemoryFishing.FX.Camera
         [SerializeField] private AnimationCurve transitionCurve;
         [SerializeField, Range(0f, 1f)] private float transitionDuration = 0.5f;
 
-        private Vector3 targetPosition;
-        private Vector3 startPosition;
+        private Vector3 targetPlayerOffset;
+        private Vector3 startPlayerOffset;
+
         private float t;
 
         private float approachTime;
@@ -50,47 +51,42 @@ namespace MemoryFishing.FX.Camera
         {
             Debug.Log("Switch");
             fishApproaching = false;
-
-            Vector3 target = playerPos;
-            target += Quaternion.Euler(angle) * -offset;
-
-            transform.position = target;
-
-            SetTargetPosition(target);
         }
 
         public override void UpdatePosition(Vector3 playerPos, Quaternion playerRotation, Vector3 bobberPos, float delta)
         {
-            Vector3 target = Vector3.Lerp(playerPos, bobberPos, distanceFromPlayer);
+            Vector3 direction = bobberPos - playerPos;
+            Vector3 playerOffset = Vector3.Lerp(Vector3.zero, direction, distanceFromPlayer);
 
-            if (targetPosition != target)
+            float curveT = transitionCurve.Evaluate(t) / transitionDuration;
+
+            if (targetPlayerOffset != playerOffset)
             {
-                SetTargetPosition(target);
+                startPlayerOffset = Vector3.Lerp(Vector3.zero, targetPlayerOffset, curveT);
+                targetPlayerOffset = playerOffset;
+
+                t = 0f;
+                curveT = 0f;
             }
 
             if (fishApproaching)
             {
-                approachTimeCounter += delta;
+                approachTimeCounter += Time.deltaTime;
+                float fishT = approachTimeCounter / approachTime;
+                fishT *= 1 - distanceFromPlayer;
 
-                float t = approachTimeCounter / approachTime;
-
-                target = Vector3.Lerp(target, bobberPos, t);
+                playerOffset = Vector3.Lerp(Vector3.zero, direction, distanceFromPlayer + fishT);
             }
 
-            target += Quaternion.Euler(angle) * -offset;
+            Vector3 cameraPos = playerPos + Vector3.Lerp(startPlayerOffset, playerOffset, curveT);
 
-            float curveT = transitionCurve.Evaluate(t) / transitionDuration;
-            transform.position = Vector3.Lerp(startPosition, target, curveT);
-
-            t += delta;
+            SetCameraPosition(delta, cameraPos);
         }
-        private void SetTargetPosition(Vector3 target)
-        {
-            startPosition = transform.position;
-            targetPosition = target;
-            t = 0f;
 
-            Debug.DrawRay(targetPosition, Vector3.up, Color.yellow, 1f);
+        private void SetCameraPosition(float delta, Vector3 cameraPos)
+        {
+            transform.position = cameraPos + Quaternion.Euler(angle) * -offset;
+            t += delta;
         }
     }
 }

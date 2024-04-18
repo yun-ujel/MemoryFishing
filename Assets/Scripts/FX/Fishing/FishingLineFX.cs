@@ -67,8 +67,6 @@ namespace MemoryFishing.FX.Fishing
             counter = 0f;
             recalling = true;
 
-            bobberPos = args.BobberPosition;
-
             startPos = bobberPos;
             targetPos = rodEnd.position;
         }
