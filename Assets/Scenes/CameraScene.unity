@@ -23032,16 +23032,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterMaterial: {fileID: 2100000, guid: 16babdfba8035ec4996c47e7ce5b6819, type: 2}
-  waveCount: 8
+  waveCount: 16
   planeLength: 10
-  medianWavelength: 1
-  wavelengthRange: 1
+  medianWavelength: 0.5
+  wavelengthRange: 0.5
   medianDirection: 0
-  directionalRange: 30
-  medianAmplitude: 0.1
+  directionalRange: 40
+  medianAmplitude: 0.05
   steepness: 0
   medianSpeed: 0.4
-  speedRange: 0.1
+  speedRange: 0.3
 --- !u!4 &1922177827
 Transform:
   m_ObjectHideFlags: 0

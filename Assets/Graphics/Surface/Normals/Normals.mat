@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
-  m_Shader: {fileID: 4800000, guid: 7f8991b1f73886646a62fd767cf6f23a, type: 3}
+  m_Name: Normals
+  m_Shader: {fileID: 4800000, guid: 3c7887d7f9975a64c8df0f478fff54b3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,11 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats:
-    - _DiffuseReflectance: 0.25
-    - _NormalStrength: 4
-    - _Smoothness: 1
-    - _SpecularReflectance: 1
+    m_Floats: []
     m_Colors:
-    - _Color: {r: 0, g: 0.14688152, b: 0.5566038, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
