@@ -18,5 +18,10 @@ namespace MemoryFishing.FX.Camera
 
             transform.position = Vector3.MoveTowards(transform.position, target, speed * delta);
         }
+
+        public override void OnInitialSwitch(Vector3 playerPos, Quaternion playerRotation, Vector3 bobberPos)
+        {
+            transform.position = bobberPos + (Quaternion.Euler(angle) * -offset);
+        }
     }
 }

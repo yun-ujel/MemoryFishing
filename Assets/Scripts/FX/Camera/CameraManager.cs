@@ -4,6 +4,7 @@ using MemoryFishing.Gameplay;
 using MemoryFishing.Gameplay.Fishing.Player;
 using MemoryFishing.FX.Camera.Enumerations;
 using MemoryFishing.Gameplay.Enumerations;
+using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
 
 namespace MemoryFishing.FX.Camera
 {
@@ -77,10 +78,10 @@ namespace MemoryFishing.FX.Camera
                     return CameraState.Fighting;
 
                 case FishingState.Exhausted:
-                    return CameraState.Fighting;
+                    return CameraState.Reeling;
 
                 case FishingState.Reeling:
-                    return CameraState.Fighting;
+                    return CameraState.Reeling;
             }
         }
     }
