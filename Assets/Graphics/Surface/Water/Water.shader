@@ -116,6 +116,7 @@ Shader "Custom/Water"
                 for (int i = 0; i < _WaveCount; i++)
 				{
 					h += CalculateOffset(firstInputs.positionWS.xyz, _Waves[i]);
+                    n += CalculateNormal(firstInputs.positionWS.xyz, _Waves[i]);
 				}
                 
                 float4 position = input.positionOS + float4(h, 0.0f);
@@ -123,11 +124,6 @@ Shader "Custom/Water"
                 VertexPositionInputs newInputs = GetVertexPositionInputs(position.xyz);
                 output.positionWS = newInputs.positionWS.xyz;
                 output.positionCS = newInputs.positionCS;
-
-                for (int j = 0; j < _WaveCount; j++)
-                {
-                    n += CalculateNormal(newInputs.positionWS.xyz, _Waves[j]);
-                }
 
                 output.normal = normalize(TransformObjectToWorldNormal(normalize(float3(n.x, 1.0f, n.y))));
 
