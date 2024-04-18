@@ -26,7 +26,7 @@ namespace MemoryFishing.FX.Camera
         {
             for (int i = 0; i < trackers.Length; i++)
             {
-                trackers[i].Initialize(player.position, player.rotation, bobber.position);
+                trackers[i].Initialize(playerManager, fishingManager, player.position, player.rotation, bobber.position);
             }
         }
 
@@ -34,17 +34,14 @@ namespace MemoryFishing.FX.Camera
         {
             UpdatePriority();
 
-            for (int i = 0; i < trackers.Length; i++)
-            {
-                trackers[i].UpdatePosition(player.position, player.rotation, bobber.position, Time.deltaTime);
-            }
+            trackers[(int)cameraState].UpdatePosition(player.position, player.rotation, bobber.position, Time.deltaTime);
         }
 
         private void UpdatePriority()
         {
             CameraState state = GetState(playerManager.State, fishingManager.State);
 
-            if ((int)state >= trackers.Length)
+            if ((int)state >= trackers.Length || state == cameraState)
             {
                 return;
             }
@@ -53,6 +50,7 @@ namespace MemoryFishing.FX.Camera
             {
                 if (i == (int)state)
                 {
+                    trackers[i].OnInitialSwitch(player.position, player.rotation, bobber.position);
                     trackers[i].Priority = 1;
                     continue;
                 }
@@ -72,14 +70,14 @@ namespace MemoryFishing.FX.Camera
 
             switch (fishingState)
             {
+                default:
+                    return CameraState.Waiting;
+
                 case FishingState.Fighting:
                     return CameraState.Fighting;
 
                 case FishingState.Reeling:
                     return CameraState.Reeling;
-
-                default:
-                    return CameraState.Waiting;
             }
         }
     }

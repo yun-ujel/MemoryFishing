@@ -1,6 +1,8 @@
 using UnityEngine;
 
 using Cinemachine;
+using MemoryFishing.Gameplay.Fishing.Player;
+using MemoryFishing.Gameplay;
 
 namespace MemoryFishing.FX.Camera
 {
@@ -15,9 +17,14 @@ namespace MemoryFishing.FX.Camera
 
         protected CinemachineVirtualCamera virtualCam;
 
-        public virtual void Initialize(Vector3 playerPos, Quaternion playerRotation, Vector3 bobberPos)
+        public virtual void Initialize(PlayerManager playerManager, PlayerFishingManager fishingManager, Vector3 playerPos, Quaternion playerRotation, Vector3 bobberPos)
         {
             virtualCam = GetComponent<CinemachineVirtualCamera>();
+        }
+
+        public virtual void OnInitialSwitch(Vector3 playerPos, Quaternion playerRotation, Vector3 bobberPos)
+        {
+
         }
 
         public abstract void UpdatePosition(Vector3 playerPos, Quaternion playerRotation, Vector3 bobberPos, float delta);

@@ -179,17 +179,18 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             fishApproaching = false;
             counter = 0f;
 
-            BobberPos = transform.position;
-
             fishingManager.RecallBobberEvent(new(BobberPos, castDirection, timeToLand));
+            BobberPos = transform.position;
         }
 
-        public void FishGainedInterest(FishBehaviour fish, float approachTime)
+        public void StartFishApproaching(FishBehaviour fish, float approachTime)
         {
             fishApproaching = true;
 
             approachingFish = fish;
             fishApproachTime = approachTime;
+
+            fishingManager.FishApproachingEvent(new(fish, approachTime));
 
             counter = 0f;
         }

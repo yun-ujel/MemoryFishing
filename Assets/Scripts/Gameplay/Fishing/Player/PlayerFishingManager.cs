@@ -21,6 +21,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         public event System.EventHandler<OnStartWindUpEventArgs> OnStartWindUpEvent;
         public event System.EventHandler<OnCastBobberEventArgs> OnCastBobberEvent;
         public event System.EventHandler<OnBobberLandEventArgs> OnBobberLandEvent;
+        public event System.EventHandler<OnFishApproachingEventArgs> OnFishApproachingEvent;
         public event System.EventHandler<OnRecallBobberEventArgs> OnRecallBobberEvent;
 
         public event System.EventHandler<OnCatchFishEventArgs> OnCatchFishEvent;
@@ -30,13 +31,24 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         public void EnableFishing()
         {
+            Debug.Log("Enable Fishing");
+
             FishingEnabled = true;
             OnEnableFishingEvent?.Invoke(this, new());
-            BobberPos = transform.position;
+        }
+
+        private void Update()
+        {
+            if (State == FishingState.None)
+            {
+                BobberPos = transform.position;
+            }
         }
 
         public void DisableFishing()
         {
+            Debug.Log("Disable Fishing");
+
             FishingEnabled = false;
             OnDisableFishingEvent?.Invoke(this, new());
         }
@@ -64,6 +76,11 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         public void BobberLandEvent(OnBobberLandEventArgs args)
         {
             OnBobberLandEvent?.Invoke(this, args);
+        }
+
+        public void FishApproachingEvent(OnFishApproachingEventArgs args)
+        {
+            OnFishApproachingEvent?.Invoke(this, args);
         }
 
         public void RecallBobberEvent(OnRecallBobberEventArgs args)

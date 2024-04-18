@@ -9,13 +9,20 @@ namespace MemoryFishing.Gameplay.Fishing
 {
     public class FishingSpot : MonoBehaviour
     {
+        [Header("References")]
         [SerializeField] private PlayerFishingManager fishingManager;
         [SerializeField] private BobberCastController bobberCastController;
-        
+
         [Space, SerializeField] private GameObject fishPrefab;
         private FishBehaviour fishBehaviour;
 
-        [Space, SerializeField, Range(0f, 10f)] private float spotRadius;
+        [Header("Spot Settings")]
+        [SerializeField, Range(0f, 10f)] private float spotRadius;
+        private bool bobberInRange;
+        private Vector3 bobberPos;
+
+        [Space, SerializeField, Range(0f, 2f)] private float timeToAppear = 0.5f;
+        private float fishAppearCounter;
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()
@@ -27,7 +34,23 @@ namespace MemoryFishing.Gameplay.Fishing
         private void Start()
         {
             fishingManager.OnBobberLandEvent += OnBobberLand;
+            fishingManager.OnRecallBobberEvent += OnRecallBobber;
             fishBehaviour = fishPrefab.GetComponent<FishBehaviour>();
+        }
+
+        private void Update()
+        {
+            if (!bobberInRange)
+            {
+                return;
+            }
+
+            fishAppearCounter -= Time.deltaTime;
+
+            if (fishAppearCounter <= 0)
+            {
+                InstantiateFish(bobberPos);
+            }
         }
 
         private void OnBobberLand(object sender, OnBobberLandEventArgs args)
@@ -36,15 +59,25 @@ namespace MemoryFishing.Gameplay.Fishing
             
             if (sqrDist <= Mathf.Pow(spotRadius, 2))
             {
-                InstantiateFish(args.BobberPosition);
+                bobberInRange = true;
+                fishAppearCounter = timeToAppear;
+
+                bobberPos = args.BobberPosition;
             }
+        }
+
+        private void OnRecallBobber(object sender, OnRecallBobberEventArgs args)
+        {
+            bobberInRange = false;
         }
 
         private void InstantiateFish(Vector3 bobberPos)
         {
             FishBehaviour newFish = Instantiate(fishBehaviour, transform.position, Quaternion.identity);
 
-            bobberCastController.FishGainedInterest(newFish, newFish.GetApproachTime(bobberPos));
+            bobberCastController.StartFishApproaching(newFish, newFish.GetApproachTime(bobberPos));
+
+            bobberInRange = false;
         }
     }
 }
