@@ -1,8 +1,8 @@
 using MemoryFishing.Utilities;
-using UnityEditor;
 using UnityEngine;
 
 using static System.Runtime.InteropServices.Marshal;
+using static MemoryFishing.Utilities.MeshUtils;
 
 namespace MemoryFishing.FX.Water
 {
@@ -32,10 +32,16 @@ namespace MemoryFishing.FX.Water
         }
 
         [SerializeField] private Material waterMaterial;
+        [SerializeField] private MeshFilter meshFilter;
+
+        [Header("Plane Settings")]
+        [SerializeField] private float cellSize;
+        [SerializeField] private int size;
+
+        [Space, SerializeField] private float yPosition;
 
         [Header("Wave Settings")]
         [SerializeField] private int waveCount = 4;
-        [SerializeField] private float planeLength = 20;
 
         [Space, SerializeField] private float medianWavelength = 1f;
         [SerializeField] private float wavelengthRange = 1f;
@@ -51,11 +57,67 @@ namespace MemoryFishing.FX.Water
 
         private ComputeBuffer waveBuffer;
 
+        private Mesh mesh;
+
+        private Vector3[] verts;
+        private Vector2[] uvs;
+        private int[] tris;
+
         private void Start()
         {
             waveBuffer = new ComputeBuffer(waveCount, SizeOf(typeof(Wave)));
 
+            GeneratePlane();
             GenerateWaves();
+        }
+
+        private void GeneratePlane()
+        {
+            mesh = new Mesh();
+
+            Vector3 origin = 0.5f * cellSize * new Vector3(-size, 0, -size);
+            origin.y = yPosition;
+            Vector3 quadSize = Vector3.one.ExcludeYAxis() * cellSize;
+
+            CreateEmptyMeshArrays(size * size, out verts, out uvs, out tris);
+
+            for (int x = 0; x < size; x++)
+            {
+                for (int y = 0; y < size; y++)
+                {
+                    int i = (x * size) + y;
+                    Vector3 worldPos = GridToWorldPosition(x, y, origin);
+                    GetUVs(x, y, out Vector2 min, out Vector2 max);
+
+                    AddQuadFromMeshArrays(verts, uvs, tris, i, worldPos, Vector3.up, quadSize, min, max);
+                }
+            }
+
+            mesh.vertices = verts;
+            mesh.uv = uvs;
+            mesh.triangles = tris;
+
+            mesh.RecalculateNormals();
+            mesh.RecalculateBounds();
+
+            meshFilter.mesh = mesh;
+        }
+
+        private Vector3 GridToWorldPosition(int x, int y, Vector3 origin)
+        {
+            Vector3 bottomLeft = new Vector3(x, 0, y) * cellSize;
+            Vector3 halfSize = new Vector3(1, 0, 1) * cellSize / 2f;
+
+            return bottomLeft + origin + halfSize;
+        }
+
+        private void GetUVs(int x, int y, out Vector2 min, out Vector2 max)
+        {
+            Vector2 cell = Vector2.one / size;
+            Vector2 pos = new(x, y);
+
+            min = cell * pos;
+            max = min + (cell * pos);
         }
 
         private void GenerateWaves()
@@ -68,9 +130,9 @@ namespace MemoryFishing.FX.Water
             float speedMax = medianSpeed + speedRange;
             float ampOverLen = medianAmplitude / medianWavelength;
 
-            float halfPlaneWidth = planeLength * 0.5f;
-            Vector3 minPoint = transform.TransformPoint(new Vector3(-halfPlaneWidth, 0.0f, -halfPlaneWidth));
-            Vector3 maxPoint = transform.TransformPoint(new Vector3(halfPlaneWidth, 0.0f, halfPlaneWidth));
+            float halfSize = size * 0.5f;
+            Vector3 minPoint = transform.TransformPoint(new Vector3(-halfSize, 0.0f, -halfSize));
+            Vector3 maxPoint = transform.TransformPoint(new Vector3(halfSize, 0.0f, halfSize));
 
             Wave[] waves = new Wave[waveCount];
 

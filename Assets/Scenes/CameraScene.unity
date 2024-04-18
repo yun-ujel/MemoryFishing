@@ -5983,7 +5983,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 705507995}
-  - {fileID: 1122681239}
   - {fileID: 642878424}
   - {fileID: 718704316}
   - {fileID: 1212790197}
@@ -11850,7 +11849,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122681235}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -11891,7 +11890,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122681235}
-  m_Mesh: {fileID: -462981019419857548, guid: 354b3e2ed3d6fef409bbdbd15005de76, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!4 &1122681239
 Transform:
   m_ObjectHideFlags: 0
@@ -11904,7 +11903,7 @@ Transform:
   m_LocalScale: {x: 5, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 584952862}
+  m_Father: {fileID: 1922177827}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1133071962
@@ -23032,9 +23031,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterMaterial: {fileID: 2100000, guid: 16babdfba8035ec4996c47e7ce5b6819, type: 2}
-  waveCount: 16
-  planeLength: 10
-  medianWavelength: 0.5
+  meshFilter: {fileID: 1122681238}
+  cellSize: 0.08
+  size: 120
+  yPosition: 0
+  waveCount: 8
+  medianWavelength: 1
   wavelengthRange: 0.5
   medianDirection: 0
   directionalRange: 40
@@ -23053,7 +23055,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1122681239}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
