@@ -179,6 +179,8 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             fishApproaching = false;
             counter = 0f;
 
+            BobberPos = transform.position;
+
             fishingManager.RecallBobberEvent(new(BobberPos, castDirection, timeToLand));
         }
 

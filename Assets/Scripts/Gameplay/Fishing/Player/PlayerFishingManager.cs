@@ -8,7 +8,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
     {
         [Space, SerializeField] private Transform bobber;
         public bool FishingEnabled { get; private set; }
-        [field: SerializeField] public FishingState State { get; set; } = FishingState.None;
+        public FishingState State { get; set; } = FishingState.None;
         public Vector3 BobberPos
         {
             get => bobber.position;
@@ -32,6 +32,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         {
             FishingEnabled = true;
             OnEnableFishingEvent?.Invoke(this, new());
+            BobberPos = transform.position;
         }
 
         public void DisableFishing()
