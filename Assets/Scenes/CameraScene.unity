@@ -23685,7 +23685,7 @@ MonoBehaviour:
   - {x: -0.8, y: 0.16, z: -1.5}
   - {x: 0, y: 0.2, z: -2}
   height: 0.25
-  volume: 5
+  volume: 15
   minimumDrag: 0
   minimumAngularDrag: 0.05
 --- !u!114 &1390089195748355188
