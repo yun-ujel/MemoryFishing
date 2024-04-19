@@ -130,7 +130,6 @@ namespace MemoryFishing.FX.Water
                 Vector3 force = displacement * unitForce * -Physics.gravity;
 
                 body.AddForceAtPosition(force, worldPos);
-                Debug.Log($"Add Force {force} at position {worldPos}");
             }
 
             body.drag = Mathf.Lerp(minimumDrag, 1.0f, submergedVolume);

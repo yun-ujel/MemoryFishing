@@ -18,17 +18,11 @@ namespace MemoryFishing.FX.Camera
 
         [SerializeField, Range(0f, 1f)] private float distanceFromPlayer = 0.7f;
 
-        [Header("Lerp Settings")]
-        [SerializeField] private AnimationCurve transitionCurve;
-        [SerializeField, Range(0f, 1f)] private float transitionDuration = 0.5f;
+        [Header("Smoothing")]
+        [SerializeField] private float smoothing = 2f;
+        [SerializeField] private float approachingSmoothing;
 
-        private Vector3 targetPlayerOffset;
-        private Vector3 startPlayerOffset;
-
-        private float t;
-
-        private float approachTime;
-        private float approachTimeCounter;
+        private Vector3 currentPlayerOffset;
 
         private bool fishApproaching;
 
@@ -44,7 +38,6 @@ namespace MemoryFishing.FX.Camera
             Debug.Log("Approaching");
 
             fishApproaching = true;
-            approachTime = args.ApproachTime;
         }
 
         public override void OnInitialSwitch(Vector3 playerPos, Quaternion playerRotation, Vector3 bobberPos)
@@ -56,37 +49,21 @@ namespace MemoryFishing.FX.Camera
         public override void UpdatePosition(Vector3 playerPos, Quaternion playerRotation, Vector3 bobberPos, float delta)
         {
             Vector3 direction = bobberPos - playerPos;
-            Vector3 playerOffset = Vector3.Lerp(Vector3.zero, direction, distanceFromPlayer);
-
-            float curveT = transitionCurve.Evaluate(t) / transitionDuration;
-
-            if (targetPlayerOffset != playerOffset)
-            {
-                startPlayerOffset = Vector3.Lerp(Vector3.zero, targetPlayerOffset, curveT);
-                targetPlayerOffset = playerOffset;
-
-                t = 0f;
-                curveT = 0f;
-            }
+            Vector3 targetOffset = Vector3.Lerp(Vector3.zero, direction, distanceFromPlayer);
+            currentPlayerOffset = Vector3.MoveTowards(currentPlayerOffset, targetOffset, delta * smoothing);
 
             if (fishApproaching)
             {
-                approachTimeCounter += Time.deltaTime;
-                float fishT = approachTimeCounter / approachTime;
-                fishT *= 1 - distanceFromPlayer;
-
-                playerOffset = Vector3.Lerp(Vector3.zero, direction, distanceFromPlayer + fishT);
+                currentPlayerOffset = Vector3.MoveTowards(currentPlayerOffset, direction, delta * approachingSmoothing);
             }
 
-            Vector3 cameraPos = playerPos + Vector3.Lerp(startPlayerOffset, playerOffset, curveT);
-
-            SetCameraPosition(delta, cameraPos);
+            Vector3 cameraPos = playerPos + currentPlayerOffset;
+            SetCameraPosition(cameraPos);
         }
 
-        private void SetCameraPosition(float delta, Vector3 cameraPos)
+        private void SetCameraPosition(Vector3 cameraPos)
         {
             transform.position = cameraPos + Quaternion.Euler(angle) * -offset;
-            t += delta;
         }
     }
 }

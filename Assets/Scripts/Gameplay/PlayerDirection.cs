@@ -1,6 +1,7 @@
 using MemoryFishing.Utilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 namespace MemoryFishing.Gameplay
 {
@@ -44,12 +45,17 @@ namespace MemoryFishing.Gameplay
 
         private void MouseLook(InputAction.CallbackContext ctx)
         {
-            Ray lookRay = lookCamera.ScreenPointToRay(ctx.ReadValue<Vector2>());
+            mouseUsedLast = true;
+        }
+
+        private void Update()
+        {
+            Vector2Control mouseControl = Mouse.current.position;
+            Ray lookRay = lookCamera.ScreenPointToRay(mouseControl.value);
 
             mousePoint = GetMousePoint(lookRay);
 
             LookDirection = (mousePoint - transform.position).ExcludeYAxis().normalized;
-            mouseUsedLast = true;
         }
 
         private Vector3 GetMousePoint(Ray lookRay)
