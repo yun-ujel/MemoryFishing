@@ -10,6 +10,7 @@ Shader "Custom/WaterFBM"
         _SpecularReflectance("Specular Reflectance", Float) = 1
 
         _SpecularColor("Specular Color", Color) = (1, 1, 1, 1)
+        _DiffuseColor("Diffuse Color", Color) = (1, 1, 1, 1)
     }
     SubShader
     {
@@ -47,7 +48,7 @@ Shader "Custom/WaterFBM"
 
             float _Seed, _SeedIteration, _Frequency, _FrequencyMultiplier, _Amplitude, _AmplitudeMultiplier, _Speed, _SpeedMultiplier;
 
-            float4 _Color, _SpecularColor;
+            float4 _Color, _SpecularColor, _DiffuseColor;
 
             float _NormalStrength, _Smoothness;
             float _DiffuseReflectance, _SpecularReflectance;
@@ -146,7 +147,7 @@ Shader "Custom/WaterFBM"
 
                 float NdotL = dot(normal, lightDir);
                 float diffuseReflectance = _DiffuseReflectance / PI;
-                float3 diffuse = light.color * NdotL * diffuseReflectance;
+                float3 diffuse = light.color * NdotL * diffuseReflectance * _DiffuseColor;
 
                 float4 spec = Specular(lightDir, normal, input.positionWS, _Smoothness) * NdotL;
                 float3 specular = light.color * _SpecularReflectance * spec.rgb;
