@@ -23,11 +23,22 @@ namespace MemoryFishing.Gameplay
         public override void SubscribeToInputActions()
         {
             playerInput.actions["Player/ToggleFishing"].performed += ToggleFishingInput;
+            playerInput.actions["Player/Cancel"].performed += OnPressCancel;
         }
 
         public override void UnsubscribeFromInputActions()
         {
             playerInput.actions["Player/ToggleFishing"].performed -= ToggleFishingInput;
+            playerInput.actions["Player/Cancel"].performed -= OnPressCancel;
+        }
+
+        private void OnPressCancel(InputAction.CallbackContext ctx)
+        {
+            if (State == PlayerState.Fishing)
+            {
+                SwitchToBoatState();
+                return;
+            }
         }
 
         private void ToggleFishingInput(InputAction.CallbackContext ctx)

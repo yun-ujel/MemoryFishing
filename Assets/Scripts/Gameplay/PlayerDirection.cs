@@ -25,6 +25,8 @@ namespace MemoryFishing.Gameplay
         {
             if (mouseUsedLast)
             {
+                Vector2Control mouseControl = Mouse.current.position;
+                UpdateLookDirectionMouse(mouseControl.value);
                 return (mousePoint - fromPosition).ExcludeYAxis().normalized;
             }
 
@@ -45,13 +47,13 @@ namespace MemoryFishing.Gameplay
 
         private void MouseLook(InputAction.CallbackContext ctx)
         {
+            UpdateLookDirectionMouse(ctx.ReadValue<Vector2>());
             mouseUsedLast = true;
         }
 
-        private void Update()
+        private void UpdateLookDirectionMouse(Vector2 mouseControl)
         {
-            Vector2Control mouseControl = Mouse.current.position;
-            Ray lookRay = lookCamera.ScreenPointToRay(mouseControl.value);
+            Ray lookRay = lookCamera.ScreenPointToRay(mouseControl);
 
             mousePoint = GetMousePoint(lookRay);
 
