@@ -8,6 +8,8 @@ Shader "Custom/WaterFBM"
         _NormalStrength("Normal Strength", Float) = 10
         _DiffuseReflectance("Diffuse Reflectance", Float) = 1
         _SpecularReflectance("Specular Reflectance", Float) = 1
+
+        _SpecularColor("Specular Color", Color) = (1, 1, 1, 1)
     }
     SubShader
     {
@@ -45,18 +47,18 @@ Shader "Custom/WaterFBM"
 
             float _Seed, _SeedIteration, _Frequency, _FrequencyMultiplier, _Amplitude, _AmplitudeMultiplier, _Speed, _SpeedMultiplier;
 
-            float4 _Color;
+            float4 _Color, _SpecularColor;
 
             float _NormalStrength, _Smoothness;
             float _DiffuseReflectance, _SpecularReflectance;
 
-            float Specular(float3 lightDir, float3 normal, float3 positionWS, float smoothness)
+            float4 Specular(float3 lightDir, float3 normal, float3 positionWS, float smoothness)
             {
                 float3 viewDir = normalize(_WorldSpaceCameraPos - positionWS);
                 float3 halfwayDir = normalize(lightDir + viewDir);
                 float NdotH = saturate(dot(normal, halfwayDir));
 
-                return pow(NdotH, smoothness);
+                return pow(NdotH, smoothness) * _SpecularColor;
             }
 
             Interpolators Vertex(Attributes input)
@@ -146,10 +148,10 @@ Shader "Custom/WaterFBM"
                 float diffuseReflectance = _DiffuseReflectance / PI;
                 float3 diffuse = light.color * NdotL * diffuseReflectance;
 
-                float spec = Specular(lightDir, normal, input.positionWS, _Smoothness) * NdotL;
-                float3 specular = light.color * _SpecularReflectance * spec;
+                float4 spec = Specular(lightDir, normal, input.positionWS, _Smoothness) * NdotL;
+                float3 specular = light.color * _SpecularReflectance * spec.rgb;
 
-                float3 output = _Color + specular + diffuse;
+                float3 output = _Color.rgb + specular + diffuse;
 
 	            return float4(output, 1.0f);
             }

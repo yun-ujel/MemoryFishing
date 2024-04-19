@@ -24,8 +24,29 @@ namespace MemoryFishing.FX.Water
         [SerializeField] private float speed = 1f;
         [SerializeField] private float speedMultiplier = 1.07f;
 
-        [Header("References")]
+        [Header("Physics")]
         [SerializeField] private Rigidbody body;
+
+        [Space]
+
+        [SerializeField] private Vector3[] samplePoints;
+        [SerializeField] private float height = 1;
+        [SerializeField] private float volume = 1;
+
+        [Space]
+
+        [SerializeField] private float minimumDrag = 0f;
+        [SerializeField] private float minimumAngularDrag = 0.05f;
+
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            for (int i = 0; i < samplePoints.Length; i++)
+            {
+                Debug.DrawRay(transform.position + (transform.rotation * samplePoints[i]), Vector3.up, Color.yellow);
+            }
+        }
+#endif
 
         private float GetHeightAtPosition(Vector3 position)
         {
@@ -83,12 +104,37 @@ namespace MemoryFishing.FX.Water
             return new Vector3(-n.x, 1.0f, -n.y).normalized;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            Vector3 position = transform.position;
-            position.y = GetHeightAtPosition(position);
+            SimulateBuoyancy();
+        }
 
-            transform.position = position;
+        private void SimulateBuoyancy()
+        {
+            float density = body.mass / volume;
+
+            float submergedVolume = 0.0f;
+            float unitForce = (1.0f - density) / samplePoints.Length;
+
+            for (int i = 0; i < samplePoints.Length; i++)
+            {
+                Vector3 worldPos = body.position + (body.rotation * samplePoints[i]);
+
+                float waterLevel = GetHeightAtPosition(worldPos);
+                float depth = waterLevel - worldPos.y + height;
+                float submergedFactor = Mathf.Clamp01(depth / height);
+
+                submergedVolume += submergedFactor;
+
+                float displacement = Mathf.Max(0.0f, depth);
+                Vector3 force = displacement * unitForce * -Physics.gravity;
+
+                body.AddForceAtPosition(force, worldPos);
+                Debug.Log($"Add Force {force} at position {worldPos}");
+            }
+
+            body.drag = Mathf.Lerp(minimumDrag, 1.0f, submergedVolume);
+            body.angularDrag = Mathf.Lerp(minimumAngularDrag, 1.0f, submergedVolume);
         }
     }
 }
