@@ -1,6 +1,7 @@
 using UnityEngine;
 
 using TMPro;
+using static MemoryFishing.Utilities.TextReaderUtils;
 
 namespace MemoryFishing.UI.Dialogue
 {
@@ -20,11 +21,15 @@ namespace MemoryFishing.UI.Dialogue
         private bool IsTextFinished => charProgress == textCharArray.Length;
         private bool HasText => textCharArray != null && textCharArray.Length > 0;
 
+        private bool noParse = false;
+
         public void ReadText(string text)
         {
             textCharArray = text.ToCharArray();
 
-            currentText = AddCharOrTag(0, "", out charProgress, out _);
+            string addText = AddCharOrTag(0, textCharArray, ref noParse);
+            charProgress = addText.Length;
+            currentText = addText;
 
             timeSinceLetterAdded = 0;
         }
@@ -36,25 +41,20 @@ namespace MemoryFishing.UI.Dialogue
 
             if (lettersToAdd > 0)
             {
-                bool addedTag = false;
-
                 for (int i = 0; i < lettersToAdd; i++)
                 {
-                    charProgress++;
-
                     if (IsTextFinished)
                     {
                         textComponent.text = currentText;
                         return;
                     }
 
-                    currentText = AddCharOrTag(charProgress, currentText, out charProgress, out addedTag);
+                    string addText = AddCharOrTag(charProgress, textCharArray, ref noParse);
+                    currentText += addText;
+                    charProgress += addText.Length;
                 }
-                
-                if (!addedTag)
-                {
-                    timeSinceLetterAdded %= rate;
-                }
+
+                timeSinceLetterAdded %= rate;
             }
 
             timeSinceLetterAdded += delta;
@@ -68,42 +68,6 @@ namespace MemoryFishing.UI.Dialogue
             {
                 UpdateText(Time.deltaTime);
             }
-        }
-
-        private string AddCharOrTag(int index, string text, out int lastIndex, out bool addedTag)
-        {
-            char first = textCharArray[index];
-            lastIndex = textCharArray.Length - 1;
-
-            if (first != '<')
-            {
-                text += first;
-                lastIndex = index;
-
-                addedTag = false;
-
-                return text;
-            }
-
-            string tag = "" + first;
-
-            for (int i = index + 1; i < textCharArray.Length; i++)
-            {
-                char current = textCharArray[i];
-                tag += current;
-
-                if (current == '>')
-                {
-                    lastIndex = i;
-                    break;
-                }
-            }
-
-            text += tag;
-
-            addedTag = true;
-
-            return text;
         }
     }
 }
