@@ -16,9 +16,9 @@ MonoBehaviour:
   <DialogueName>k__BackingField: Log2
   <Title>k__BackingField: 
   <Text>k__BackingField: All you have is a <b><color=red>searing pain</color></b>
-    in your head.
+    in your head, greater than anything you've felt in your life.
   <Choices>k__BackingField:
   - <Text>k__BackingField: Next Dialogue
-    <NextDialogue>k__BackingField: {fileID: 11400000, guid: 2551898702ac3074daf770c32282c28f, type: 2}
+    <NextDialogue>k__BackingField: {fileID: 11400000, guid: 723152d8ec087d441a5a0dafbce37ae5, type: 2}
   <DialogueType>k__BackingField: 0
   <IsStartingDialogue>k__BackingField: 0

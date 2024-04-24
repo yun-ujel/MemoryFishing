@@ -15,8 +15,6 @@ namespace DS.ScriptableObjects
         [field: SerializeField] public DSDialogueType DialogueType { get; set; }
         [field: SerializeField] public bool IsStartingDialogue { get; set; }
 
-        public bool IsFinalDialogue => Choices == null || Choices.Count <= 0;
-
         public void Initialize(Texture2D texture, string dialogueName, string title, string text, List<DSDialogueChoiceData> choices, DSDialogueType dialogueType, bool isStartingDialogue)
         {
             Texture = texture;
@@ -50,6 +48,21 @@ namespace DS.ScriptableObjects
             }
 
             return choices;
+        }
+
+        public bool IsFinalDialogue()
+        {
+            for (int i = 0; i < Choices.Count; i++)
+            {
+                DSDialogueSO dialogue = Choices[i].NextDialogue;
+
+                if (dialogue != null)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

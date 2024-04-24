@@ -19,83 +19,14 @@ MonoBehaviour:
     <Name>k__BackingField: Log2
     <Title>k__BackingField: 
     <Text>k__BackingField: All you have is a <b><color=red>searing pain</color></b>
-      in your head.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <TargetGUID>k__BackingField: 9594a0b3-6288-4deb-9650-6b9127b61d9f
-    <GroupGUID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Texture>k__BackingField: {fileID: 0}
-    <Position>k__BackingField: {x: 851, y: 250}
-  - <GUID>k__BackingField: 9594a0b3-6288-4deb-9650-6b9127b61d9f
-    <Name>k__BackingField: Log3
-    <Title>k__BackingField: 
-    <Text>k__BackingField: A greater pain than anything felt in your life.
+      in your head, greater than anything you've felt in your life.
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
       <TargetGUID>k__BackingField: f56f5781-6dff-4256-a176-0eca37b7e623
     <GroupGUID>k__BackingField: 
     <DialogueType>k__BackingField: 0
     <Texture>k__BackingField: {fileID: 0}
-    <Position>k__BackingField: {x: 1493, y: 250}
-  - <GUID>k__BackingField: ee2a1598-627c-4800-b9e9-3a29b98bbd21
-    <Name>k__BackingField: Log5
-    <Title>k__BackingField: 
-    <Text>k__BackingField: And none of these cases compare to the pain you feel now.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <TargetGUID>k__BackingField: 8ddffaaf-7bb4-4a69-a4b5-d56c91f6ad01
-    <GroupGUID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Texture>k__BackingField: {fileID: 0}
-    <Position>k__BackingField: {x: 2777, y: 250}
-  - <GUID>k__BackingField: 8ddffaaf-7bb4-4a69-a4b5-d56c91f6ad01
-    <Name>k__BackingField: Log6
-    <Title>k__BackingField: 
-    <Text>k__BackingField: As the memories pass through your mind, the pain begins
-      to wash away with it.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <TargetGUID>k__BackingField: b077efbb-49d8-4535-9784-fbd0519352e7
-    <GroupGUID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Texture>k__BackingField: {fileID: 0}
-    <Position>k__BackingField: {x: 3419, y: 250}
-  - <GUID>k__BackingField: b077efbb-49d8-4535-9784-fbd0519352e7
-    <Name>k__BackingField: Log7
-    <Title>k__BackingField: 
-    <Text>k__BackingField: And then there's a light.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <TargetGUID>k__BackingField: d5902cb2-7925-43da-b205-fbfd1b0ff6ff
-    <GroupGUID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Texture>k__BackingField: {fileID: 0}
-    <Position>k__BackingField: {x: 4061, y: 250}
-  - <GUID>k__BackingField: 0cf97286-034e-449e-a7eb-fdebc3a97d62
-    <Name>k__BackingField: Log9
-    <Title>k__BackingField: 
-    <Text>k__BackingField: You feel that you're being lifted; floating closer to
-      the light.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <TargetGUID>k__BackingField: 
-    <GroupGUID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Texture>k__BackingField: {fileID: 0}
-    <Position>k__BackingField: {x: 5345, y: 250}
-  - <GUID>k__BackingField: d5902cb2-7925-43da-b205-fbfd1b0ff6ff
-    <Name>k__BackingField: Log8
-    <Title>k__BackingField: 
-    <Text>k__BackingField: Sharp sun beams piercing through a thick veil-an endless
-      ocean.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <TargetGUID>k__BackingField: 0cf97286-034e-449e-a7eb-fdebc3a97d62
-    <GroupGUID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Texture>k__BackingField: {fileID: 0}
-    <Position>k__BackingField: {x: 4703, y: 250}
+    <Position>k__BackingField: {x: 851, y: 250}
   - <GUID>k__BackingField: 30a26233-c784-4470-a48d-8101017bfc2f
     <Name>k__BackingField: Log1
     <Title>k__BackingField: 
@@ -119,30 +50,86 @@ MonoBehaviour:
     <DialogueType>k__BackingField: 0
     <Texture>k__BackingField: {fileID: 0}
     <Position>k__BackingField: {x: -94, y: 250}
+  - <GUID>k__BackingField: b077efbb-49d8-4535-9784-fbd0519352e7
+    <Name>k__BackingField: Log7
+    <Title>k__BackingField: 
+    <Text>k__BackingField: And then there's a light.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: d5902cb2-7925-43da-b205-fbfd1b0ff6ff
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 3419, y: 250}
+  - <GUID>k__BackingField: 0cf97286-034e-449e-a7eb-fdebc3a97d62
+    <Name>k__BackingField: Log9
+    <Title>k__BackingField: 
+    <Text>k__BackingField: You feel that you're being lifted; floating closer to
+      the light.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 4703, y: 250}
+  - <GUID>k__BackingField: d5902cb2-7925-43da-b205-fbfd1b0ff6ff
+    <Name>k__BackingField: Log8
+    <Title>k__BackingField: 
+    <Text>k__BackingField: Sharp sun beams piercing through a thick veil-an endless
+      ocean.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 0cf97286-034e-449e-a7eb-fdebc3a97d62
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 4061, y: 250}
+  - <GUID>k__BackingField: ee2a1598-627c-4800-b9e9-3a29b98bbd21
+    <Name>k__BackingField: Log5
+    <Title>k__BackingField: 
+    <Text>k__BackingField: And none of these cases compare to the pain you feel now.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 8ddffaaf-7bb4-4a69-a4b5-d56c91f6ad01
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 2135, y: 250}
+  - <GUID>k__BackingField: 8ddffaaf-7bb4-4a69-a4b5-d56c91f6ad01
+    <Name>k__BackingField: Log6
+    <Title>k__BackingField: 
+    <Text>k__BackingField: As the memories pass through your mind, the pain begins
+      to wash away with it.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: b077efbb-49d8-4535-9784-fbd0519352e7
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 2777, y: 250}
   - <GUID>k__BackingField: f56f5781-6dff-4256-a176-0eca37b7e623
     <Name>k__BackingField: Log4
     <Title>k__BackingField: 
-    <Text>k__BackingField: You recall your first accident, your first fall. Your
-      first hit to the face. Tens of different, equally horrific damage cases, all
-      plunging through your mind.
+    <Text>k__BackingField: The pain calls back to hundreds of different memories.
+      Hits to the face, the knees, the chest, all equally and horrifically painful.
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
       <TargetGUID>k__BackingField: ee2a1598-627c-4800-b9e9-3a29b98bbd21
     <GroupGUID>k__BackingField: 
     <DialogueType>k__BackingField: 0
     <Texture>k__BackingField: {fileID: 0}
-    <Position>k__BackingField: {x: 2135, y: 250}
+    <Position>k__BackingField: {x: 1493, y: 250}
   <OldGroupNames>k__BackingField: []
   <OldUngroupedNodeNames>k__BackingField:
   - Log2
-  - Log3
-  - Log5
-  - Log6
+  - Log1
+  - Log0
   - Log7
   - Log9
   - Log8
-  - Log1
-  - Log0
+  - Log5
+  - Log6
   - Log4
   <OldGroupedNodeNames>k__BackingField:
     list: []

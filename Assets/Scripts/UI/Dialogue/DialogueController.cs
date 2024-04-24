@@ -68,7 +68,7 @@ namespace MemoryFishing.UI.Dialogue
 
         public void GoToNextDialogue(int selection)
         {
-            if (currentDialogue.IsFinalDialogue)
+            if (currentDialogue.IsFinalDialogue())
             {
                 return;
             }
