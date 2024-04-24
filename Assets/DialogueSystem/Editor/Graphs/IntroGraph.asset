@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8a45880a6fc5a488fcd566e8b7ea92, type: 3}
+  m_Name: IntroGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: Intro
+  <Groups>k__BackingField: []
+  <Nodes>k__BackingField:
+  - <GUID>k__BackingField: 9827bd67-a185-4ad8-9820-f9d6431cf829
+    <Name>k__BackingField: Log0
+    <Title>k__BackingField: 
+    <Text>k__BackingField: First, there's total darkness.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: f8da6ca8-5b2e-40d0-b26c-a09cd1a8cf87
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 209, y: 250}
+  - <GUID>k__BackingField: f8da6ca8-5b2e-40d0-b26c-a09cd1a8cf87
+    <Name>k__BackingField: Log1
+    <Title>k__BackingField: 
+    <Text>k__BackingField: Pitch blackness. And a <b>searing pain</b> in your head.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 9594a0b3-6288-4deb-9650-6b9127b61d9f
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 851, y: 250}
+  - <GUID>k__BackingField: 9594a0b3-6288-4deb-9650-6b9127b61d9f
+    <Name>k__BackingField: Log2
+    <Title>k__BackingField: 
+    <Text>k__BackingField: A greater pain than anything felt in your life.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: f56f5781-6dff-4256-a176-0eca37b7e623
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 1493, y: 250}
+  - <GUID>k__BackingField: ee2a1598-627c-4800-b9e9-3a29b98bbd21
+    <Name>k__BackingField: Log4
+    <Title>k__BackingField: 
+    <Text>k__BackingField: Yet none of these cases compare to the pain you feel now.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 8ddffaaf-7bb4-4a69-a4b5-d56c91f6ad01
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 2777, y: 250}
+  - <GUID>k__BackingField: 8ddffaaf-7bb4-4a69-a4b5-d56c91f6ad01
+    <Name>k__BackingField: Log5
+    <Title>k__BackingField: 
+    <Text>k__BackingField: As the memories pass through your mind, the pain begins
+      to wash away with it.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: b077efbb-49d8-4535-9784-fbd0519352e7
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 3419, y: 250}
+  - <GUID>k__BackingField: b077efbb-49d8-4535-9784-fbd0519352e7
+    <Name>k__BackingField: Log6
+    <Title>k__BackingField: 
+    <Text>k__BackingField: And then there's a light.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: d5902cb2-7925-43da-b205-fbfd1b0ff6ff
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 4061, y: 250}
+  - <GUID>k__BackingField: d5902cb2-7925-43da-b205-fbfd1b0ff6ff
+    <Name>k__BackingField: Log7
+    <Title>k__BackingField: 
+    <Text>k__BackingField: Sharp sun beams piercing through a thick veil-an endless
+      ocean.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 0cf97286-034e-449e-a7eb-fdebc3a97d62
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 4703, y: 250}
+  - <GUID>k__BackingField: 0cf97286-034e-449e-a7eb-fdebc3a97d62
+    <Name>k__BackingField: Log8
+    <Title>k__BackingField: 
+    <Text>k__BackingField: You feel that you're being lifted; floating closer to
+      the light.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 5345, y: 250}
+  - <GUID>k__BackingField: f56f5781-6dff-4256-a176-0eca37b7e623
+    <Name>k__BackingField: Log3
+    <Title>k__BackingField: 
+    <Text>k__BackingField: 'You recall some of your memories: your first accident.
+      First fall. First hit to the face. And hundreds of other damage cases, all
+      plunging through your mind.'
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: ee2a1598-627c-4800-b9e9-3a29b98bbd21
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 2135, y: 250}
+  <OldGroupNames>k__BackingField: []
+  <OldUngroupedNodeNames>k__BackingField:
+  - Log0
+  - Log1
+  - Log2
+  - Log4
+  - Log5
+  - Log6
+  - Log7
+  - Log8
+  - Log3
+  <OldGroupedNodeNames>k__BackingField:
+    list: []
