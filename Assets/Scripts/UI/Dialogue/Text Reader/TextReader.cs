@@ -7,6 +7,13 @@ namespace MemoryFishing.UI.Dialogue
 {
     public class TextReader : MonoBehaviour
     {
+        public class OnTextFinishedEventArgs : System.EventArgs
+        {
+
+        }
+
+        public event System.EventHandler<OnTextFinishedEventArgs> OnTextFinishedEvent;
+
         [SerializeField] private TextMeshProUGUI textComponent;
 
         [Space]
@@ -14,11 +21,14 @@ namespace MemoryFishing.UI.Dialogue
         [SerializeField, Range(0f, 100f)] private float lettersPerSecond = 10f;
         private float timeSinceLetterAdded;
 
+        [SerializeField, Range(0f, 1f)] private float delayOnTextFinished = 0.2f;
+
         private char[] textCharArray;
+        private string targetText;
         private string currentText;
         private int charProgress;
 
-        private bool IsTextFinished => charProgress == textCharArray.Length;
+        private bool IsTextFinished => charProgress >= textCharArray.Length;
         private bool HasText => textCharArray != null && textCharArray.Length > 0;
 
         private bool noParse = false;
@@ -26,6 +36,7 @@ namespace MemoryFishing.UI.Dialogue
         public void ReadText(string text)
         {
             textCharArray = text.ToCharArray();
+            targetText = text;
 
             string addText = AddCharOrTag(0, textCharArray, ref noParse);
             charProgress = addText.Length;
@@ -34,7 +45,7 @@ namespace MemoryFishing.UI.Dialogue
             timeSinceLetterAdded = 0;
         }
 
-        private void UpdateText(float delta)
+        private void UpdateText()
         {
             float rate = 1f / lettersPerSecond;
             int lettersToAdd = Mathf.FloorToInt(timeSinceLetterAdded / rate);
@@ -46,6 +57,7 @@ namespace MemoryFishing.UI.Dialogue
                     if (IsTextFinished)
                     {
                         textComponent.text = currentText;
+                        OnTextFinishedEvent?.Invoke(this, new OnTextFinishedEventArgs());
                         return;
                     }
 
@@ -57,8 +69,6 @@ namespace MemoryFishing.UI.Dialogue
                 timeSinceLetterAdded %= rate;
             }
 
-            timeSinceLetterAdded += delta;
-
             textComponent.text = currentText;
         }
 
@@ -66,8 +76,24 @@ namespace MemoryFishing.UI.Dialogue
         {
             if (HasText && !IsTextFinished)
             {
-                UpdateText(Time.deltaTime);
+                UpdateText();
             }
+
+            timeSinceLetterAdded += Time.deltaTime;
+        }
+
+        public void ForceFinishText()
+        {
+            if (IsTextFinished && HasText && timeSinceLetterAdded < delayOnTextFinished)
+            {
+                return;
+            }
+
+            currentText = targetText;
+            charProgress = textCharArray.Length;
+            timeSinceLetterAdded = delayOnTextFinished;
+
+            OnTextFinishedEvent?.Invoke(this, new OnTextFinishedEventArgs());
         }
     }
 }
