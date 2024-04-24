@@ -666,6 +666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f7c347ac71b1cc4e9957de8a914af23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueController: {fileID: 1889483131}
   textComponent: {fileID: 1218861155}
   lettersPerSecond: 24
   delayOnTextFinished: 0.2
@@ -23160,7 +23161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textReader: {fileID: 198637551}
-  dialogue: {fileID: 1889483132}
+  dialogueHolder: {fileID: 1889483132}
 --- !u!114 &1889483132
 MonoBehaviour:
   m_ObjectHideFlags: 0

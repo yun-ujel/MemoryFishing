@@ -5,7 +5,7 @@ using static MemoryFishing.Utilities.TextReaderUtils;
 
 namespace MemoryFishing.UI.Dialogue
 {
-    public class TextReader : MonoBehaviour
+    public class TextReader : DialogueReader
     {
         public class OnTextFinishedEventArgs : System.EventArgs
         {
@@ -28,8 +28,8 @@ namespace MemoryFishing.UI.Dialogue
         private string currentText;
         private int charProgress;
 
-        private bool IsTextFinished => charProgress >= textCharArray.Length;
-        private bool HasText => textCharArray != null && textCharArray.Length > 0;
+        public bool IsTextFinished => charProgress >= textCharArray.Length;
+        public bool HasText => textCharArray != null && textCharArray.Length > 0;
 
         private bool noParse = false;
 
@@ -93,7 +93,14 @@ namespace MemoryFishing.UI.Dialogue
             charProgress = textCharArray.Length;
             timeSinceLetterAdded = delayOnTextFinished;
 
+            textComponent.text = currentText;
+
             OnTextFinishedEvent?.Invoke(this, new OnTextFinishedEventArgs());
+        }
+
+        public override void OnStartDialogue(object sender, DialogueController.OnStartDialogueEventArgs args)
+        {
+            ReadText(args.Text);
         }
     }
 }

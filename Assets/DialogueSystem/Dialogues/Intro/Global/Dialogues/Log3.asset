@@ -15,9 +15,7 @@ MonoBehaviour:
   <Texture>k__BackingField: {fileID: 0}
   <DialogueName>k__BackingField: Log3
   <Title>k__BackingField: 
-  <Text>k__BackingField: 'You recall some of your memories: your first accident.
-    First fall. First hit to the face. And hundreds of other damage cases, all plunging
-    through your mind.'
+  <Text>k__BackingField: A greater pain than anything felt in your life.
   <Choices>k__BackingField:
   - <Text>k__BackingField: Next Dialogue
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: 723152d8ec087d441a5a0dafbce37ae5, type: 2}

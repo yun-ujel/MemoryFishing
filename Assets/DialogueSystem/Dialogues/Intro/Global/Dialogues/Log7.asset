@@ -15,8 +15,7 @@ MonoBehaviour:
   <Texture>k__BackingField: {fileID: 0}
   <DialogueName>k__BackingField: Log7
   <Title>k__BackingField: 
-  <Text>k__BackingField: Sharp sun beams piercing through a thick veil-an endless
-    ocean.
+  <Text>k__BackingField: And then there's a light.
   <Choices>k__BackingField:
   - <Text>k__BackingField: Next Dialogue
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: 0da7019286de8be4b9481435d4ae6cea, type: 2}

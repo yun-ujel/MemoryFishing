@@ -15,7 +15,8 @@ MonoBehaviour:
   <Texture>k__BackingField: {fileID: 0}
   <DialogueName>k__BackingField: Log2
   <Title>k__BackingField: 
-  <Text>k__BackingField: A greater pain than anything felt in your life.
+  <Text>k__BackingField: All you have is a <b><color=red>searing pain</color></b>
+    in your head.
   <Choices>k__BackingField:
   - <Text>k__BackingField: Next Dialogue
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: 2551898702ac3074daf770c32282c28f, type: 2}

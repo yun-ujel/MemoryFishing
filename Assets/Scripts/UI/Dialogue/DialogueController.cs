@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-using System.Collections.Generic;
-
 using MemoryFishing.Gameplay;
 using DS.Enumerations;
 using DS.ScriptableObjects;
@@ -12,8 +10,23 @@ namespace MemoryFishing.UI.Dialogue
 {
     public class DialogueController : PlayerController
     {
+        public class OnStartDialogueEventArgs : System.EventArgs
+        {
+            public OnStartDialogueEventArgs(DSDialogueSO dialogue)
+            {
+                Dialogue = dialogue;
+            }
+
+            public DSDialogueSO Dialogue { get; private set; }
+            public string Title => Dialogue.Title;
+            public string Text => Dialogue.Text;
+        }
+
         [SerializeField] private TextReader textReader;
-        [SerializeField] private DSDialogue dialogue;
+        [SerializeField] private DSDialogue dialogueHolder;
+
+        private DSDialogueSO currentDialogue;
+        public event System.EventHandler<OnStartDialogueEventArgs> OnStartDialogueEvent;
 
         public override void SubscribeToInputActions()
         {
@@ -27,40 +40,41 @@ namespace MemoryFishing.UI.Dialogue
 
         private void ReceiveSubmitInput(InputAction.CallbackContext ctx)
         {
+            if (textReader.HasText && textReader.IsTextFinished)
+            {
+                if (currentDialogue.DialogueType == DSDialogueType.SingleChoice)
+                {
+                    GoToNextDialogue(0);
+                }
 
+                return;
+            }
+
+            textReader.ForceFinishText();
         }
 
         public override void Start()
         {
             base.Start();
-            ReadDialogue(dialogue.dialogue);
+            ReadDialogue(dialogueHolder.dialogue);
         }
 
         public void ReadDialogue(DSDialogueSO dialogue)
         {
-            List<string> quotes = new List<string>();
-            AddDialoguesToQuoteList(dialogue, quotes);
+            currentDialogue = dialogue;
 
-            for(int i = 0; i < quotes.Count; i++)
-            {
-                Debug.Log(quotes[i]);
-            }
+            OnStartDialogueEvent?.Invoke(this, new(dialogue));
         }
 
-        private void AddDialoguesToQuoteList(DSDialogueSO firstDialogue, List<string> quotes)
+        public void GoToNextDialogue(int selection)
         {
-            quotes.Add(firstDialogue.Text);
-
-            if (firstDialogue.DialogueType == DSDialogueType.MultipleChoice)
+            if (currentDialogue.IsFinalDialogue)
             {
                 return;
             }
 
-            DSDialogueSO choice = firstDialogue.GetChoice(0);
-            if (choice != null)
-            {
-                AddDialoguesToQuoteList(choice, quotes);
-            }
+            DSDialogueSO choice = currentDialogue.GetChoice(selection);
+            ReadDialogue(choice);
         }
     }
 }

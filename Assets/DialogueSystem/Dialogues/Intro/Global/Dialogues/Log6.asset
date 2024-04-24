@@ -15,7 +15,8 @@ MonoBehaviour:
   <Texture>k__BackingField: {fileID: 0}
   <DialogueName>k__BackingField: Log6
   <Title>k__BackingField: 
-  <Text>k__BackingField: And then there's a light.
+  <Text>k__BackingField: As the memories pass through your mind, the pain begins
+    to wash away with it.
   <Choices>k__BackingField:
   - <Text>k__BackingField: Next Dialogue
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: 00715817c0c6f3140a9bd7ced2d8500b, type: 2}
