@@ -4,7 +4,7 @@ namespace MemoryFishing.UI.Dialogue
 {
     public abstract class DialogueReader : MonoBehaviour
     {
-        [SerializeField] protected DialogueController dialogueController;
+        [Space, SerializeField] protected DialogueController dialogueController;
 
         protected virtual void Start()
         {

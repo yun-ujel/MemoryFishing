@@ -30,8 +30,8 @@ namespace MemoryFishing.UI.Dialogue
         public event System.EventHandler<OnOpenDialogueEventArgs> OnOpenDialogueEvent;
         public event System.EventHandler<OnStartDialogueEventArgs> OnStartDialogueEvent;
         public event System.EventHandler<OnCloseDialogueEventArgs> OnCloseDialogueEvent;
-
-        private bool windowOpen;
+    
+        public bool DialogueWindowOpen { get; private set; }
 
         public override void SubscribeToInputActions()
         {
@@ -41,6 +41,12 @@ namespace MemoryFishing.UI.Dialogue
         public override void UnsubscribeFromInputActions()
         {
             playerInput.actions["UI/Submit"].performed -= ReceiveSubmitInput;
+        }
+
+        public override void Start()
+        {
+            base.Start();
+            CloseWindow();
         }
 
         private void ReceiveSubmitInput(InputAction.CallbackContext ctx)
@@ -60,7 +66,7 @@ namespace MemoryFishing.UI.Dialogue
 
         public void ReadDialogue(DSDialogueSO dialogue)
         {
-            if (!windowOpen)
+            if (!DialogueWindowOpen)
             {
                 OpenWindow();
             }
@@ -85,14 +91,18 @@ namespace MemoryFishing.UI.Dialogue
 
         private void OpenWindow()
         {
-            windowOpen = true;
+            DialogueWindowOpen = true;
             OnOpenDialogueEvent?.Invoke(this, new());
+
+            playerInput.SwitchCurrentActionMap("UI");
         }
 
         private void CloseWindow()
         {
-            windowOpen = false;
+            DialogueWindowOpen = false;
             OnCloseDialogueEvent?.Invoke(this, new());
+
+            playerInput.SwitchCurrentActionMap("Player");
         }
     }
 }
