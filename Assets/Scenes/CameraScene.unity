@@ -23118,7 +23118,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1889483130}
-  - component: {fileID: 1889483132}
   - component: {fileID: 1889483131}
   m_Layer: 5
   m_Name: Dialogue
@@ -23161,26 +23160,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textReader: {fileID: 198637551}
-  dialogueHolder: {fileID: 1889483132}
---- !u!114 &1889483132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1889483129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f8ca0475c20dc84896ac0d875ff2ba3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueContainer: {fileID: 11400000, guid: c16b678ac71f1df42bbe1ed4e2fe18d2, type: 2}
-  dialogueGroup: {fileID: 0}
-  dialogue: {fileID: 11400000, guid: a1c4430ce4886ad4ba9dcb9e23ab295f, type: 2}
-  groupedDialogues: 0
-  startingDialoguesOnly: 1
-  selectedDialogueGroupIndex: 0
-  selectedDialogueIndex: 0
 --- !u!1 &1973015573
 GameObject:
   m_ObjectHideFlags: 3
