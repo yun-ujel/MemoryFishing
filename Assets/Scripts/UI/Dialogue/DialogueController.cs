@@ -4,12 +4,12 @@ using UnityEngine.InputSystem;
 using MemoryFishing.Gameplay;
 using DS.Enumerations;
 using DS.ScriptableObjects;
-using DS;
 
 namespace MemoryFishing.UI.Dialogue
 {
     public class DialogueController : PlayerController
     {
+        public class OnOpenDialogueEventArgs : System.EventArgs { }
         public class OnStartDialogueEventArgs : System.EventArgs
         {
             public OnStartDialogueEventArgs(DSDialogueSO dialogue)
@@ -21,12 +21,17 @@ namespace MemoryFishing.UI.Dialogue
             public string Title => Dialogue.Title;
             public string Text => Dialogue.Text;
         }
+        public class OnCloseDialogueEventArgs : System.EventArgs { }
 
-        [SerializeField] private TextReader textReader;
-        [SerializeField] private DSDialogue dialogueHolder;
+        [Space, SerializeField] private TextReader textReader;
 
         private DSDialogueSO currentDialogue;
+
+        public event System.EventHandler<OnOpenDialogueEventArgs> OnOpenDialogueEvent;
         public event System.EventHandler<OnStartDialogueEventArgs> OnStartDialogueEvent;
+        public event System.EventHandler<OnCloseDialogueEventArgs> OnCloseDialogueEvent;
+
+        private bool windowOpen;
 
         public override void SubscribeToInputActions()
         {
@@ -53,14 +58,13 @@ namespace MemoryFishing.UI.Dialogue
             textReader.ForceFinishText();
         }
 
-        public override void Start()
-        {
-            base.Start();
-            ReadDialogue(dialogueHolder.dialogue);
-        }
-
         public void ReadDialogue(DSDialogueSO dialogue)
         {
+            if (!windowOpen)
+            {
+                OpenWindow();
+            }
+
             currentDialogue = dialogue;
 
             OnStartDialogueEvent?.Invoke(this, new(dialogue));
@@ -70,11 +74,25 @@ namespace MemoryFishing.UI.Dialogue
         {
             if (currentDialogue.IsFinalDialogue())
             {
+                CloseWindow();
+
                 return;
             }
 
             DSDialogueSO choice = currentDialogue.GetChoice(selection);
             ReadDialogue(choice);
+        }
+
+        private void OpenWindow()
+        {
+            windowOpen = true;
+            OnOpenDialogueEvent?.Invoke(this, new());
+        }
+
+        private void CloseWindow()
+        {
+            windowOpen = false;
+            OnCloseDialogueEvent?.Invoke(this, new());
         }
     }
 }

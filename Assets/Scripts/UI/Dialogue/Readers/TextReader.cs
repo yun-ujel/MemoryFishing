@@ -98,7 +98,12 @@ namespace MemoryFishing.UI.Dialogue
             OnTextFinishedEvent?.Invoke(this, new OnTextFinishedEventArgs());
         }
 
-        public override void OnStartDialogue(object sender, DialogueController.OnStartDialogueEventArgs args)
+        public override void SubscribeToDialogueEvents()
+        {
+            dialogueController.OnStartDialogueEvent += OnStartDialogue;
+        }
+
+        public void OnStartDialogue(object sender, DialogueController.OnStartDialogueEventArgs args)
         {
             ReadText(args.Text);
         }
