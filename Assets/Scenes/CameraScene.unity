@@ -18217,7 +18217,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1752309347}
-  - component: {fileID: 1752309348}
   - component: {fileID: 1752309349}
   m_Layer: 0
   m_Name: FBMWater
@@ -18234,7 +18233,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1752309346}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4, z: 0}
+  m_LocalPosition: {x: 0, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18242,29 +18241,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1752309348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1752309346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a3d08829977193499d13571a3ef6267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: be581b31fd4dcb94b98296817951e801, type: 2}
-  vertexWaveCount: 12
-  fragmentWaveCount: 12
-  seed: 0
-  seedIteration: 1253.213
-  frequency: 0.4
-  frequencyMultiplier: 1.18
-  amplitude: 2
-  amplitudeMultiplier: 0.82
-  speed: 0.5
-  speedMultiplier: 1.07
 --- !u!114 &1752309349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23486,25 +23462,24 @@ MonoBehaviour:
   waveCount: 8
   seed: 0
   seedIteration: 1253.2131
-  frequency: 0.4
+  frequency: 1
   frequencyMultiplier: 1.18
-  amplitude: 2
+  amplitude: 1
   amplitudeMultiplier: 0.82
-  speed: 0.5
+  speed: 1
   speedMultiplier: 1.07
   body: {fileID: 919132149589081891}
   samplePoints:
-  - {x: 0, y: 0.24, z: 2.5}
-  - {x: 0, y: 0.08, z: 2}
-  - {x: 0.5, y: 0.08, z: 1}
-  - {x: -0.5, y: 0.08, z: 1}
-  - {x: 0.75, y: 0.08, z: -0.5}
-  - {x: -0.75, y: 0.08, z: -0.5}
-  - {x: 0.8, y: 0.16, z: -1.5}
-  - {x: -0.8, y: 0.16, z: -1.5}
-  - {x: 0, y: 0.2, z: -2}
+  - {x: 0.4, y: 0.08, z: 1.5}
+  - {x: -0.4, y: 0.08, z: 1.5}
+  - {x: 0.5, y: 0, z: 0.5}
+  - {x: -0.5, y: 0, z: 0.5}
+  - {x: 0.6, y: 0, z: -0.5}
+  - {x: -0.6, y: 0, z: -0.5}
+  - {x: 0.6, y: 0.08, z: -1.5}
+  - {x: -0.6, y: 0.08, z: -1.5}
   height: 0.25
-  volume: 15
+  volume: 10
   minimumDrag: 0
   minimumAngularDrag: 0.05
 --- !u!114 &1390089195748355188

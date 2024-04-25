@@ -2,15 +2,46 @@ Shader "Custom/WaterFBM"
 {
     Properties
     {
+        [Header(Color)][Space]
         _Color ("Base Color", Color) = (1, 1, 1, 1)
-        _Smoothness("Smoothness", Float) = 1
+        
+        _SpecularColor("Specular Color", Color) = (1, 1, 1, 1)
+        _DiffuseColor("Diffuse Color", Color) = (1, 1, 1, 1)
+
+        [Header(Lighting)][Space]
 
         _NormalStrength("Normal Strength", Float) = 10
+        _Smoothness("Smoothness", Float) = 1
+
+        [Space]
+
         _DiffuseReflectance("Diffuse Reflectance", Float) = 1
         _SpecularReflectance("Specular Reflectance", Float) = 1
 
-        _SpecularColor("Specular Color", Color) = (1, 1, 1, 1)
-        _DiffuseColor("Diffuse Color", Color) = (1, 1, 1, 1)
+        [Header(Waves)][Space]
+
+        _VertexWaveCount("Vertex Wave Count", Int) = 12
+        _FragmentWaveCount("Fragment Wave Count", Int) = 12
+
+        [Space]
+        
+        _Frequency("Frequency", Float) = 0.4
+        _FrequencyMultiplier("Frequency Multiplier", Float) = 1.18
+
+        [Space]
+
+        _Amplitude("Amplitude", Float) = 2
+        _AmplitudeMultiplier("Amplitude Multiplier", Float) = 0.82
+
+        [Space]
+
+        _Speed("Speed", Float) = 0.5
+        _SpeedMultiplier("Speed Multiplier", Float) = 1.07
+        
+        [Header(Direction Randomization)][Space]
+
+        _Seed("Seed", Float) = 0
+        _SeedIteration("Seed Iteration", Float) = 1253.213
     }
     SubShader
     {
@@ -147,7 +178,7 @@ Shader "Custom/WaterFBM"
 
                 float NdotL = dot(normal, lightDir);
                 float diffuseReflectance = _DiffuseReflectance / PI;
-                float3 diffuse = light.color * NdotL * diffuseReflectance * _DiffuseColor;
+                float3 diffuse = light.color * NdotL * diffuseReflectance * _DiffuseColor.rgb;
 
                 float4 spec = Specular(lightDir, normal, input.positionWS, _Smoothness) * NdotL;
                 float3 specular = light.color * _SpecularReflectance * spec.rgb;
