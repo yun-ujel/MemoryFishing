@@ -28,12 +28,12 @@ Material:
     - _Amplitude: 1
     - _AmplitudeMultiplier: 0.6
     - _DiffuseReflectance: 2
-    - _FragmentWaveCount: 10
+    - _FragmentWaveCount: 50
     - _Frequency: 0.6
     - _FrequencyMultiplier: 1.4
     - _NormalStrength: 15
     - _Seed: 0
-    - _SeedIteration: 1253.213
+    - _SeedIteration: 0.4
     - _Smoothness: 15
     - _SpecularReflectance: 2
     - _Speed: 0.5

@@ -41,7 +41,7 @@ Shader "Custom/WaterFBM"
         [Header(Direction Randomization)][Space]
 
         _Seed("Seed", Float) = 0
-        _SeedIteration("Seed Iteration", Float) = 1253.213
+        _SeedIteration("Seed Iteration", Range(0.0, 3.14)) = 1253.213
     }
     SubShader
     {

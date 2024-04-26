@@ -43,7 +43,7 @@ namespace MemoryFishing.FX.Water
         {
             for (int i = 0; i < samplePoints.Length; i++)
             {
-                Debug.DrawRay(transform.position + (transform.rotation * samplePoints[i]), Vector3.up, Color.yellow);
+                Debug.DrawRay(transform.position + (transform.rotation * samplePoints[i]), Vector3.down * 0.25f, Color.yellow);
             }
         }
 #endif
@@ -130,6 +130,7 @@ namespace MemoryFishing.FX.Water
                 Vector3 force = displacement * unitForce * -Physics.gravity;
 
                 body.AddForceAtPosition(force, worldPos);
+                Debug.DrawRay(worldPos, force, Color.red);
             }
 
             body.drag = Mathf.Lerp(minimumDrag, 1.0f, submergedVolume);

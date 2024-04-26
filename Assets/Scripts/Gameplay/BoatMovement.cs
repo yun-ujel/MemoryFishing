@@ -92,7 +92,10 @@ namespace MemoryFishing.Gameplay
             float speed = currentMovementSpeed < 0 ? maxReverseSpeed : maxForwardSpeed;
             speed *= currentMovementSpeed;
 
-            body.AddForce(transform.forward.ExcludeYAxis() * speed, ForceMode.Acceleration);
+            Vector3 target = transform.forward.ExcludeYAxis() * speed;
+            Vector3 current = body.velocity.ExcludeYAxis();
+
+            body.AddForce(target - current, ForceMode.Acceleration);
         }
     }
 }
