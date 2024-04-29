@@ -410,6 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424db595a2b511140a030f7d5dd2601e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseController: {fileID: 132072770}
   startingSubmenuIndex: 0
   menuOverlay: {fileID: 768012837}
   submenus:

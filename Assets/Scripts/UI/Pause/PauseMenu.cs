@@ -33,11 +33,17 @@ namespace MemoryFishing.UI.Pause
         private void Start()
         {
             PauseController.Instance.OnPauseEvent += OnPaused;
+            TogglePause(PauseController.Instance.Paused);
         }
 
         private void OnPaused(object sender, PauseController.OnPauseEventArgs args)
         {
-            if (args.Paused)
+            TogglePause(args.Paused);
+        }
+
+        public void TogglePause(bool paused)
+        {
+            if (paused)
             {
                 menuOverlay.SetActive(true);
                 OpenMenu(startingSubmenuIndex);
