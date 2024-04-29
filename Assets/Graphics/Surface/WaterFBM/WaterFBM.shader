@@ -37,11 +37,6 @@ Shader "Custom/WaterFBM"
 
         _Speed("Speed", Float) = 0.5
         _SpeedMultiplier("Speed Multiplier", Float) = 1.07
-        
-        [Header(Direction Randomization)][Space]
-
-        _Seed("Seed", Float) = 0
-        _SeedIteration("Seed Iteration", Range(0.0, 3.14)) = 1253.213
     }
     SubShader
     {
@@ -74,10 +69,18 @@ Shader "Custom/WaterFBM"
                 float3 positionWS : TEXCOORD2;
             };
 
+            struct Wave
+            {
+                float2 direction;
+                float2 origin;
+            };
+            
+			StructuredBuffer<Wave> _Waves;
+
             int _VertexWaveCount;
             int _FragmentWaveCount;
 
-            float _Seed, _SeedIteration, _Frequency, _FrequencyMultiplier, _Amplitude, _AmplitudeMultiplier, _Speed, _SpeedMultiplier;
+            float _Frequency, _FrequencyMultiplier, _Amplitude, _AmplitudeMultiplier, _Speed, _SpeedMultiplier;
 
             float4 _Color, _SpecularColor, _DiffuseColor;
 
@@ -98,8 +101,6 @@ Shader "Custom/WaterFBM"
                 float f = _Frequency;
                 float a = _Amplitude;
                 float speed = _Speed;
-
-                float seed = _Seed;
                 
                 VertexPositionInputs posnInputs = GetVertexPositionInputs(input.positionOS);
                 float3 worldPos = posnInputs.positionWS;
@@ -110,7 +111,7 @@ Shader "Custom/WaterFBM"
 
                 for (int i = 0; i < _VertexWaveCount; i++)
                 {
-                    float2 direction = normalize(float2(cos(seed), sin(seed)));
+                    float2 direction = _Waves[i].direction;
 
                     float x = dot(direction, worldPos.xz) * f + _Time.y * speed;
                     float wave = a * exp(sin(x) - 1);
@@ -123,7 +124,6 @@ Shader "Custom/WaterFBM"
                     f *= _FrequencyMultiplier;
                     a *= _AmplitudeMultiplier;
                     speed *= _SpeedMultiplier;
-                    seed += _SeedIteration;
                 }
 
                 float3 newPos = input.positionOS + float3(0.0f, h / amplitudeSum, 0.0f);
@@ -143,15 +143,13 @@ Shader "Custom/WaterFBM"
                 float a = _Amplitude;
                 float speed = _Speed;
 
-                float seed = _Seed;
-
                 float3 worldPos = input.positionWS;
 
                 float2 n = 0.0f;
 
                 for (int i = 0; i < _FragmentWaveCount; i++)
                 {
-                    float2 direction = normalize(float2(cos(seed), sin(seed)));
+                    float2 direction = _Waves[i].direction;
 
                     float x = dot(direction, worldPos.xz) * f + _Time.y * speed;
                     float wave = a * exp(sin(x) - 1);
@@ -164,7 +162,6 @@ Shader "Custom/WaterFBM"
                     f *= _FrequencyMultiplier;
                     a *= _AmplitudeMultiplier;
                     speed *= _SpeedMultiplier;
-                    seed += _SeedIteration;
                 }
                 
                 float3 normal = normalize(TransformObjectToWorldNormal(normalize(float3(-n.x, 1.0f, -n.y))));

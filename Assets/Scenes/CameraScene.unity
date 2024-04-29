@@ -18231,6 +18231,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1752309347}
+  - component: {fileID: 1752309350}
   - component: {fileID: 1752309349}
   m_Layer: 0
   m_Name: FBMWater
@@ -18271,6 +18272,24 @@ MonoBehaviour:
   trackPosition: 1
   trackRotation: 0
   offset: {x: 0, y: -5, z: 0}
+--- !u!114 &1752309350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752309346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3d08829977193499d13571a3ef6267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterMaterial: {fileID: 2100000, guid: be581b31fd4dcb94b98296817951e801, type: 2}
+  waveCount: 54
+  randomSeed: 24
+  medianDirection: 0
+  directionalRange: 90
+  planeLength: 30
 --- !u!1 &1790552467
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,47 +1,69 @@
 using UnityEngine;
 
+using static System.Runtime.InteropServices.Marshal;
+using static MemoryFishing.Utilities.VectorUtils;
+
 public class WaterFBM : MonoBehaviour
 {
-    [SerializeField] private Material material;
+    public struct Wave
+    {
+        public Vector2 direction;
+        public Vector2 origin;
 
-    [Header("Wave Count")]
-    [SerializeField] private int vertexWaveCount = 8;
-    [SerializeField] private int fragmentWaveCount = 40;
+        public Wave(float direction, Vector2 origin)
+        {
+            this.direction = DegreesToVector(direction).normalized;
+            this.origin = origin;
+        }
+    }
 
-    [Header("Direction Randomization")]
-    [SerializeField] private float seed = 0;
-    [SerializeField] private float seedIteration = 1253.2131f;
+    [Space, SerializeField] private Material waterMaterial;
 
-    [Header("Waves")]
-    [SerializeField] private float frequency = 1.0f;
-    [SerializeField] private float frequencyMultiplier = 1.18f;
+    [Header("Wave Settings")]
+    [SerializeField] private int waveCount = 32;
 
-    [Space]
+    [Space, SerializeField] private int randomSeed = 0;
 
-    [SerializeField] private float amplitude = 1.0f;
-    [SerializeField] private float amplitudeMultiplier = 0.82f;
+    [Space, SerializeField] private float medianDirection = 0f;
+    [SerializeField] private float directionalRange = 30f;
 
-    [Space]
-
-    [SerializeField] private float speed = 1f;
-    [SerializeField] private float speedMultiplier = 1.07f;
-
-
+    [Space, SerializeField] private float planeLength;
+    
+    private ComputeBuffer waveBuffer;
     private void Start()
     {
-        material.SetInt("_VertexWaveCount", vertexWaveCount);
-        material.SetInt("_FragmentWaveCount", fragmentWaveCount);
+        GenerateWaves();
+    }
 
-        material.SetFloat("_Seed", seed);
-        material.SetFloat("_SeedIteration", seedIteration);
+    public void GenerateWaves()
+    {
+        waveBuffer = new ComputeBuffer(waveCount, SizeOf(typeof(Wave)));
+        Random.InitState(randomSeed);
 
-        material.SetFloat("_Frequency", frequency);
-        material.SetFloat("_FrequencyMultiplier", frequencyMultiplier);
+        float halfLength = planeLength / 2f;
+        Vector3 size = new Vector3(halfLength, 0.0f, halfLength);
 
-        material.SetFloat("_Amplitude", amplitude);
-        material.SetFloat("_AmplitudeMultiplier", amplitudeMultiplier);
+        Vector3 minPoint = transform.TransformPoint(-size);
+        Vector3 maxPoint = transform.TransformPoint(size);
 
-        material.SetFloat("_Speed", speed);
-        material.SetFloat("_SpeedMultiplier", speedMultiplier);
+        float directionMin = medianDirection - directionalRange;
+        float directionMax = medianDirection + directionalRange;
+
+        Wave[] waves = new Wave[waveCount];
+
+        for (int i = 0; i < waves.Length; i++)
+        {
+            float x = Random.Range(minPoint.x * 2, maxPoint.x * 2);
+            float y = Random.Range(minPoint.x * 2, maxPoint.x * 2);
+
+            Vector2 origin = new(x, y);
+
+            float direction = Random.Range(directionMin, directionMax);
+
+            waves[i] = new Wave(direction, origin);
+        }
+
+        waveBuffer.SetData(waves);
+        waterMaterial.SetBuffer("_Waves", waveBuffer);
     }
 }
