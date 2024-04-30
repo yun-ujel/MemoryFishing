@@ -266,17 +266,6 @@
                 },
                 {
                     "name": "",
-                    "id": "0caeed6c-21df-4c2a-ab6a-03e499b711b0",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "CastReel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "25e2be48-a0e7-4def-aea8-5b6164d140f7",
                     "path": "<Keyboard>/r",
                     "interactions": "",
@@ -843,6 +832,12 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Empty",
+            "id": "099f15b0-54c3-42ed-a2fe-46ac5c08ff6a",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": [

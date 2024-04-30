@@ -18,7 +18,7 @@ public class ActionRebinderDisplay : MonoBehaviour
 
     private void OnStartRebind(object sender, ActionRebinder.InteractiveRebindingEventArgs args)
     {
-        bindingText.text = "Waiting For Input...";
+        bindingText.text = "press a button...";
     }
 
     private void Start()

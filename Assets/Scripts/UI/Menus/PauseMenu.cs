@@ -7,8 +7,10 @@ namespace MemoryFishing.UI.Menus
     {
         [SerializeField] protected GameObject menuOverlay;
 
-        private void Start()
+        public override void Start()
         {
+            base.Start();
+
             PauseController.Instance.OnPauseEvent += OnPaused;
             TogglePause(PauseController.Instance.Paused);
         }
@@ -28,6 +30,21 @@ namespace MemoryFishing.UI.Menus
             }
             menuOverlay.SetActive(false);
             OpenMenu(-1);
+        }
+
+        public override void GoBack()
+        {
+            if (currentMenuIndex < 0 || currentMenuIndex >= submenus.Length)
+            {
+                return;
+            }
+
+            if (submenus[currentMenuIndex].previousMenuIndex < 0)
+            {
+                TogglePause(false);
+            }
+
+            base.GoBack();
         }
     }
 }

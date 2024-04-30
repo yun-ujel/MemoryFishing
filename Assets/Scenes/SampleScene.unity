@@ -410,14 +410,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424db595a2b511140a030f7d5dd2601e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseController: {fileID: 132072770}
   startingSubmenuIndex: 0
-  menuOverlay: {fileID: 768012837}
   submenus:
   - menuParent: {fileID: 522415625}
     firstSelected: {fileID: 1628465210}
+    previousMenuIndex: -1
   - menuParent: {fileID: 885099618}
     firstSelected: {fileID: 324229593}
+    previousMenuIndex: 0
+  menuOverlay: {fileID: 768012837}
 --- !u!1001 &153595177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13283,7 +13284,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7533194713358619857, guid: 89d00ed2fa4a35c48ab0ab30ac712381, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7533194713358619857, guid: 89d00ed2fa4a35c48ab0ab30ac712381, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -13295,11 +13296,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7533194713358619857, guid: 89d00ed2fa4a35c48ab0ab30ac712381, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenMenu
+      value: GoBack
       objectReference: {fileID: 0}
     - target: {fileID: 7533194713358619857, guid: 89d00ed2fa4a35c48ab0ab30ac712381, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MemoryFishing.UI.Pause.PauseMenu, Assembly-CSharp
+      value: MemoryFishing.UI.Menus.PauseMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7533194713358619857, guid: 89d00ed2fa4a35c48ab0ab30ac712381, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

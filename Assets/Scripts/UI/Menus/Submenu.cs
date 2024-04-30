@@ -9,6 +9,8 @@ namespace MemoryFishing.UI.Menus
         [SerializeField] private GameObject menuParent;
         [SerializeField] private GameObject firstSelected;
 
+        [field: Space, SerializeField] public int previousMenuIndex;
+
         public void OpenMenu()
         {
             menuParent.SetActive(true);
