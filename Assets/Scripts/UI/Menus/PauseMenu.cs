@@ -3,14 +3,9 @@ using UnityEngine.EventSystems;
 
 namespace MemoryFishing.UI.Menus
 {
-    public class PauseMenu : MonoBehaviour
+    public class PauseMenu : MainMenu
     {
-        [SerializeField] private int startingSubmenuIndex = 0;
-
-        [Space]
-
-        [SerializeField] private GameObject menuOverlay;
-        [SerializeField] private Submenu[] submenus;
+        [SerializeField] protected GameObject menuOverlay;
 
         private void Start()
         {
@@ -33,19 +28,6 @@ namespace MemoryFishing.UI.Menus
             }
             menuOverlay.SetActive(false);
             OpenMenu(-1);
-        }
-
-        public void OpenMenu(int menu)
-        {
-            for (int i = 0; i < submenus.Length; i++)
-            {
-                if (i == menu)
-                {
-                    submenus[i].OpenMenu();
-                    continue;
-                }
-                submenus[i].CloseMenu();
-            }
         }
     }
 }
