@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 using MemoryFishing.Gameplay;
 
-namespace MemoryFishing.UI.Pause
+namespace MemoryFishing.UI.Menus
 {
     public class PauseController : PlayerController
     {

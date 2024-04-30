@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace MemoryFishing.UI.Pause
+namespace MemoryFishing.UI.Menus
 {
     public class PauseMenu : MonoBehaviour
     {
@@ -10,25 +10,7 @@ namespace MemoryFishing.UI.Pause
         [Space]
 
         [SerializeField] private GameObject menuOverlay;
-        [SerializeField] private Menu[] submenus;
-
-        [System.Serializable]
-        public class Menu
-        {
-            [SerializeField] private GameObject menuParent;
-            [SerializeField] private GameObject firstSelected;
-
-            public void OpenMenu()
-            {
-                menuParent.SetActive(true);
-                EventSystem.current.SetSelectedGameObject(firstSelected);
-            }
-
-            public void CloseMenu()
-            {
-                menuParent.SetActive(false);
-            }
-        }
+        [SerializeField] private Submenu[] submenus;
 
         private void Start()
         {
