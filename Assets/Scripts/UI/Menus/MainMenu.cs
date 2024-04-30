@@ -10,6 +10,11 @@ namespace MemoryFishing.UI.Menus
 
         [SerializeField] protected Submenu[] submenus;
 
+        private void Start()
+        {
+            OpenMenu(startingSubmenuIndex);
+        }
+
         public void OpenMenu(int menu)
         {
             for (int i = 0; i < submenus.Length; i++)
