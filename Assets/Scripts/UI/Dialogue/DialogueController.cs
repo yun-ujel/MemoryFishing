@@ -51,6 +51,8 @@ namespace MemoryFishing.UI.Dialogue
 
         private void ReceiveSubmitInput(InputAction.CallbackContext ctx)
         {
+            if (!DialogueWindowOpen) { return; }
+
             if (textReader.HasText && textReader.IsTextFinished)
             {
                 if (currentDialogue.DialogueType == DSDialogueType.SingleChoice)
