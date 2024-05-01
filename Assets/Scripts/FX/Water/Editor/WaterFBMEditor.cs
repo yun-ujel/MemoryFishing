@@ -15,6 +15,11 @@ public class WaterFBMEditor : Editor
     {
         base.OnInspectorGUI();
 
+        if (!EditorApplication.isPlaying)
+        {
+            return;
+        }
+
         EditorGUILayout.Space(8);
 
         if (GUILayout.Button("Update"))

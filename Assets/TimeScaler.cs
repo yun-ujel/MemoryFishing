@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+using MemoryFishing.UI.Menus;
 
 public class TimeScaler : MonoBehaviour
 {
@@ -8,6 +8,11 @@ public class TimeScaler : MonoBehaviour
 
     void Update()
     {
+        if (PauseController.Instance.Paused)
+        {
+            return;
+        }
+
         Time.timeScale = timeScale;
     }
 }
