@@ -10,13 +10,14 @@ Shader "Custom/WaterFBM"
 
         [Header(Lighting)][Space]
 
-        _NormalStrength("Normal Strength", Float) = 10
+        _SpecularNormalStrength("Specular Normal Strength", Float) = 10
+        _SpecularReflectance("Specular Reflectance", Float) = 1
         _Smoothness("Smoothness", Float) = 1
 
         [Space]
 
+        _DiffuseNormalStrength("Diffuse Normal Strength", Float) = 10
         _DiffuseReflectance("Diffuse Reflectance", Float) = 1
-        _SpecularReflectance("Specular Reflectance", Float) = 1
 
         [Header(Waves)][Space]
 
@@ -84,8 +85,8 @@ Shader "Custom/WaterFBM"
 
             float4 _Color, _SpecularColor, _DiffuseColor;
 
-            float _NormalStrength, _Smoothness;
-            float _DiffuseReflectance, _SpecularReflectance;
+            float _SpecularNormalStrength, _SpecularReflectance, _Smoothness;
+            float _DiffuseNormalStrength, _DiffuseReflectance;
 
             float4 Specular(float3 lightDir, float3 normal, float3 positionWS, float smoothness)
             {
@@ -166,19 +167,26 @@ Shader "Custom/WaterFBM"
                 
                 float3 normal = normalize(TransformObjectToWorldNormal(normalize(float3(-n.x, 1.0f, -n.y))));
 
-                normal.xz *= _NormalStrength;
-                normal = normalize(normal);
+                float3 specNormal = normal;
+                specNormal.xz *= _SpecularNormalStrength;
+                specNormal = normalize(specNormal);
+
+                float3 diffNormal = normal;
+                diffNormal.xz *= _DiffuseNormalStrength;
+                diffNormal = normalize(diffNormal);
                 
                 float4 shadowCoord = TransformWorldToShadowCoord(input.positionWS);
                 Light light = GetMainLight(shadowCoord);
                 float3 lightDir = normalize(light.direction);
 
-                float NdotL = dot(normal, lightDir);
+                float DiffDotL = dot(diffNormal, lightDir);
                 float diffuseReflectance = _DiffuseReflectance / PI;
-                float3 diffuse = light.color * NdotL * diffuseReflectance * _DiffuseColor.rgb;
+                float3 diffuse = light.color * DiffDotL * diffuseReflectance * _DiffuseColor.rgb;
 
-                float4 spec = Specular(lightDir, normal, input.positionWS, _Smoothness) * NdotL;
-                float3 specular = light.color * _SpecularReflectance * spec.rgb;
+                float SpecDotL = dot(specNormal, lightDir);
+                float4 spec = Specular(lightDir, specNormal, input.positionWS, _Smoothness) * SpecDotL;
+                float specularReflectance = _SpecularReflectance / PI;
+                float3 specular = specularReflectance * spec.rgb;
 
                 float3 output = _Color.rgb + specular + diffuse;
 
