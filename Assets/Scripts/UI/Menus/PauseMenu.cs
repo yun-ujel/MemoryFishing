@@ -41,7 +41,7 @@ namespace MemoryFishing.UI.Menus
 
             if (submenus[currentMenuIndex].previousMenuIndex < 0)
             {
-                TogglePause(false);
+                PauseController.Instance.ClosePauseMenu();
             }
 
             base.GoBack();
