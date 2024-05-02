@@ -11,7 +11,8 @@ Material:
   m_Shader: {fileID: 4800000, guid: ffe281324cd312149a428bb7df128d79, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - ENABLE_FOAM
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -29,6 +30,7 @@ Material:
     - _AmplitudeMultiplier: 0.6
     - _DiffuseNormalStrength: 70
     - _DiffuseReflectance: 1
+    - _EnableFoam: 1
     - _FoamPower: 3
     - _FragmentWaveCount: 54
     - _Frequency: 0.5
@@ -42,6 +44,7 @@ Material:
     - _Speed: 1
     - _SpeedMultiplier: 1.07
     - _TimeOffset: -0.8
+    - _VertexHeightMultiplier: 1
     - _VertexWaveCount: 10
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
