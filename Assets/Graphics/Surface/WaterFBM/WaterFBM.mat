@@ -29,8 +29,9 @@ Material:
     - _AmplitudeMultiplier: 0.6
     - _DiffuseNormalStrength: 70
     - _DiffuseReflectance: 1
-    - _FoamPower: 3
-    - _FragmentWaveCount: 54
+    - _EnableFoam: 0
+    - _FoamPower: 1
+    - _FragmentWaveCount: 20
     - _Frequency: 0.5
     - _FrequencyMultiplier: 1.4
     - _NormalStrength: 15
@@ -41,11 +42,13 @@ Material:
     - _SpecularReflectance: 1
     - _Speed: 1
     - _SpeedMultiplier: 1.07
-    - _TimeOffset: -0.8
-    - _VertexWaveCount: 10
+    - _Threshold: 0.05
+    - _TimeOffset: 0
+    - _VertexHeightMultiplier: 3
+    - _VertexWaveCount: 20
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _DiffuseColor: {r: 0, g: 1, b: 0.95714283, a: 1}
-    - _FoamColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
+    - _FoamColor: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

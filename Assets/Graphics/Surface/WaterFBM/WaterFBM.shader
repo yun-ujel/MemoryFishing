@@ -16,6 +16,8 @@ Shader "Custom/WaterFBM"
         _FoamColor ("Foam Color", Color) = (1, 1, 1, 1)
         _FoamPower ("Foam Power", Float) = 2
 
+        _Threshold ("Threshold", Float) = 0.1
+
         [Header(Lighting)][Space]
 
         _SpecularNormalStrength("Specular Normal Strength", Float) = 10
@@ -105,7 +107,7 @@ Shader "Custom/WaterFBM"
             float _TimeOffset, _FoamPower;
             float4 _FoamColor;
 
-            float _VertexHeightMultiplier;
+            float _VertexHeightMultiplier, _Threshold;
 
             float4 Specular(float3 lightDir, float3 normal, float3 positionWS, float smoothness)
             {
@@ -138,6 +140,7 @@ Shader "Custom/WaterFBM"
                     float dx = wave * cos(x);
 
                     h += wave;
+
                     worldPos.xz += direction * -dx * a;
 
                     amplitudeSum += a;
@@ -167,6 +170,7 @@ Shader "Custom/WaterFBM"
 
                 float2 n = 0.0f;
                 float foamH = 0.0f;
+                float peak = 0.0f;
 
                 float amplitudeSum = 0.0f;
 
@@ -180,6 +184,8 @@ Shader "Custom/WaterFBM"
 
                     float foamX = dot(direction, worldPos.xz) * f + (_Time.y + _TimeOffset) * speed;
                     float foamWave = a * exp(sin(foamX) - 1);
+                    
+                    peak += pow(smoothstep((1 - _Threshold) * a, a, wave), _FoamPower);
 
                     worldPos.xz += -dw * a;
 
@@ -193,7 +199,10 @@ Shader "Custom/WaterFBM"
                 }
 
                 foamH /= amplitudeSum;
-                foamH = pow(foamH, _FoamPower);
+                foamH = pow(abs(foamH), _FoamPower);
+
+                peak /= amplitudeSum;
+                peak *= foamH;
                 
                 float3 normal = normalize(TransformObjectToWorldNormal(normalize(float3(-n.x, 1.0f, -n.y))));
 
@@ -224,7 +233,7 @@ Shader "Custom/WaterFBM"
                 float3 albedo = _Color.rgb;
                 #endif
 
-                float3 output = albedo + specular + diffuse;
+                float3 output = albedo + specular + diffuse + peak;
 
 	            return float4(output, 1.0f);
             }
