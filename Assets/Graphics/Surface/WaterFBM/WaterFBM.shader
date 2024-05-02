@@ -8,6 +8,14 @@ Shader "Custom/WaterFBM"
         _SpecularColor("Specular Color", Color) = (1, 1, 1, 1)
         _DiffuseColor("Diffuse Color", Color) = (1, 1, 1, 1)
 
+        [Header(Debug)][Space]
+
+        [Toggle(ENABLE_FOAM)] _EnableFoam ("Enable Foam", Float) = 1
+
+        _TimeOffset ("Time Offset", Float) = 1
+        _FoamColor ("Foam Color", Color) = (1, 1, 1, 1)
+        _FoamPower ("Foam Power", Float) = 2
+
         [Header(Lighting)][Space]
 
         _SpecularNormalStrength("Specular Normal Strength", Float) = 10
@@ -38,6 +46,10 @@ Shader "Custom/WaterFBM"
 
         _Speed("Speed", Float) = 0.5
         _SpeedMultiplier("Speed Multiplier", Float) = 1.07
+
+        [Space]
+
+        _VertexHeightMultiplier("Vertex Height Multiplier", Float) = 1
     }
     SubShader
     {
@@ -56,6 +68,8 @@ Shader "Custom/WaterFBM"
             HLSLPROGRAM
             #pragma vertex Vertex
             #pragma fragment Fragment
+
+            #pragma multi_compile __ ENABLE_FOAM
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             
@@ -87,6 +101,11 @@ Shader "Custom/WaterFBM"
 
             float _SpecularNormalStrength, _SpecularReflectance, _Smoothness;
             float _DiffuseNormalStrength, _DiffuseReflectance;
+
+            float _TimeOffset, _FoamPower;
+            float4 _FoamColor;
+
+            float _VertexHeightMultiplier;
 
             float4 Specular(float3 lightDir, float3 normal, float3 positionWS, float smoothness)
             {
@@ -127,7 +146,7 @@ Shader "Custom/WaterFBM"
                     speed *= _SpeedMultiplier;
                 }
 
-                float3 newPos = input.positionOS + float3(0.0f, h / amplitudeSum, 0.0f);
+                float3 newPos = input.positionOS + float3(0.0f, (h / amplitudeSum) * _VertexHeightMultiplier, 0.0f);
                 posnInputs = GetVertexPositionInputs(newPos);
 
                 Interpolators output;
@@ -147,6 +166,9 @@ Shader "Custom/WaterFBM"
                 float3 worldPos = input.positionWS;
 
                 float2 n = 0.0f;
+                float foamH = 0.0f;
+
+                float amplitudeSum = 0.0f;
 
                 for (int i = 0; i < _FragmentWaveCount; i++)
                 {
@@ -156,14 +178,22 @@ Shader "Custom/WaterFBM"
                     float wave = a * exp(sin(x) - 1);
                     float2 dw = f * direction * (wave * cos(x));
 
+                    float foamX = dot(direction, worldPos.xz) * f + (_Time.y + _TimeOffset) * speed;
+                    float foamWave = a * exp(sin(foamX) - 1);
+
                     worldPos.xz += -dw * a;
 
                     n += dw;
+                    foamH += foamWave + wave;
+                    amplitudeSum += a;
                     
                     f *= _FrequencyMultiplier;
                     a *= _AmplitudeMultiplier;
                     speed *= _SpeedMultiplier;
                 }
+
+                foamH /= amplitudeSum;
+                foamH = pow(foamH, _FoamPower);
                 
                 float3 normal = normalize(TransformObjectToWorldNormal(normalize(float3(-n.x, 1.0f, -n.y))));
 
@@ -188,7 +218,13 @@ Shader "Custom/WaterFBM"
                 float specularReflectance = _SpecularReflectance / PI;
                 float3 specular = specularReflectance * spec.rgb;
 
-                float3 output = _Color.rgb + specular + diffuse;
+                #ifdef ENABLE_FOAM
+                float3 albedo = lerp(_Color.rgb, _FoamColor.rgb, foamH);
+                #else
+                float3 albedo = _Color.rgb;
+                #endif
+
+                float3 output = albedo + specular + diffuse;
 
 	            return float4(output, 1.0f);
             }
