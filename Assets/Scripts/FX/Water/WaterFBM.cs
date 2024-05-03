@@ -28,7 +28,9 @@ public class WaterFBM : MonoBehaviour
     [SerializeField] private float directionalRange = 30f;
 
     [Space, SerializeField] private float planeLength;
-    
+
+    public Wave[] Waves { get; private set; }
+
     private ComputeBuffer waveBuffer;
     private void Start()
     {
@@ -49,9 +51,9 @@ public class WaterFBM : MonoBehaviour
         float directionMin = medianDirection - directionalRange;
         float directionMax = medianDirection + directionalRange;
 
-        Wave[] waves = new Wave[waveCount];
+        Waves = new Wave[waveCount];
 
-        for (int i = 0; i < waves.Length; i++)
+        for (int i = 0; i < Waves.Length; i++)
         {
             float x = Random.Range(minPoint.x * 2, maxPoint.x * 2);
             float y = Random.Range(minPoint.x * 2, maxPoint.x * 2);
@@ -60,10 +62,10 @@ public class WaterFBM : MonoBehaviour
 
             float direction = Random.Range(directionMin, directionMax);
 
-            waves[i] = new Wave(direction, origin);
+            Waves[i] = new Wave(direction, origin);
         }
 
-        waveBuffer.SetData(waves);
+        waveBuffer.SetData(Waves);
         waterMaterial.SetBuffer("_Waves", waveBuffer);
     }
 }

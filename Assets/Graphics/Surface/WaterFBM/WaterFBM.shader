@@ -71,6 +71,9 @@ Shader "Custom/WaterFBM"
 
             #pragma multi_compile __ ENABLE_FOAM
 
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
+
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             
             struct Attributes
@@ -205,8 +208,8 @@ Shader "Custom/WaterFBM"
                 diffNormal.xz *= _DiffuseNormalStrength;
                 diffNormal = normalize(diffNormal);
                 
-                float4 shadowCoord = TransformWorldToShadowCoord(input.positionWS);
-                Light light = GetMainLight(shadowCoord);
+                float4 shadowCoord = TransformWorldToShadowCoord(worldPos);
+                Light light = GetMainLight(shadowCoord, worldPos, half4(1, 1, 1, 1));
                 float3 lightDir = normalize(light.direction);
 
                 float DiffDotL = dot(diffNormal, lightDir);
@@ -214,7 +217,7 @@ Shader "Custom/WaterFBM"
                 float3 diffuse = light.color * DiffDotL * diffuseReflectance * _DiffuseColor.rgb;
 
                 float SpecDotL = dot(specNormal, lightDir);
-                float4 spec = Specular(lightDir, specNormal, input.positionWS, _Smoothness) * SpecDotL;
+                float4 spec = Specular(lightDir, specNormal, worldPos, _Smoothness) * SpecDotL;
                 float specularReflectance = _SpecularReflectance / PI;
                 float3 specular = specularReflectance * spec.rgb;
 
@@ -225,6 +228,7 @@ Shader "Custom/WaterFBM"
                 #endif
 
                 float3 output = albedo + specular + diffuse;
+                output *= MainLightRealtimeShadow(shadowCoord);
 
 	            return float4(output, 1.0f);
             }

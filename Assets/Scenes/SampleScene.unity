@@ -7176,7 +7176,7 @@ MonoBehaviour:
   m_CameraType: 0
   m_Cameras:
   - {fileID: 1370888414}
-  m_RendererIndex: 1
+  m_RendererIndex: 2
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -12806,7 +12806,7 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 1
   m_Cameras: []
-  m_RendererIndex: 0
+  m_RendererIndex: 1
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -18766,7 +18766,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1752309346}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18781,7 +18781,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1752309346}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4e2140ef85c1cb4c9e2e38817eaef84, type: 3}
   m_Name: 
@@ -18789,7 +18789,7 @@ MonoBehaviour:
   follow: {fileID: 543450653307282840}
   trackPosition: 1
   trackRotation: 0
-  offset: {x: 0, y: -5.66, z: 0}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!114 &1752309350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24774,19 +24774,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149589081890}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb705ebb09baae041b4599d7467f41de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveCount: 8
-  seed: 0
-  seedIteration: 1253.2131
-  frequency: 0.6
+  waveCount: 10
+  waveGenerator: {fileID: 1752309350}
+  frequency: 0.5
   frequencyMultiplier: 1.4
   amplitude: 1
   amplitudeMultiplier: 0.6
-  speed: 0.5
+  speed: 1
   speedMultiplier: 1.07
   body: {fileID: 919132149589081891}
   samplePoints:
@@ -24798,8 +24797,8 @@ MonoBehaviour:
   - {x: -0.6, y: 0, z: -0.5}
   - {x: 0.6, y: 0.08, z: -1.5}
   - {x: -0.6, y: 0.08, z: -1.5}
-  height: 0.25
-  volume: 10
+  height: 0.5
+  volume: 40
   minimumDrag: 0
   minimumAngularDrag: 0.05
 --- !u!114 &1390089195748355188

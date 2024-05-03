@@ -5,10 +5,7 @@ namespace MemoryFishing.FX.Water
     public class WaterFBMBuoy : MonoBehaviour
     {
         [SerializeField] private int waveCount = 8;
-
-        [Header("Direction Randomization")]
-        [SerializeField] private float seed = 0;
-        [SerializeField] private float seedIteration = 1253.2131f;
+        [SerializeField] private WaterFBM waveGenerator;
 
         [Header("Waves")]
         [SerializeField] private float frequency = 1.0f;
@@ -50,7 +47,6 @@ namespace MemoryFishing.FX.Water
 
         private float GetHeightAtPosition(Vector3 position)
         {
-            float seed = this.seed;
             float frequency = this.frequency;
             float amplitude = this.amplitude;
             float speed = this.speed;
@@ -60,10 +56,10 @@ namespace MemoryFishing.FX.Water
 
             for (int i = 0; i < waveCount; i++)
             {
-                Vector2 direction = new Vector2(Mathf.Cos(seed), Mathf.Sin(seed)).normalized;
+                Vector2 direction = waveGenerator.Waves[i].direction;
 
-                float x = Vector2.Dot(direction, new(position.x, position.z)) * frequency * Time.time * speed;
-                float wave = Mathf.Exp(Mathf.Sin(x) - 1);
+                float x = Vector2.Dot(direction, new(position.x, position.z)) * frequency * Time.timeSinceLevelLoad * speed;
+                float wave = amplitude * Mathf.Exp(Mathf.Sin(x) - 1);
 
                 h += wave;
                 amplitudeSum += amplitude;
@@ -71,37 +67,11 @@ namespace MemoryFishing.FX.Water
                 frequency *= frequencyMultiplier;
                 amplitude *= amplitudeMultiplier;
                 speed *= speedMultiplier;
-                seed += seedIteration;
             }
 
-            return h / amplitudeSum;
-        }
+            float height = h / amplitudeSum;
 
-        private Vector3 GetNormalAtPosition(Vector3 position)
-        {
-            float seed = this.seed;
-            float frequency = this.frequency;
-            float amplitude = this.amplitude;
-            float speed = this.speed;
-
-            Vector2 n = Vector2.zero;
-            for (int i = 0; i < waveCount; i++)
-            {
-                Vector2 direction = new Vector2(Mathf.Cos(seed), Mathf.Sin(seed)).normalized;
-
-                float x = Vector2.Dot(direction, new(position.x, position.z)) * frequency * Time.time * speed;
-                float wave = amplitude * Mathf.Exp(Mathf.Sin(x) - 1);
-                Vector2 dw = frequency * direction * (wave * Mathf.Cos(x));
-
-                n += dw;
-
-                frequency *= frequencyMultiplier;
-                amplitude *= amplitudeMultiplier;
-                speed *= speedMultiplier;
-                seed += seedIteration;
-            }
-
-            return new Vector3(-n.x, 1.0f, -n.y).normalized;
+            return height;
         }
 
         private void FixedUpdate()
