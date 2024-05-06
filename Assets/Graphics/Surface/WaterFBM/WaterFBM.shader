@@ -8,13 +8,25 @@ Shader "Custom/WaterFBM"
         _SpecularColor("Specular Color", Color) = (1, 1, 1, 1)
         _DiffuseColor("Diffuse Color", Color) = (1, 1, 1, 1)
 
-        [Header(Debug)][Space]
+        [Header(Foam)][Space]
 
         [Toggle(ENABLE_FOAM)] _EnableFoam ("Enable Foam", Float) = 1
 
-        _TimeOffset ("Time Offset", Float) = 1
+        [Space]
+
         _FoamColor ("Foam Color", Color) = (1, 1, 1, 1)
+        _TimeOffset ("Time Offset", Float) = 1
+
+        [Space][Space]
+
         _FoamPower ("Foam Power", Float) = 2
+        _FoamMultiplier ("Foam Multiplier", Float) = 1
+        _OffsetFoamMultiplier ("Offset Foam Multiplier", Float) = 1
+
+        [Space][Space]
+
+        _FoamTexture ("Foam Texture", 2D) = "white" {}
+        _FoamTextureSpread ("Spread", Float) = 0.1
 
         [Header(Lighting)][Space]
 
@@ -22,7 +34,7 @@ Shader "Custom/WaterFBM"
         _SpecularReflectance("Specular Reflectance", Float) = 1
         _Smoothness("Smoothness", Float) = 1
 
-        [Space]
+        [Space][Space]
 
         _DiffuseNormalStrength("Diffuse Normal Strength", Float) = 10
         _DiffuseReflectance("Diffuse Reflectance", Float) = 1
@@ -32,22 +44,22 @@ Shader "Custom/WaterFBM"
         _VertexWaveCount("Vertex Wave Count", Int) = 12
         _FragmentWaveCount("Fragment Wave Count", Int) = 12
 
-        [Space]
+        [Space][Space]
         
         _Frequency("Frequency", Float) = 0.4
         _FrequencyMultiplier("Frequency Multiplier", Float) = 1.18
 
-        [Space]
+        [Space][Space]
 
         _Amplitude("Amplitude", Float) = 2
         _AmplitudeMultiplier("Amplitude Multiplier", Float) = 0.82
 
-        [Space]
+        [Space][Space]
 
         _Speed("Speed", Float) = 0.5
         _SpeedMultiplier("Speed Multiplier", Float) = 1.07
 
-        [Space]
+        [Space][Space]
 
         _VertexHeightMultiplier("Vertex Height Multiplier", Float) = 1
     }
@@ -79,12 +91,14 @@ Shader "Custom/WaterFBM"
             struct Attributes
             {
 	            float3 positionOS : POSITION;
+                float2 UV : TEXCOORD0;
             };
 
             struct Interpolators
             {
                 float4 positionCS : SV_POSITION;
                 float3 positionWS : TEXCOORD2;
+                float2 UV : TEXCOORD0;
             };
 
             struct Wave
@@ -106,7 +120,14 @@ Shader "Custom/WaterFBM"
             float _DiffuseNormalStrength, _DiffuseReflectance;
 
             float _TimeOffset, _FoamPower;
+            float _FoamMultiplier, _OffsetFoamMultiplier;
             float4 _FoamColor;
+
+            TEXTURE2D(_FoamTexture);
+            float _FoamTextureSpread;
+            float4 _FoamTexture_ST;
+
+            SamplerState sampler_bilinear_repeat;
 
             float _VertexHeightMultiplier;
 
@@ -157,6 +178,8 @@ Shader "Custom/WaterFBM"
                 output.positionCS = posnInputs.positionCS;
                 output.positionWS = posnInputs.positionWS;
 
+                output.UV = TRANSFORM_TEX(input.UV, _FoamTexture);
+
                 return output;
             }
 
@@ -181,13 +204,17 @@ Shader "Custom/WaterFBM"
                     float wave = a * exp(sin(x) - 1);
                     float2 dw = f * direction * (wave * cos(x));
 
+                    #ifdef ENABLE_FOAM
                     float foamX = dot(direction, worldPos.xz) * f + (_Time.y + _TimeOffset) * speed;
                     float foamWave = a * exp(sin(foamX) - 1);
+
+                    foamH += foamWave * _OffsetFoamMultiplier;
+                    foamH += wave * _FoamMultiplier;
+                    #endif
 
                     worldPos.xz += -dw * a;
 
                     n += dw;
-                    foamH += foamWave + wave;
                     amplitudeSum += a;
                     
                     f *= _FrequencyMultiplier;
@@ -195,8 +222,14 @@ Shader "Custom/WaterFBM"
                     speed *= _SpeedMultiplier;
                 }
 
+                #ifdef ENABLE_FOAM
                 foamH /= amplitudeSum;
                 foamH = pow(foamH, _FoamPower);
+                
+                float dither = _FoamTexture.Sample(sampler_bilinear_repeat, input.UV).r;
+                foamH -= dither * _FoamTextureSpread;
+                foamH = max(foamH, 0);
+                #endif
                 
                 float3 normal = normalize(TransformObjectToWorldNormal(normalize(float3(-n.x, 1.0f, -n.y))));
 
