@@ -18,13 +18,6 @@ public class KuwaharaFeature : ScriptableRendererFeature
         {
             renderPassEvent = settings.RenderPassEvent
         };
-
-        if (settings.StencilSettings.overrideStencilState)
-        {
-            kuwaharaPass.SetStencilState(settings.StencilSettings.stencilReference,
-            settings.StencilSettings.stencilCompareFunction, settings.StencilSettings.passOperation,
-            settings.StencilSettings.failOperation, settings.StencilSettings.zFailOperation);
-        }
     }
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
