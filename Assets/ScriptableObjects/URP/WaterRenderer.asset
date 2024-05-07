@@ -17,6 +17,17 @@ MonoBehaviour:
     <RunInSceneView>k__BackingField: 0
     <RenderPassEvent>k__BackingField: 550
     <KernelSize>k__BackingField: 3
+    <RenderQueueType>k__BackingField: 0
+    <LayerMask>k__BackingField:
+      serializedVersion: 2
+      m_Bits: 0
+    <StencilSettings>k__BackingField:
+      overrideStencilState: 0
+      stencilReference: 0
+      stencilCompareFunction: 8
+      passOperation: 0
+      failOperation: 0
+      zFailOperation: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

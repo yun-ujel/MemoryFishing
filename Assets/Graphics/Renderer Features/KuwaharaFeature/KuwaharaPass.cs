@@ -55,12 +55,14 @@ public class KuwaharaPass : ScriptableRenderPass
     public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
     {
         RTHandle camTarget = renderingData.cameraData.renderer.cameraColorTargetHandle;
-        RenderTextureDescriptor descriptor = renderingData.cameraData.cameraTargetDescriptor;
-        descriptor.depthBufferBits = 0;
+        RTHandle depthTarget = renderingData.cameraData.renderer.cameraDepthTargetHandle;
 
-        _ = RenderingUtils.ReAllocateIfNeeded(ref rtBaseColor, descriptor);
+        RenderTextureDescriptor colorDescriptor = renderingData.cameraData.cameraTargetDescriptor;
+        colorDescriptor.depthBufferBits = 0;
 
-        ConfigureTarget(camTarget);
+        _ = RenderingUtils.ReAllocateIfNeeded(ref rtBaseColor, colorDescriptor);
+
+        ConfigureTarget(camTarget, depthTarget);
     }
 
     public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
@@ -79,7 +81,7 @@ public class KuwaharaPass : ScriptableRenderPass
 
         DrawingSettings drawingSettings = CreateDrawingSettings(shaderTagIDList, ref renderingData, sortingCriteria);
 
-        using (new ProfilingScope(cmd, new ProfilingSampler("Kuwahara Filter")))
+        using (new ProfilingScope(cmd, new ProfilingSampler("Draw Stylised Water")))
         {
             context.ExecuteCommandBuffer(cmd);
             cmd.Clear();
@@ -87,9 +89,12 @@ public class KuwaharaPass : ScriptableRenderPass
             material.SetInt("_KernelSize", settings.KernelSize);
 
             context.DrawRenderers(renderingData.cullResults, ref drawingSettings, ref filteringSettings, ref renderStateBlock);
+        }
 
-            //Blitter.BlitCameraTexture(cmd, camTarget, rtBaseColor, material, 0);
-            //Blitter.BlitCameraTexture(cmd, rtBaseColor, camTarget);
+        using (new ProfilingScope(cmd, new ProfilingSampler("Kuwahara Filter")))
+        {
+            Blitter.BlitCameraTexture(cmd, camTarget, rtBaseColor, material, 0);
+            Blitter.BlitCameraTexture(cmd, rtBaseColor, camTarget);
         }
 
         context.ExecuteCommandBuffer(cmd);

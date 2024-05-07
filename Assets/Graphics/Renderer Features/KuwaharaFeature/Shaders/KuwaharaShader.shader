@@ -66,7 +66,9 @@ Shader "Screen/Kuwahara"
                 float minstd = min(q1.a, min(q2.a, min(q3.a, q4.a)));
                 int4 q = float4(q1.a, q2.a, q3.a, q4.a) == minstd;
 
-                return saturate(float4(q1.rgb * q.x + q2.rgb * q.y + q3.rgb * q.z + q4.rgb * q.w, 1.0f));
+                float alpha = _BlitTexture.Sample(sampler_point_clamp, input.texcoord).a;
+
+                return saturate(float4(q1.rgb * q.x + q2.rgb * q.y + q3.rgb * q.z + q4.rgb * q.w, alpha));
 			}
 			ENDHLSL
 		}
