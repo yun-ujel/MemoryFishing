@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
@@ -17,6 +18,13 @@ public class KuwaharaFeature : ScriptableRendererFeature
         {
             renderPassEvent = settings.RenderPassEvent
         };
+
+        if (settings.StencilSettings.overrideStencilState)
+        {
+            kuwaharaPass.SetStencilState(settings.StencilSettings.stencilReference,
+            settings.StencilSettings.stencilCompareFunction, settings.StencilSettings.passOperation,
+            settings.StencilSettings.failOperation, settings.StencilSettings.zFailOperation);
+        }
     }
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
