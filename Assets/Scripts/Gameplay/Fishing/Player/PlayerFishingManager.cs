@@ -12,7 +12,13 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         public Vector3 BobberPos
         {
             get => bobber.position;
-            set => bobber.position = value;
+            set => bobber.position = new Vector3(value.x, BobberPosY, value.z);
+        }
+
+        public float BobberPosY
+        {
+            get => bobber.position.y;
+            set => bobber.position = new Vector3(bobber.position.x, value, bobber.position.z);
         }
 
         public event System.EventHandler<OnStartFightingEventArgs> OnStartFightingEvent;
@@ -70,6 +76,10 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         public void CastBobberEvent(OnCastBobberEventArgs args)
         {
+            Vector3 targetPos = args.TargetPosition;
+            targetPos.y = BobberPosY;
+            args.TargetPosition = targetPos;
+
             OnCastBobberEvent?.Invoke(this, args);
         }
 

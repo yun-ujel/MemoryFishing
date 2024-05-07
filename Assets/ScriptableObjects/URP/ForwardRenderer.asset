@@ -16,7 +16,7 @@ MonoBehaviour:
   settings:
     <RunInSceneView>k__BackingField: 1
     <RenderPassEvent>k__BackingField: 300
-    <KernelSize>k__BackingField: 3
+    <KernelSize>k__BackingField: 4
 --- !u!114 &-3394460940258964333
 MonoBehaviour:
   m_ObjectHideFlags: 0

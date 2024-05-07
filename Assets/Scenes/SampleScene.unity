@@ -391,7 +391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishingManager: {fileID: 2006554647}
   line: {fileID: 950335618}
-  peakHeightMultiplier: 0.4
+  peakHeightMultiplier: 0.6
   peak: 0.4
   risingHeightCurve:
     serializedVersion: 2
@@ -702,7 +702,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 199725075}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6865,7 +6865,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.03
+    widthMultiplier: 0.05
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -18358,9 +18358,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: {fileID: 543450653307282840}
-  trackPosition: 1
-  trackRotation: 0
-  offset: {x: 0, y: 0, z: 0}
+  trackXPosition: 0
+  trackYPosition: 0
+  trackZPosition: 0
+  positionOffset: {x: 0, y: 0, z: 0}
+  trackXRotation: 0
+  trackYRotation: 0
+  trackZRotation: 0
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &1752309350
 MonoBehaviour:
   m_ObjectHideFlags: 0
