@@ -37,7 +37,7 @@ Material:
     - _EnableFoam: 1
     - _FoamMultiplier: 0.8
     - _FoamPower: 3
-    - _FoamTextureSpread: 0.2
+    - _FoamTextureSpread: -0.2
     - _FragmentWaveCount: 54
     - _Frequency: 0.5
     - _FrequencyMultiplier: 1.4

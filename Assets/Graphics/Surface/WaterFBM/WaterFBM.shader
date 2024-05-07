@@ -3,10 +3,10 @@ Shader "Custom/WaterFBM"
     Properties
     {
         [Header(Color)][Space]
-        _Color ("Base Color", Color) = (1, 1, 1, 1)
+        _Color ("Base Color", Color) = (0, 0, 0, 1)
         
         _SpecularColor("Specular Color", Color) = (1, 1, 1, 1)
-        _DiffuseColor("Diffuse Color", Color) = (1, 1, 1, 1)
+        _DiffuseColor("Diffuse Color", Color) = (0, 1, 0.95, 1)
 
         [Header(Foam)][Space]
 
@@ -15,57 +15,57 @@ Shader "Custom/WaterFBM"
         [Space]
 
         _FoamColor ("Foam Color", Color) = (1, 1, 1, 1)
-        _TimeOffset ("Time Offset", Float) = 1
+        _TimeOffset ("Time Offset", Float) = -1
 
         [Space][Space]
 
-        _FoamPower ("Foam Power", Float) = 2
-        _FoamMultiplier ("Foam Multiplier", Float) = 1
-        _OffsetFoamMultiplier ("Offset Foam Multiplier", Float) = 1
+        _FoamPower ("Foam Power", Float) = 3
+        _FoamMultiplier ("Foam Multiplier", Float) = 0.8
+        _OffsetFoamMultiplier ("Offset Foam Multiplier", Float) = 0.3
 
         [Space][Space]
 
         _FoamTexture ("Foam Texture", 2D) = "white" {}
-        _FoamTextureSpread ("Spread", Float) = 0.1
+        _FoamTextureSpread ("Spread", Float) = -0.2
 
         [Header(Lighting)][Space]
 
-        _SpecularNormalStrength("Specular Normal Strength", Float) = 10
+        _SpecularNormalStrength("Specular Normal Strength", Float) = 30
         _SpecularReflectance("Specular Reflectance", Float) = 1
-        _Smoothness("Smoothness", Float) = 1
+        _Smoothness("Smoothness", Float) = 70
 
         [Space][Space]
 
-        _DiffuseNormalStrength("Diffuse Normal Strength", Float) = 10
+        _DiffuseNormalStrength("Diffuse Normal Strength", Float) = 70
         _DiffuseReflectance("Diffuse Reflectance", Float) = 1
 
         [Header(Waves)][Space]
 
-        _VertexWaveCount("Vertex Wave Count", Int) = 12
-        _FragmentWaveCount("Fragment Wave Count", Int) = 12
+        [IntRange] _VertexWaveCount("Vertex Wave Count", Range(0, 54)) = 10
+        [IntRange] _FragmentWaveCount("Fragment Wave Count", Range(0, 54)) = 54
 
         [Space][Space]
         
-        _Frequency("Frequency", Float) = 0.4
-        _FrequencyMultiplier("Frequency Multiplier", Float) = 1.18
+        _Frequency("Frequency", Float) = 0.5
+        _FrequencyMultiplier("Frequency Multiplier", Float) = 1.4
 
         [Space][Space]
 
-        _Amplitude("Amplitude", Float) = 2
-        _AmplitudeMultiplier("Amplitude Multiplier", Float) = 0.82
+        _Amplitude("Amplitude", Float) = 1
+        _AmplitudeMultiplier("Amplitude Multiplier", Float) = 0.6
 
         [Space][Space]
 
-        _Speed("Speed", Float) = 0.5
+        _Speed("Speed", Float) = 1
         _SpeedMultiplier("Speed Multiplier", Float) = 1.07
 
         [Space][Space]
 
-        _VertexHeightMultiplier("Vertex Height Multiplier", Float) = 1
+        _VertexHeightMultiplier("Vertex Height Multiplier", Float) = 2
     }
     SubShader
     {
-        Tags { "RenderPipeline" = "UniversalRenderPipeline" }
+        Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalRenderPipeline" }
         LOD 100
 
         Pass
@@ -226,7 +226,7 @@ Shader "Custom/WaterFBM"
                 foamH = pow(abs(foamH), _FoamPower);
                 
                 float dither = _FoamTexture.Sample(sampler_bilinear_repeat, input.UV).r;
-                foamH -= dither * _FoamTextureSpread;
+                foamH += dither * _FoamTextureSpread;
                 foamH = max(foamH, 0);
                 #endif
                 
