@@ -113,6 +113,7 @@ Shader "Custom/WaterFBM"
             int _FragmentWaveCount;
 
             float _Frequency, _FrequencyMultiplier, _Amplitude, _AmplitudeMultiplier, _Speed, _SpeedMultiplier;
+            float _VertexHeightMultiplier;
 
             float4 _Color, _SpecularColor, _DiffuseColor;
 
@@ -128,8 +129,6 @@ Shader "Custom/WaterFBM"
             float4 _FoamTexture_ST;
 
             SamplerState sampler_bilinear_repeat;
-
-            float _VertexHeightMultiplier;
 
             float4 Specular(float3 lightDir, float3 normal, float3 positionWS, float smoothness)
             {
@@ -224,7 +223,7 @@ Shader "Custom/WaterFBM"
 
                 #ifdef ENABLE_FOAM
                 foamH /= amplitudeSum;
-                foamH = pow(foamH, _FoamPower);
+                foamH = pow(abs(foamH), _FoamPower);
                 
                 float dither = _FoamTexture.Sample(sampler_bilinear_repeat, input.UV).r;
                 foamH -= dither * _FoamTextureSpread;
@@ -264,6 +263,94 @@ Shader "Custom/WaterFBM"
                 output *= MainLightRealtimeShadow(shadowCoord);
 
 	            return float4(output, 1.0f);
+            }
+
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "DepthOnly"
+            Tags { "LightMode"="DepthOnly" }
+            
+            ColorMask 0
+            ZWrite On
+            ZTest LEqual
+
+            HLSLPROGRAM
+
+	        #pragma vertex DisplacedDepthOnlyVertex
+        	#pragma fragment DepthOnlyFragment
+
+	        // Material Keywords
+	        #pragma shader_feature _ALPHATEST_ON
+        	#pragma shader_feature _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+
+	        // GPU Instancing
+	        #pragma multi_compile_instancing
+	        // #pragma multi_compile _ DOTS_INSTANCING_ON
+
+            float4 _BaseMap_ST, _BaseColor;
+            float _Cutoff;
+
+            struct Wave
+            {
+                float2 direction;
+                float2 origin;
+            };
+            
+			StructuredBuffer<Wave> _Waves;
+
+            int _VertexWaveCount;
+            
+            float _Frequency, _FrequencyMultiplier, _Amplitude, _AmplitudeMultiplier, _Speed, _SpeedMultiplier;
+            float _VertexHeightMultiplier;
+
+	        #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/SurfaceInput.hlsl"
+	        #include "Packages/com.unity.render-pipelines.universal/Shaders/DepthOnlyPass.hlsl"
+
+            Varyings DisplacedDepthOnlyVertex(Attributes input)
+            {
+                Varyings output = (Varyings)0;
+
+                UNITY_SETUP_INSTANCE_ID(input);
+	            UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
+
+                float f = _Frequency;
+                float a = _Amplitude;
+                float speed = _Speed;
+                
+                VertexPositionInputs posnInputs = GetVertexPositionInputs(input.position.xyz);
+                float3 worldPos = posnInputs.positionWS;
+
+                float amplitudeSum = 0.0f;
+
+                float h = 0.0f;
+
+                for (int i = 0; i < _VertexWaveCount; i++)
+                {
+                    float2 direction = _Waves[i].direction;
+
+                    float x = dot(direction, worldPos.xz) * f + _Time.y * speed;
+                    float wave = a * exp(sin(x) - 1);
+                    float dx = wave * cos(x);
+
+                    h += wave;
+                    worldPos.xz += direction * -dx * a;
+
+                    amplitudeSum += a;
+                    f *= _FrequencyMultiplier;
+                    a *= _AmplitudeMultiplier;
+                    speed *= _SpeedMultiplier;
+                }
+
+                float3 newPos = input.position.xyz + float3(0.0f, (h / amplitudeSum) * _VertexHeightMultiplier, 0.0f);
+                posnInputs = GetVertexPositionInputs(newPos);
+
+                output.positionCS = posnInputs.positionCS;
+                output.uv = TRANSFORM_TEX(input.texcoord, _BaseMap);
+
+                return output;
             }
 
             ENDHLSL

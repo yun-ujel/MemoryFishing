@@ -2,7 +2,8 @@ fileFormatVersion: 2
 guid: ffe281324cd312149a428bb7df128d79
 ShaderImporter:
   externalObjects: {}
-  defaultTextures: []
+  defaultTextures:
+  - _FoamTexture: {instanceID: 0}
   nonModifiableTextures: []
   userData: 
   assetBundleName: 

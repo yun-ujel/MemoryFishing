@@ -26,7 +26,7 @@ Material:
     m_TexEnvs:
     - _FoamTexture:
         m_Texture: {fileID: 2800000, guid: 7e12bd1387fd57246ad8a0c80625d83e, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 1.5, y: 1.5}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
@@ -35,14 +35,14 @@ Material:
     - _DiffuseNormalStrength: 70
     - _DiffuseReflectance: 1
     - _EnableFoam: 1
-    - _FoamMultiplier: 1
+    - _FoamMultiplier: 0.8
     - _FoamPower: 3
-    - _FoamTextureSpread: 2
+    - _FoamTextureSpread: 0.2
     - _FragmentWaveCount: 54
     - _Frequency: 0.5
     - _FrequencyMultiplier: 1.4
     - _NormalStrength: 15
-    - _OffsetFoamMultiplier: 0.2
+    - _OffsetFoamMultiplier: 0.5
     - _Seed: 0
     - _SeedIteration: 0.4
     - _Smoothness: 70
