@@ -76,10 +76,6 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         public void CastBobberEvent(OnCastBobberEventArgs args)
         {
-            Vector3 targetPos = args.TargetPosition;
-            targetPos.y = BobberPosY;
-            args.TargetPosition = targetPos;
-
             OnCastBobberEvent?.Invoke(this, args);
         }
 

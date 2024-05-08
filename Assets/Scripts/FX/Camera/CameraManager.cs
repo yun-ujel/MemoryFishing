@@ -20,7 +20,7 @@ namespace MemoryFishing.FX.Camera
         [SerializeField] private PlayerManager playerManager;
         [SerializeField] private PlayerFishingManager fishingManager;
 
-        [SerializeField] private int cameraState;
+        private int cameraState;
 
         private void Start()
         {

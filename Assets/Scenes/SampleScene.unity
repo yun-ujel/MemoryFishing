@@ -878,7 +878,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214990950}
-  m_Mesh: {fileID: 8536425139288874787, guid: 274eef3ef4e42524cbda8fa1c959be25, type: 3}
+  m_Mesh: {fileID: -4355527502438278892, guid: 6d152055d34f2f244b796b3d76f0fc35, type: 3}
 --- !u!1 &224037169
 GameObject:
   m_ObjectHideFlags: 0
@@ -12988,9 +12988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 30}
   angle: {x: 60, y: 0, z: 0}
-  distanceFromPlayer: 0.5
-  smoothing: 20
-  approachingSmoothing: 5
+  speed: 10
 --- !u!1 &1616928174
 GameObject:
   m_ObjectHideFlags: 0
@@ -18352,16 +18350,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1752309346}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4e2140ef85c1cb4c9e2e38817eaef84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  follow: {fileID: 543450653307282840}
-  trackXPosition: 0
+  follow: {fileID: 963194228}
+  trackXPosition: 1
   trackYPosition: 0
-  trackZPosition: 0
-  positionOffset: {x: 0, y: 0, z: 0}
+  trackZPosition: 1
+  positionOffset: {x: 0, y: 0, z: 14}
   trackXRotation: 0
   trackYRotation: 0
   trackZRotation: 0
@@ -23436,9 +23434,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6430609539192878915, guid: 5f36ceefeb72c2041a82044320d80caa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2103755203}
+    - target: {fileID: 6430609539192878915, guid: 5f36ceefeb72c2041a82044320d80caa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenSubmenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6430609539192878915, guid: 5f36ceefeb72c2041a82044320d80caa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MemoryFishing.UI.Menus.Menu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448441504833598841, guid: 5f36ceefeb72c2041a82044320d80caa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2103755203}
+    - target: {fileID: 6448441504833598841, guid: 5f36ceefeb72c2041a82044320d80caa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenSubmenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448441504833598841, guid: 5f36ceefeb72c2041a82044320d80caa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MemoryFishing.UI.Menus.Menu, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6462751810661725458, guid: 5f36ceefeb72c2041a82044320d80caa, type: 3}
       propertyPath: m_Name
       value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200123010522639669, guid: 5f36ceefeb72c2041a82044320d80caa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2103755203}
+    - target: {fileID: 8200123010522639669, guid: 5f36ceefeb72c2041a82044320d80caa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenSubmenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200123010522639669, guid: 5f36ceefeb72c2041a82044320d80caa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MemoryFishing.UI.Menus.Menu, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23535,7 +23569,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  castDistance: 8
+  castDistance: 16
   startingCastDistance: 2
   timeToLand: 0.7
   timeToRecall: 0.1
@@ -23571,6 +23605,17 @@ MonoBehaviour:
   timeToReelFully: 1
   reelAcceleration: 4
   reelDeceleration: 1
+--- !u!114 &2103755203 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 247128637633554660, guid: 5f36ceefeb72c2041a82044320d80caa, type: 3}
+  m_PrefabInstance: {fileID: 2003931672}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 424db595a2b511140a030f7d5dd2601e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!223 &383941406862445622
 Canvas:
   m_ObjectHideFlags: 0
@@ -23809,7 +23854,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7621960612164022661}
   - component: {fileID: 3961752496258420589}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: Player Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23835,7 +23880,7 @@ GameObject:
   - component: {fileID: 2255325712572550866}
   - component: {fileID: 1464027684415987848}
   - component: {fileID: 4249157222633302256}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23853,7 +23898,7 @@ GameObject:
   - component: {fileID: 7764841504472702143}
   - component: {fileID: 4283862306275145396}
   - component: {fileID: 7332914723569225461}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23909,7 +23954,7 @@ GameObject:
   - component: {fileID: 6551715224198856598}
   - component: {fileID: 6978466412328635798}
   - component: {fileID: 2223472352555935843}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: Exhaustion Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23926,7 +23971,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4734573367971939480}
   - component: {fileID: 2355030316550049609}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: Fish Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24060,7 +24105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7535118295874475871}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: Direction Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24142,7 +24187,7 @@ GameObject:
   - component: {fileID: 383941406862445622}
   - component: {fileID: 1390089195748355188}
   - component: {fileID: 6986165055876128564}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: Local UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}

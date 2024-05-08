@@ -36,7 +36,7 @@ namespace MemoryFishing.Utilities
 
         public static bool IsInRangeOf(this int value, object[] array)
         {
-            return IsInRangeOf(array.Length, value);
+            return IsInRangeOf(value, array.Length);
         }
     }
 }

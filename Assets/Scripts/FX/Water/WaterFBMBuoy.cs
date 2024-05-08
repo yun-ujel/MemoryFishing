@@ -40,7 +40,7 @@ namespace MemoryFishing.FX.Water
         {
             for (int i = 0; i < samplePoints.Length; i++)
             {
-                Debug.DrawRay(transform.position + (transform.rotation * samplePoints[i]), Vector3.down * 0.25f, Color.yellow);
+                Debug.DrawRay(transform.position + (transform.rotation * samplePoints[i]), Vector3.down * height, Color.yellow);
             }
         }
 #endif

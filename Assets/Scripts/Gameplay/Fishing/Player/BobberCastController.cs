@@ -159,6 +159,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             counter = 0f;
 
             targetBobberPos = transform.position + (castDirection * castMagnitude);
+            targetBobberPos.y = BobberPos.y;
             fishingManager.CastBobberEvent(new(targetBobberPos, castDirection, castMagnitude, timeToLand));
         }
 

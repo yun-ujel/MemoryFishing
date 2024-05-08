@@ -13,6 +13,7 @@ Shader "Custom/StencilMask"
 		{
 			Blend Zero One
 			ZWrite Off
+			Cull Back
 
 			Stencil
 			{
