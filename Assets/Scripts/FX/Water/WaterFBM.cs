@@ -68,4 +68,13 @@ public class WaterFBM : MonoBehaviour
         waveBuffer.SetData(Waves);
         waterMaterial.SetBuffer("_Waves", waveBuffer);
     }
+
+    private void OnDisable()
+    {
+        if (waveBuffer != null)
+        {
+            waveBuffer.Release();
+            waveBuffer = null;
+        }
+    }
 }
