@@ -5,6 +5,7 @@ using Cinemachine;
 using MemoryFishing.Gameplay.Fishing.Player;
 using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
 using MemoryFishing.Gameplay;
+using MemoryFishing.Gameplay.Enumerations;
 
 namespace MemoryFishing.FX.Camera
 {
@@ -64,6 +65,11 @@ namespace MemoryFishing.FX.Camera
         private void SetCameraPosition(Vector3 cameraPos)
         {
             transform.position = cameraPos + Quaternion.Euler(angle) * -offset;
+        }
+
+        public override bool TryTrackingConditions(PlayerState playerState, FishingState fishingState)
+        {
+            return playerState == PlayerState.Fishing && fishingState != FishingState.Exhausted && fishingState != FishingState.Reeling && fishingState != FishingState.Fighting;
         }
     }
 }

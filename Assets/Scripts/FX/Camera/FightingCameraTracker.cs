@@ -1,3 +1,4 @@
+using MemoryFishing.Gameplay.Enumerations;
 using UnityEngine;
 
 namespace MemoryFishing.FX.Camera
@@ -22,6 +23,11 @@ namespace MemoryFishing.FX.Camera
         public override void OnInitialSwitch(Vector3 playerPos, Quaternion playerRotation, Vector3 bobberPos)
         {
             transform.position = bobberPos + (Quaternion.Euler(angle) * -offset);
+        }
+
+        public override bool TryTrackingConditions(PlayerState playerState, FishingState fishingState)
+        {
+            return fishingState == FishingState.Fighting;
         }
     }
 }

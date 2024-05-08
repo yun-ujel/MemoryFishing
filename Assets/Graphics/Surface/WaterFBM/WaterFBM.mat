@@ -54,7 +54,7 @@ Material:
     - _VertexWaveCount: 10
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
-    - _DiffuseColor: {r: 0, g: 1, b: 0.95714283, a: 1}
+    - _DiffuseColor: {r: 0.46306515, g: 0.8113208, b: 0.78089577, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

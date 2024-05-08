@@ -3,6 +3,7 @@ using UnityEngine;
 using Cinemachine;
 using MemoryFishing.Gameplay.Fishing.Player;
 using MemoryFishing.Gameplay;
+using MemoryFishing.Gameplay.Enumerations;
 
 namespace MemoryFishing.FX.Camera
 {
@@ -28,5 +29,7 @@ namespace MemoryFishing.FX.Camera
         }
 
         public abstract void UpdatePosition(Vector3 playerPos, Quaternion playerRotation, Vector3 bobberPos, float delta);
+
+        public abstract bool TryTrackingConditions(PlayerState playerState, FishingState fishingState);
     }
 }

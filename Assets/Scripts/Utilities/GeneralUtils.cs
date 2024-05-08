@@ -28,5 +28,15 @@ namespace MemoryFishing.Utilities
         {
             return Remap(input, inputMin, inputMax, 0.0f, 1.0f);
         }
+
+        public static bool IsInRangeOf(this int value, int length)
+        {
+            return value >= 0 && value < length;
+        }
+
+        public static bool IsInRangeOf(this int value, object[] array)
+        {
+            return IsInRangeOf(array.Length, value);
+        }
     }
 }

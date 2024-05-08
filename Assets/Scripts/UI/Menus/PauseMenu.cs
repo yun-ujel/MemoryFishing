@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace MemoryFishing.UI.Menus
 {
-    public class PauseMenu : MainMenu
+    public class PauseMenu : Menu
     {
         [SerializeField] protected GameObject menuOverlay;
 
@@ -25,11 +25,11 @@ namespace MemoryFishing.UI.Menus
             if (paused)
             {
                 menuOverlay.SetActive(true);
-                OpenMenu(startingSubmenuIndex);
+                OpenSubmenu(startingSubmenuIndex);
                 return;
             }
             menuOverlay.SetActive(false);
-            OpenMenu(-1);
+            OpenSubmenu(-1);
         }
 
         public override void GoBack()

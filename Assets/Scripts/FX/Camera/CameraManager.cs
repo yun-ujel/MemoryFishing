@@ -2,9 +2,8 @@ using UnityEngine;
 
 using MemoryFishing.Gameplay;
 using MemoryFishing.Gameplay.Fishing.Player;
-using MemoryFishing.FX.Camera.Enumerations;
 using MemoryFishing.Gameplay.Enumerations;
-using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
+using MemoryFishing.Utilities;
 
 namespace MemoryFishing.FX.Camera
 {
@@ -21,7 +20,7 @@ namespace MemoryFishing.FX.Camera
         [SerializeField] private PlayerManager playerManager;
         [SerializeField] private PlayerFishingManager fishingManager;
 
-        private CameraState cameraState;
+        [SerializeField] private int cameraState;
 
         private void Start()
         {
@@ -35,21 +34,21 @@ namespace MemoryFishing.FX.Camera
         {
             UpdatePriority();
 
-            trackers[(int)cameraState].UpdatePosition(player.position, player.rotation, bobber.position, Time.deltaTime);
+            trackers[cameraState].UpdatePosition(player.position, player.rotation, bobber.position, Time.deltaTime);
         }
 
         private void UpdatePriority()
         {
-            CameraState state = GetState(playerManager.State, fishingManager.State);
+            int state = GetState(playerManager.State, fishingManager.State);
 
-            if ((int)state >= trackers.Length || state == cameraState)
+            if (!state.IsInRangeOf(trackers) || state == cameraState)
             {
                 return;
             }
 
             for (int i = 0; i < trackers.Length; i++)
             {
-                if (i == (int)state)
+                if (i == state)
                 {
                     trackers[i].OnInitialSwitch(player.position, player.rotation, bobber.position);
                     trackers[i].Priority = 1;
@@ -62,27 +61,17 @@ namespace MemoryFishing.FX.Camera
             cameraState = state;
         }
 
-        private CameraState GetState(PlayerState playerState, FishingState fishingState)
+        private int GetState(PlayerState playerState, FishingState fishingState)
         {
-            if (playerState == PlayerState.Boat)
+            for (int i = 0; i < trackers.Length; i++)
             {
-                return CameraState.BoatMoving;
+                if (trackers[i].TryTrackingConditions(playerState, fishingState))
+                {
+                    return i;
+                }
             }
 
-            switch (fishingState)
-            {
-                default:
-                    return CameraState.Waiting;
-
-                case FishingState.Fighting:
-                    return CameraState.Fighting;
-
-                case FishingState.Exhausted:
-                    return CameraState.Reeling;
-
-                case FishingState.Reeling:
-                    return CameraState.Reeling;
-            }
+            return -1;
         }
     }
 }

@@ -11,13 +11,13 @@ namespace MemoryFishing.UI.Menus
 
         [field: Space, SerializeField] public int previousMenuIndex;
 
-        public void OpenMenu()
+        public void Open()
         {
             menuParent.SetActive(true);
             EventSystem.current.SetSelectedGameObject(firstSelected);
         }
 
-        public void CloseMenu()
+        public void Close()
         {
             menuParent.SetActive(false);
         }
