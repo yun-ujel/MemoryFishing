@@ -64,7 +64,12 @@ namespace MemoryFishing.Gameplay
 
         private void ReceiveMoveInput(InputAction.CallbackContext ctx)
         {
-            moveDir = ctx.ReadValue<Vector2>();
+            SetMoveInput(ctx.ReadValue<Vector2>());
+        }
+
+        public void SetMoveInput(Vector2 direction)
+        {
+            moveDir = direction;
         }
 
         private void FixedUpdate()

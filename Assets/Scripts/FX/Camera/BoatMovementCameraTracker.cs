@@ -6,10 +6,6 @@ namespace MemoryFishing.FX.Camera
 {
     public class BoatMovementCameraTracker : CameraTracker
     {
-        [Header("Position")]
-        [SerializeField] private Vector3 offset = new Vector3(0f, 0f, 30f);
-        [SerializeField] private Vector3 angle = new Vector3(60f, 0f, 0f);
-
         public override bool TryTrackingConditions(PlayerState playerState, FishingState fishingState)
         {
             return playerState == PlayerState.Boat;

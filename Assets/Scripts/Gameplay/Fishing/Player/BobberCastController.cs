@@ -74,7 +74,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         {
             if (State == FishingState.WindUp)
             {
-                CastBobber();
+                CastBobber(castDirection, castMagnitude);
             }
         }
 
@@ -152,15 +152,18 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             Debug.DrawRay(transform.position, cast, Color.cyan);
         }
 
-        private void CastBobber()
+        public void CastBobber(Vector3 direction, float magnitude)
         {
             State = FishingState.Casting;
 
             counter = 0f;
 
-            targetBobberPos = transform.position + (castDirection * castMagnitude);
+            castDirection = direction;
+            castMagnitude = magnitude;
+
+            targetBobberPos = transform.position + (direction * magnitude);
             targetBobberPos.y = BobberPos.y;
-            fishingManager.CastBobberEvent(new(targetBobberPos, castDirection, castMagnitude, timeToLand));
+            fishingManager.CastBobberEvent(new(targetBobberPos, direction, magnitude, timeToLand));
         }
 
         private void BobberLanding()

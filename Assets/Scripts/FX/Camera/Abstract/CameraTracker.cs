@@ -18,6 +18,10 @@ namespace MemoryFishing.FX.Camera
 
         protected CinemachineVirtualCamera virtualCam;
 
+        [Header("Position")]
+        [SerializeField] protected Vector3 offset = new Vector3(0f, 0f, 30f);
+        [SerializeField] protected Vector3 angle = new Vector3(60f, 0f, 0f);
+
         public virtual void Initialize(PlayerManager playerManager, PlayerFishingManager fishingManager, Vector3 playerPos, Quaternion playerRotation, Vector3 bobberPos)
         {
             virtualCam = GetComponent<CinemachineVirtualCamera>();
