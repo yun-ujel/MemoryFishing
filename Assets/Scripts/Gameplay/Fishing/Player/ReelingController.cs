@@ -25,10 +25,6 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         [Space]
 
-        [SerializeField, Range(0f, 10f)] private float timeToReelFully = 2f;
-
-        [Space]
-
         [SerializeField, Range(0f, 10f)] private float reelAcceleration = 10f;
         [SerializeField, Range(0f, 10f)] private float reelDeceleration = 1f;
 
@@ -105,7 +101,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
             if (args.FirstFight)
             {
                 startingDistance = Vector3.Distance(args.PlayerPos, args.FishPos);
-                maxReelSpeed = startingDistance / timeToReelFully;
+                maxReelSpeed = startingDistance / args.TimeToReelFully;
             }
         }
 

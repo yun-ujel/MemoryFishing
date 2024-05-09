@@ -2941,6 +2941,7 @@ MonoBehaviour:
   radialSprite: {fileID: 2223472352555935843}
   circleColorMin: {r: 1, g: 1, b: 1, a: 0.2}
   circleColorMax: {r: 1, g: 1, b: 1, a: 0.6}
+  circleColorReeling: {r: 1, g: 1, b: 1, a: 0.3137255}
 --- !u!114 &1112941918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4704,7 +4705,6 @@ MonoBehaviour:
   fightController: {fileID: 2006554644}
   castController: {fileID: 2006554646}
   catchFishRadius: 2
-  timeToReelFully: 1.5
   reelAcceleration: 4
   reelDeceleration: 1
 --- !u!223 &383941406862445622

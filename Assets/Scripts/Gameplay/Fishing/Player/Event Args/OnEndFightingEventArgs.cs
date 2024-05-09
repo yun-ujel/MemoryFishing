@@ -9,15 +9,17 @@ namespace MemoryFishing.Gameplay.Fishing.Player.EventArgs
         public FishBehaviour FishBehaviour { get; private set; }
         public Vector3 PlayerPos { get; private set; }
         public Vector3 FishPos { get; private set; }
+        public float TimeToReelFully { get; private set; }
         public int FightCount { get; private set; }
         public bool FirstFight => FightCount == 0;
 
-        public OnEndFightingEventArgs(FishBehaviour fishBehaviour, Vector3 playerPos, Vector3 fishPos, int fightCount)
+        public OnEndFightingEventArgs(FishBehaviour fishBehaviour, Vector3 playerPos, Vector3 fishPos, float timeToReelFully, int fightCount)
         {
             FishBehaviour = fishBehaviour;
             PlayerPos = playerPos;
             FishPos = fishPos;
             FightCount = fightCount;
+            TimeToReelFully = timeToReelFully;
         }
     }
 }
