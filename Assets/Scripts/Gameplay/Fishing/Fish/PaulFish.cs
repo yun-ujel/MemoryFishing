@@ -4,6 +4,7 @@ using MemoryFishing.Gameplay.Inventory;
 using MemoryFishing.Utilities;
 
 using static MemoryFishing.Utilities.GeneralUtils;
+using static MemoryFishing.Utilities.VectorUtils;
 
 namespace MemoryFishing.Gameplay.Fishing.Fish
 {
@@ -12,7 +13,13 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         private Vector3 direction;
         private Rigidbody body;
 
-        [SerializeField] private float speed;
+        [SerializeField] private PlayerDirection playerDirection;
+
+        [Space, SerializeField] private float driftDuration = 2f;
+        [SerializeField] private float startSpeed = 1f;
+
+        private float speed;
+        float t;
 
         private void Start()
         {
@@ -41,31 +48,31 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         {
             base.InitiateFighting(playerPos, fishPos, fightCount);
 
-            direction = CalculateDirection(playerPos, fishPos).OnZAxis();
-        }
+            Vector3 dir = playerDirection.GetLookDirection(transform.position);
+            float angle = VectorToDegrees(dir);
 
-        private static Vector2 CalculateDirection(Vector3 playerPos, Vector3 fishPos)
-        {
-            Vector3 direction = (playerPos - fishPos).ExcludeYAxis().normalized;
-            float angleToPlayer = VectorUtils.VectorToDegrees(direction.OnYAxis());
+            angle += 60f;
+            direction = DegreesToVector(angle).OnZAxis();
 
-            bool flipAngle = fishPos.z > playerPos.z;
-            angleToPlayer = flipAngle ? (360 - angleToPlayer) : angleToPlayer;
-
-            float multiplier = CoinFlip() ? 1 : -1;
-            float angleOffset = (Random.value * 90f) + 45f;
-
-            return VectorUtils.DegreesToVector((angleOffset * multiplier) + angleToPlayer);
+            speed = startSpeed;
+            t = 0f;
         }
 
         public override float GetExhaustionMultiplier(float dot)
         {
-            if (dot > 0.8f)
+            return 1f;
+        }
+
+        public override float UpdateFishExhaustion(float delta, Vector3 input)
+        {
+            float dot = Vector3.Dot(input, GetFishDirection());
+
+            if (dot > 0.9f)
             {
-                return 0.2f;
+                return 0.2f * delta;
             }
 
-            return 0f;
+            return -1f * delta;
         }
 
         public override Vector3 GetFishDirection()
@@ -80,7 +87,9 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         public override void UpdateFishFighting(float delta)
         {
+            t += delta / driftDuration;
 
+            speed = Mathf.Lerp(startSpeed, 0, t);
         }
 
         #endregion

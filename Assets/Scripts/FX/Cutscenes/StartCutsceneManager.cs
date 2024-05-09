@@ -4,6 +4,7 @@ using UnityEngine;
 using MemoryFishing.Gameplay;
 using MemoryFishing.Gameplay.Fishing.Player;
 using MemoryFishing.Utilities;
+using MemoryFishing.Gameplay.Fishing.Fish;
 
 namespace MemoryFishing.FX.Cutscenes
 {
@@ -11,11 +12,18 @@ namespace MemoryFishing.FX.Cutscenes
     {
         [Header("References")]
         [SerializeField] private BoatMovement boat;
-        [SerializeField] private BobberCastController bobberCaster;
 
         [Space]
 
+        [SerializeField] private PlayerFishingManager playerFishingManager;
         [SerializeField] private PlayerManager playerManager;
+
+        private BobberCastController bobberCaster;
+        private FishFightController fishFighter;
+
+        [Space]
+
+        [SerializeField] private PaulFish paulFish;
 
         [Header("Boat")]
         [SerializeField] private Vector3 boatStartPosition = new(21, 0, 23);
@@ -23,9 +31,13 @@ namespace MemoryFishing.FX.Cutscenes
 
         private void Start()
         {
+            bobberCaster = playerFishingManager.GetComponent<BobberCastController>();
+            fishFighter = playerFishingManager.GetComponent<FishFightController>();
+
             boat.transform.SetPositionAndRotation(boatStartPosition, Quaternion.Euler(boatStartRotation));
 
             playerManager.SwitchToEmptyState();
+            playerManager.EnablePlayerStateSwitching = false;
 
             _ = StartCoroutine(PlayCutscene());
         }
@@ -38,8 +50,13 @@ namespace MemoryFishing.FX.Cutscenes
 
             boat.SetMoveInput(new(0, 0));
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
             CastBobber(Vector3.zero);
+
+            yield return new WaitForSeconds(1f);
+
+            playerManager.SwitchToFishingState();
+            fishFighter.StartFighting(paulFish, true);
         }
 
         private void CastBobber(Vector3 targetPosition)

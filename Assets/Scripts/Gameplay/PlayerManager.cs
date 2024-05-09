@@ -12,6 +12,7 @@ namespace MemoryFishing.Gameplay
         [SerializeField] private PlayerFishingManager fishingManager;
 
         public PlayerState State { get; private set; }
+        public bool EnablePlayerStateSwitching { get; set; } = true;
 
         public override void SubscribeToInputActions()
         {
@@ -27,6 +28,11 @@ namespace MemoryFishing.Gameplay
 
         private void OnPressCancel(InputAction.CallbackContext ctx)
         {
+            if (!EnablePlayerStateSwitching)
+            {
+                return;
+            }
+
             if (State == PlayerState.Fishing)
             {
                 SwitchToBoatState();
@@ -36,6 +42,11 @@ namespace MemoryFishing.Gameplay
 
         private void ToggleFishingInput(InputAction.CallbackContext ctx)
         {
+            if (!EnablePlayerStateSwitching)
+            {
+                return;
+            }
+
             if (State == PlayerState.Fishing)
             {
                 SwitchToBoatState();
