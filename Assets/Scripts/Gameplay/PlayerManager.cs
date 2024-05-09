@@ -13,13 +13,6 @@ namespace MemoryFishing.Gameplay
 
         public PlayerState State { get; private set; }
 
-        public override void Start()
-        {
-            base.Start();
-
-            SwitchToBoatState();
-        }
-
         public override void SubscribeToInputActions()
         {
             playerInput.actions["Player/ToggleFishing"].performed += ToggleFishingInput;
@@ -61,6 +54,7 @@ namespace MemoryFishing.Gameplay
             State = PlayerState.Boat;
 
             boatMovement.ReceiveInputs = true;
+
             fishingManager.DisableFishing();
         }
 
@@ -69,7 +63,19 @@ namespace MemoryFishing.Gameplay
             State = PlayerState.Fishing;
 
             boatMovement.ReceiveInputs = false;
+            boatMovement.SetMoveInput(Vector2.zero);
+
             fishingManager.EnableFishing();
+        }
+
+        public void SwitchToEmptyState()
+        {
+            State = PlayerState.None;
+
+            boatMovement.ReceiveInputs = false;
+            boatMovement.SetMoveInput(Vector2.zero);
+
+            fishingManager.DisableFishing();
         }
     }
 }

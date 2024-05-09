@@ -9,21 +9,23 @@ namespace MemoryFishing.FX.Cutscenes
 {
     public class StartCutsceneManager : MonoBehaviour
     {
-        [Header("Boat")]
+        [Header("References")]
         [SerializeField] private BoatMovement boat;
+        [SerializeField] private BobberCastController bobberCaster;
 
         [Space]
 
+        [SerializeField] private PlayerManager playerManager;
+
+        [Header("Boat")]
         [SerializeField] private Vector3 boatStartPosition = new(21, 0, 23);
         [SerializeField] private Vector3 boatStartRotation = new(0, -155, 0);
 
-        [Header("Bobber Cast")]
-        [SerializeField] private BobberCastController bobberCast;
-
         private void Start()
         {
-            boat.transform.position = boatStartPosition;
-            boat.transform.rotation = Quaternion.Euler(boatStartRotation);
+            boat.transform.SetPositionAndRotation(boatStartPosition, Quaternion.Euler(boatStartRotation));
+
+            playerManager.SwitchToEmptyState();
 
             _ = StartCoroutine(PlayCutscene());
         }
@@ -42,10 +44,10 @@ namespace MemoryFishing.FX.Cutscenes
 
         private void CastBobber(Vector3 targetPosition)
         {
-            Vector3 direction = targetPosition - bobberCast.transform.position;
+            Vector3 direction = targetPosition - bobberCaster.transform.position;
             direction.DirectionMagnitude(out Vector3 normalized, out float magnitude);
 
-            bobberCast.CastBobber(normalized, magnitude);
+            bobberCaster.CastBobber(normalized, magnitude);
         }
     }
 }
