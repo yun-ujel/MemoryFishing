@@ -100,10 +100,9 @@ namespace MemoryFishing.UI.Fishing
                 return;
             }
 
-            PlayerAlpha = Mathf.MoveTowards(PlayerAlpha, 1f, delta * 10f);
-
             if (isFighting)
             {
+                PlayerAlpha = Mathf.MoveTowards(PlayerAlpha, 1f, delta * 10f);
                 FishAlpha = Mathf.MoveTowards(FishAlpha, 1f, delta * 10f);
                 
                 currentFishDirection = Vector3.MoveTowards(currentFishDirection, fishBehaviour.GetFishDirection(), delta * arrowAcceleration);
@@ -112,6 +111,7 @@ namespace MemoryFishing.UI.Fishing
             else
             {
                 FishAlpha = Mathf.MoveTowards(FishAlpha, 0f, delta * 10f);
+                PlayerAlpha = Mathf.MoveTowards(PlayerAlpha, 0f, delta * 10f);
             }
 
             transform.position = fishBehaviour.transform.position + offset;
