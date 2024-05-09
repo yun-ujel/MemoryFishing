@@ -11,11 +11,6 @@ namespace MemoryFishing.UI.Inventory
     {
         [SerializeField] private RawImage image;
 
-        private void Start()
-        {
-            image.enabled = false;
-        }
-
         public void AddItem(InventoryItem item)
         {
             image.enabled = true;

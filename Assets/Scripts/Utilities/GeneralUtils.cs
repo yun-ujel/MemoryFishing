@@ -38,5 +38,10 @@ namespace MemoryFishing.Utilities
         {
             return IsInRangeOf(value, array.Length);
         }
+
+        public static bool CoinFlip()
+        {
+            return Random.Range(0, 2) == 0;
+        }
     }
 }
