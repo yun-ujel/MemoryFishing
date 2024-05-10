@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9e145471024d6745a2f518e25a1f741, type: 3}
-  m_Name: Log0
+  m_Name: Log24
   m_EditorClassIdentifier: 
   <Texture>k__BackingField: {fileID: 0}
-  <DialogueName>k__BackingField: Log0
-  <Title>k__BackingField: ???
-  <Text>k__BackingField: I must say, I've never seen anyone start in the water. You
-    doing alright?
+  <DialogueName>k__BackingField: Log24
+  <Title>k__BackingField: You
+  <Text>k__BackingField: ...is it like fishing in my life?
   <Choices>k__BackingField:
   - <Text>k__BackingField: Next Dialogue
-    <NextDialogue>k__BackingField: {fileID: 11400000, guid: 545c1ee76c08bd04ba1d3c2688ba5a4c, type: 2}
+    <NextDialogue>k__BackingField: {fileID: 11400000, guid: 133e60199d28cbc4f85486bfb2b1333f, type: 2}
   <DialogueType>k__BackingField: 0
   <IsStartingDialogue>k__BackingField: 0

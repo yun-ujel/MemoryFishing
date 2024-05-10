@@ -19,6 +19,6 @@ MonoBehaviour:
     job to decide who gets what. I'm just a <b>Ferryman</b>."
   <Choices>k__BackingField:
   - <Text>k__BackingField: Next Dialogue
-    <NextDialogue>k__BackingField: {fileID: 0}
+    <NextDialogue>k__BackingField: {fileID: 11400000, guid: 789785e4588acc245ba11df51e7fed59, type: 2}
   <DialogueType>k__BackingField: 0
   <IsStartingDialogue>k__BackingField: 0

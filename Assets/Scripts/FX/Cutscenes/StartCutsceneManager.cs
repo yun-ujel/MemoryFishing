@@ -35,6 +35,8 @@ namespace MemoryFishing.FX.Cutscenes
         [SerializeField] private BoatMovement boat;
         [SerializeField] private StartCutsceneCameraTracker cutsceneCameraTracker;
 
+        [Space, SerializeField] private GameObject fishingSpots;
+
         [Header("Boat")]
         [SerializeField] private Vector3 boatStartPosition = new(21, 0, 23);
         [SerializeField] private Vector3 boatStartRotation = new(0, -155, 0);
@@ -67,6 +69,8 @@ namespace MemoryFishing.FX.Cutscenes
             playerManager.EnablePlayerStateSwitching = true;
             playerManager.SwitchToBoatState();
 
+            fishingSpots.SetActive(true);
+
             dialogueController.OnCloseDialogueEvent -= OnStartDialogueClosed;
         }
 
@@ -74,7 +78,7 @@ namespace MemoryFishing.FX.Cutscenes
         {
             boat.SetMoveInput(new(0, 1));
 
-            yield return new WaitForSeconds(7.5f);
+            yield return new WaitForSeconds(6f);
 
             boat.SetMoveInput(new(0, 0));
 
