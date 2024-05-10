@@ -5,6 +5,9 @@ using MemoryFishing.Gameplay;
 using MemoryFishing.Gameplay.Fishing.Player;
 using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
 using MemoryFishing.Gameplay.Fishing.Fish;
+
+using MemoryFishing.FX.Camera;
+
 using MemoryFishing.Utilities;
 using MemoryFishing.UI.Dialogue;
 
@@ -19,7 +22,7 @@ namespace MemoryFishing.FX.Cutscenes
 
         [Space]
 
-        [SerializeField] private DSDialogue startDialogue;
+        [Space, SerializeField] private DSDialogue startDialogue;
 
         [Header("References")]
         [SerializeField] private PlayerFishingManager fishingManager;
@@ -28,13 +31,9 @@ namespace MemoryFishing.FX.Cutscenes
         private BobberCastController bobberCaster;
         private FishFightController fishFighter;
 
-        [Space]
-
-        [SerializeField] private PaulFish paulFish;
-
-        [Space]
-        
+        [Space, SerializeField] private PaulFish paulFish;
         [SerializeField] private BoatMovement boat;
+        [SerializeField] private StartCutsceneCameraTracker cutsceneCameraTracker;
 
         [Header("Boat")]
         [SerializeField] private Vector3 boatStartPosition = new(21, 0, 23);
@@ -84,6 +83,7 @@ namespace MemoryFishing.FX.Cutscenes
 
             yield return new WaitForSeconds(1f);
 
+            cutsceneCameraTracker.UseTracker = false;
             playerManager.SwitchToFishingState();
             fishFighter.StartFighting(paulFish, true);
         }

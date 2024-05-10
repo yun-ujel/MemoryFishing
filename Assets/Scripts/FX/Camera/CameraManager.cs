@@ -20,7 +20,7 @@ namespace MemoryFishing.FX.Camera
         [SerializeField] private PlayerManager playerManager;
         [SerializeField] private PlayerFishingManager fishingManager;
 
-        private int cameraState;
+        [SerializeField] private int cameraState;
 
         private void Start()
         {
@@ -28,6 +28,8 @@ namespace MemoryFishing.FX.Camera
             {
                 trackers[i].Initialize(playerManager, fishingManager, player.position, player.rotation, bobber.position);
             }
+
+            SetState(0);
         }
 
         private void Update()
@@ -45,7 +47,12 @@ namespace MemoryFishing.FX.Camera
             {
                 return;
             }
+            
+            SetState(state);
+        }
 
+        private void SetState(int state)
+        {
             for (int i = 0; i < trackers.Length; i++)
             {
                 if (i == state)
