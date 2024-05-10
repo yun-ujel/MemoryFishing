@@ -100,11 +100,13 @@ namespace MemoryFishing.UI.Dialogue
 
         public override void SubscribeToDialogueEvents()
         {
+            Debug.Log("Subscribe to Dialogue Events");
             dialogueController.OnStartDialogueEvent += OnStartDialogue;
         }
 
         public void OnStartDialogue(object sender, DialogueController.OnStartDialogueEventArgs args)
         {
+            Debug.Log("Read Text");
             ReadText(args.Text);
         }
     }

@@ -74,7 +74,6 @@ namespace MemoryFishing.UI.Dialogue
             }
 
             currentDialogue = dialogue;
-
             OnStartDialogueEvent?.Invoke(this, new(dialogue));
         }
 
