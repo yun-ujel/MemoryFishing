@@ -64,6 +64,11 @@ namespace MemoryFishing.Gameplay
 
         private void ReceiveMoveInput(InputAction.CallbackContext ctx)
         {
+            if (!ReceiveInputs)
+            {
+                return;
+            }
+
             SetMoveInput(ctx.ReadValue<Vector2>());
         }
 
@@ -74,12 +79,6 @@ namespace MemoryFishing.Gameplay
 
         private void FixedUpdate()
         {
-            if (!ReceiveInputs)
-            {
-                RotateBoat(Vector2.zero);
-                AccelerateBoat(Vector2.zero);
-                return;
-            }
             RotateBoat(moveDir);
             AccelerateBoat(moveDir);
         }

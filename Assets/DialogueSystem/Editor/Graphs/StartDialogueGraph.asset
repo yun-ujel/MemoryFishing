@@ -15,18 +15,6 @@ MonoBehaviour:
   <FileName>k__BackingField: StartDialogue
   <Groups>k__BackingField: []
   <Nodes>k__BackingField:
-  - <GUID>k__BackingField: c1b42a79-fecb-4ec1-bc69-78470e8aa73d
-    <Name>k__BackingField: Log0
-    <Title>k__BackingField: ???
-    <Text>k__BackingField: "Ah, you\u2019re finally awake. I began to think you were
-      dead for the second time."
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <TargetGUID>k__BackingField: 98d7afce-8f99-43ad-9def-d323679638e1
-    <GroupGUID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Texture>k__BackingField: {fileID: 0}
-    <Position>k__BackingField: {x: -547, y: 68}
   - <GUID>k__BackingField: a470113e-e809-4f2d-8c35-71fc93c69b8d
     <Name>k__BackingField: Log2
     <Title>k__BackingField: ???
@@ -49,17 +37,6 @@ MonoBehaviour:
     <DialogueType>k__BackingField: 0
     <Texture>k__BackingField: {fileID: 0}
     <Position>k__BackingField: {x: 2021, y: 68}
-  - <GUID>k__BackingField: 98d7afce-8f99-43ad-9def-d323679638e1
-    <Name>k__BackingField: Log1
-    <Title>k__BackingField: You
-    <Text>k__BackingField: What is this, where am I?!
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <TargetGUID>k__BackingField: a470113e-e809-4f2d-8c35-71fc93c69b8d
-    <GroupGUID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Texture>k__BackingField: {fileID: 0}
-    <Position>k__BackingField: {x: 95, y: 314}
   - <GUID>k__BackingField: 6840b4d6-97b1-49a8-9d82-ff5d35b2d3a6
     <Name>k__BackingField: Log3
     <Title>k__BackingField: You
@@ -173,17 +150,180 @@ MonoBehaviour:
       my job to decide who gets what. I'm just a <b>Ferryman</b>."
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
-      <TargetGUID>k__BackingField: 
+      <TargetGUID>k__BackingField: b3efb89b-25d2-4418-a5bc-72001e92cbe1
     <GroupGUID>k__BackingField: 
     <DialogueType>k__BackingField: 0
     <Texture>k__BackingField: {fileID: 0}
     <Position>k__BackingField: {x: 7799, y: 68}
+  - <GUID>k__BackingField: d3b0e06d-583e-47ac-9c46-f3eeca4fb7ae
+    <Name>k__BackingField: Entry
+    <Title>k__BackingField: You
+    <Text>k__BackingField: What is this, where am I?!
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: c1b42a79-fecb-4ec1-bc69-78470e8aa73d
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: -1189, y: 314}
+  - <GUID>k__BackingField: c1b42a79-fecb-4ec1-bc69-78470e8aa73d
+    <Name>k__BackingField: Log0
+    <Title>k__BackingField: ???
+    <Text>k__BackingField: I must say, I've never seen anyone start in the water.
+      You doing alright?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 98d7afce-8f99-43ad-9def-d323679638e1
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: -547, y: 68}
+  - <GUID>k__BackingField: 98d7afce-8f99-43ad-9def-d323679638e1
+    <Name>k__BackingField: Log1
+    <Title>k__BackingField: You
+    <Text>k__BackingField: "That doesn\u2019t answer my question- where. Am I. \r"
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: a470113e-e809-4f2d-8c35-71fc93c69b8d
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 95, y: 314}
+  - <GUID>k__BackingField: b3efb89b-25d2-4418-a5bc-72001e92cbe1
+    <Name>k__BackingField: Log15
+    <Title>k__BackingField: 
+    <Text>k__BackingField: The ferryman hands you a fishing rod.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 91377f9d-c60a-4e4c-b7aa-a83cfd2d926c
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 8441, y: 68}
+  - <GUID>k__BackingField: 91377f9d-c60a-4e4c-b7aa-a83cfd2d926c
+    <Name>k__BackingField: Log16
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: "Get started, then.\r"
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 97eaeaef-dfb0-4145-83a5-a95071b31381
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 9083, y: 68}
+  - <GUID>k__BackingField: 97eaeaef-dfb0-4145-83a5-a95071b31381
+    <Name>k__BackingField: Log17
+    <Title>k__BackingField: You
+    <Text>k__BackingField: "Fishing? Oh, so I'm supposed to feed myself here too?
+      <b>You\u2019ve got the hospitality of a-</b>"
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: c323f42b-d8fd-4944-9f01-c4e7baca3399
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 9386, y: 68}
+  - <GUID>k__BackingField: c323f42b-d8fd-4944-9f01-c4e7baca3399
+    <Name>k__BackingField: Log18
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: "Yeah yeah yep- it's not for food. Sometimes people\u2019s
+      memories get stuck in the lake, it's the lake of memories. It's in the name.
+      Now, on normal rides, employees would fish them out."
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 9e6b2a00-1688-4a49-a021-11f70c98c3c0
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 10028, y: 68}
+  - <GUID>k__BackingField: 9e6b2a00-1688-4a49-a021-11f70c98c3c0
+    <Name>k__BackingField: Log19
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: "But since it's just me and you, you\u2019re going to!
+      Thanks to you too, my shift has now doubled in time..."
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 3e1d4f92-8771-45b9-b94f-3200f9979a1e
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 10670, y: 68}
+  - <GUID>k__BackingField: 3e1d4f92-8771-45b9-b94f-3200f9979a1e
+    <Name>k__BackingField: Log20
+    <Title>k__BackingField: You
+    <Text>k__BackingField: "And what if I don't?! Surely I\u2019ll remember eventually.
+      Just old man brain, probably"
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: ff683515-0b7e-4ceb-a5ec-8ba3db59e37c
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 11312, y: 68}
+  - <GUID>k__BackingField: ff683515-0b7e-4ceb-a5ec-8ba3db59e37c
+    <Name>k__BackingField: Log21
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: "If that's your choice then go ahead, if you want to be
+      permanently rotting in the river for eternity, that's up to you. But it\u2019ll
+      be painful, depressing and extremely boring after a couple years."
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 5d486239-d2da-42e8-ada6-178cf75c236f
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 11954, y: 68}
+  - <GUID>k__BackingField: 5d486239-d2da-42e8-ada6-178cf75c236f
+    <Name>k__BackingField: Log22
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: "But they won't let you in unless you\u2019ve got a good
+      grasp on who you were and what you did. That's kind of the whole point."
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 19f95ebe-0c23-440a-9db2-2a7952160110
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 12596, y: 68}
+  - <GUID>k__BackingField: 19f95ebe-0c23-440a-9db2-2a7952160110
+    <Name>k__BackingField: Log23
+    <Title>k__BackingField: 
+    <Text>k__BackingField: 'You reluctantly take the fishing rod into your hands,
+      analysing it. '
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: aac90239-bca2-4c52-aefd-88169090f16b
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 13238, y: 68}
+  - <GUID>k__BackingField: aac90239-bca2-4c52-aefd-88169090f16b
+    <Name>k__BackingField: Log24
+    <Title>k__BackingField: You
+    <Text>k__BackingField: ...is it like fishing in my life?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 5aed29d4-8de1-4252-836f-116506441556
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 13880, y: 68}
+  - <GUID>k__BackingField: 5aed29d4-8de1-4252-836f-116506441556
+    <Name>k__BackingField: Log25
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: "It's similar. They\u2019ll struggle in the same way.
+      But what comes out might surprise you."
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 14522, y: 68}
   <OldGroupNames>k__BackingField: []
   <OldUngroupedNodeNames>k__BackingField:
-  - Log0
   - Log2
   - Log4
-  - Log1
   - Log3
   - Log6
   - Log5
@@ -194,5 +334,19 @@ MonoBehaviour:
   - Log12
   - Log13
   - Log14
+  - Entry
+  - Log0
+  - Log1
+  - Log15
+  - Log16
+  - Log17
+  - Log18
+  - Log19
+  - Log20
+  - Log21
+  - Log22
+  - Log23
+  - Log24
+  - Log25
   <OldGroupedNodeNames>k__BackingField:
     list: []

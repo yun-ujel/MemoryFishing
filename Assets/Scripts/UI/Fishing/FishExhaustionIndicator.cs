@@ -20,7 +20,14 @@ namespace MemoryFishing.UI.Fishing
         [SerializeField] private Color circleColorMin;
         [SerializeField] private Color circleColorMax;
 
+        [Space]
+
+        [SerializeField] private Color circleColorReeling;
+
         private bool fighting;
+        private bool fishing;
+
+        float t;
 
         private void Start()
         {
@@ -37,6 +44,7 @@ namespace MemoryFishing.UI.Fishing
         private void Hide()
         {
             fighting = false;
+            fishing = false;
             radialSprite.color = circleColorMin;
 
             SetFillAmount(0);
@@ -45,6 +53,7 @@ namespace MemoryFishing.UI.Fishing
         private void StartFighting(object sender, OnStartFightingEventArgs args)
         {
             fighting = true;
+            fishing = true;
 
             SetFillAmount(0);
             radialSprite.color = circleColorMin;
@@ -56,6 +65,8 @@ namespace MemoryFishing.UI.Fishing
 
             SetFillAmount(1);
             radialSprite.color = circleColorMax;
+
+            t = 0f;
         }
 
         private void Update()
@@ -66,6 +77,16 @@ namespace MemoryFishing.UI.Fishing
 
                 SetFillAmount(exhaustion);
                 radialSprite.color = Color.Lerp(circleColorMin, circleColorMax, exhaustion);
+                
+                return;
+            }
+
+            if (fishing)
+            {
+                t += Time.deltaTime;
+                radialSprite.color = Color.Lerp(circleColorMax, circleColorReeling, t);
+
+                return;
             }
         }
 

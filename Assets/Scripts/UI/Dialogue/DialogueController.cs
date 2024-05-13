@@ -36,11 +36,13 @@ namespace MemoryFishing.UI.Dialogue
         public override void SubscribeToInputActions()
         {
             playerInput.actions["UI/Submit"].performed += ReceiveSubmitInput;
+            playerInput.actions["UI/LeftClick"].performed += ReceiveSubmitInput;
         }
 
         public override void UnsubscribeFromInputActions()
         {
             playerInput.actions["UI/Submit"].performed -= ReceiveSubmitInput;
+            playerInput.actions["UI/LeftClick"].performed -= ReceiveSubmitInput;
         }
 
         public override void Start()
@@ -74,7 +76,6 @@ namespace MemoryFishing.UI.Dialogue
             }
 
             currentDialogue = dialogue;
-
             OnStartDialogueEvent?.Invoke(this, new(dialogue));
         }
 

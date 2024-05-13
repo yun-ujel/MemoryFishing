@@ -92,7 +92,7 @@ namespace MemoryFishing.Gameplay.Fishing.Player
         private void EndFighting()
         {
             currentFish.StopFighting();
-            fishingManager.EndFightingEvent(new(currentFish, transform.position, currentFish.transform.position, currentFishFightCount));
+            fishingManager.EndFightingEvent(new(currentFish, transform.position, currentFish.transform.position, currentFish.GetReelDuration(), currentFishFightCount));
 
             currentFish = null;
         }

@@ -12,13 +12,7 @@ namespace MemoryFishing.Gameplay
         [SerializeField] private PlayerFishingManager fishingManager;
 
         public PlayerState State { get; private set; }
-
-        public override void Start()
-        {
-            base.Start();
-
-            SwitchToBoatState();
-        }
+        public bool EnablePlayerStateSwitching { get; set; } = true;
 
         public override void SubscribeToInputActions()
         {
@@ -34,6 +28,11 @@ namespace MemoryFishing.Gameplay
 
         private void OnPressCancel(InputAction.CallbackContext ctx)
         {
+            if (!EnablePlayerStateSwitching)
+            {
+                return;
+            }
+
             if (State == PlayerState.Fishing)
             {
                 SwitchToBoatState();
@@ -43,6 +42,11 @@ namespace MemoryFishing.Gameplay
 
         private void ToggleFishingInput(InputAction.CallbackContext ctx)
         {
+            if (!EnablePlayerStateSwitching)
+            {
+                return;
+            }
+
             if (State == PlayerState.Fishing)
             {
                 SwitchToBoatState();
@@ -61,6 +65,7 @@ namespace MemoryFishing.Gameplay
             State = PlayerState.Boat;
 
             boatMovement.ReceiveInputs = true;
+
             fishingManager.DisableFishing();
         }
 
@@ -69,7 +74,19 @@ namespace MemoryFishing.Gameplay
             State = PlayerState.Fishing;
 
             boatMovement.ReceiveInputs = false;
+            boatMovement.SetMoveInput(Vector2.zero);
+
             fishingManager.EnableFishing();
+        }
+
+        public void SwitchToEmptyState()
+        {
+            State = PlayerState.None;
+
+            boatMovement.ReceiveInputs = false;
+            boatMovement.SetMoveInput(Vector2.zero);
+
+            fishingManager.DisableFishing();
         }
     }
 }

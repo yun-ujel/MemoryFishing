@@ -15,7 +15,7 @@ MonoBehaviour:
   <Texture>k__BackingField: {fileID: 0}
   <DialogueName>k__BackingField: Log1
   <Title>k__BackingField: You
-  <Text>k__BackingField: What is this, where am I?!
+  <Text>k__BackingField: "That doesn\u2019t answer my question- where. Am I. \r"
   <Choices>k__BackingField:
   - <Text>k__BackingField: Next Dialogue
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: d9ffc18e8a784d547bc6c589b09a0449, type: 2}

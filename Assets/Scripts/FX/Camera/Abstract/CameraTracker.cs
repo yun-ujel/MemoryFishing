@@ -12,11 +12,11 @@ namespace MemoryFishing.FX.Camera
     {
         public int Priority
         {
-            get => virtualCam.Priority;
-            set => virtualCam.Priority = value;
+            get => VirtualCam.Priority;
+            set => VirtualCam.Priority = value;
         }
 
-        protected CinemachineVirtualCamera virtualCam;
+        public CinemachineVirtualCamera VirtualCam { get; private set; }
 
         [Header("Position")]
         [SerializeField] protected Vector3 offset = new Vector3(0f, 0f, 30f);
@@ -24,7 +24,7 @@ namespace MemoryFishing.FX.Camera
 
         public virtual void Initialize(PlayerManager playerManager, PlayerFishingManager fishingManager, Vector3 playerPos, Quaternion playerRotation, Vector3 bobberPos)
         {
-            virtualCam = GetComponent<CinemachineVirtualCamera>();
+            VirtualCam = GetComponent<CinemachineVirtualCamera>();
         }
 
         public virtual void OnInitialSwitch(Vector3 playerPos, Quaternion playerRotation, Vector3 bobberPos)

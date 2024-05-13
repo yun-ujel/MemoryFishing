@@ -163,6 +163,10 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
 
         #region Reeling
 
+        public override float GetReelDuration()
+        {
+            return 1.5f;
+        }
         public override float UpdateReawakenDuration(float startingDistance, float distanceLeft, float delta)
         {
             if (stagesLeft == 0)

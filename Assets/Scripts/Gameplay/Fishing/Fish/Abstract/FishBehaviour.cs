@@ -42,7 +42,7 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         #endregion
 
         #region Reeling
-
+        public abstract float GetReelDuration();
         public abstract float UpdateReawakenDuration(float startingDistance, float distanceLeft, float delta);
 
         #endregion
