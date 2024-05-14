@@ -23,6 +23,8 @@ namespace MemoryFishing.FX.Fishing
         [Space, SerializeField] private AnimationCurve risingHeightCurve;
         [SerializeField] private AnimationCurve fallingHeightCurve;
 
+        [Space, SerializeField, Range(0f, 1f)] private float castDelay;
+
         [Header("Recall Settings")]
         [SerializeField] private AnimationCurve recallCurve;
 
@@ -101,7 +103,7 @@ namespace MemoryFishing.FX.Fishing
             if (fishingManager.State == FishingState.Casting)
             {
                 counter += Time.deltaTime;
-                float t = counter / timeToLand;
+                float t = Mathf.Max((counter - castDelay) / (timeToLand - castDelay), 0);
 
                 bobberPos = Vector3.Lerp(startPos, targetPos, t);
 

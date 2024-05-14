@@ -31,7 +31,7 @@ Material:
     m_Floats:
     - _Amplitude: 1
     - _AmplitudeMultiplier: 0.6
-    - _DiffuseNormalStrength: 70
+    - _DiffuseNormalStrength: 80
     - _DiffuseReflectance: 1
     - _EnableFoam: 0
     - _FoamMultiplier: 0.7

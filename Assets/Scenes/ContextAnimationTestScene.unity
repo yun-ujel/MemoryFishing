@@ -450,6 +450,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  castDelay: 0.3
   recallCurve:
     serializedVersion: 2
     m_Curve:
@@ -1266,6 +1267,7 @@ MonoBehaviour:
   playerManager: {fileID: 1623768385}
   fishingManager: {fileID: 2006554647}
   direction: {fileID: 1623768384}
+  playerOrientation: {fileID: 543450653307282840}
 --- !u!1 &324355307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1469,7 +1471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &357977105
 Transform:
   m_ObjectHideFlags: 0
@@ -3315,7 +3317,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349501853}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 4, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3885,7 +3887,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623768381}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.5, y: 0, z: -23.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4478,7 +4480,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   castDistance: 8
   startingCastDistance: 2
-  timeToLand: 0.7
+  timeToLand: 1
   timeToRecall: 0.1
 --- !u!114 &2006554647
 MonoBehaviour:
@@ -4876,7 +4878,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149589081890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21, y: 0, z: 23}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
