@@ -35,8 +35,8 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
         private float startingDistance;
 
-        private float maxReelSpeed;
-        private float currentReelSpeed;
+        public float MaxReelSpeed { get; private set; }
+        public float CurrentReelSpeed { get; private set; }
 
         private float fishReawakenDuration;
 
@@ -96,12 +96,12 @@ namespace MemoryFishing.Gameplay.Fishing.Player
                 fishBody = fish.GetComponent<Rigidbody>();
             }
             
-            currentReelSpeed = fishBody.velocity.magnitude;
+            CurrentReelSpeed = fishBody.velocity.magnitude;
 
             if (args.FirstFight)
             {
                 startingDistance = Vector3.Distance(args.PlayerPos, args.FishPos);
-                maxReelSpeed = startingDistance / args.TimeToReelFully;
+                MaxReelSpeed = startingDistance / args.TimeToReelFully;
             }
         }
 
@@ -156,15 +156,15 @@ namespace MemoryFishing.Gameplay.Fishing.Player
 
             if (State == FishingState.Reeling)
             {
-                currentReelSpeed = Mathf.MoveTowards(currentReelSpeed, maxReelSpeed, delta * maxReelSpeed * reelAcceleration);
+                CurrentReelSpeed = Mathf.MoveTowards(CurrentReelSpeed, MaxReelSpeed, delta * MaxReelSpeed * reelAcceleration);
             }
 
             if (State == FishingState.Exhausted)
             {
-                currentReelSpeed = Mathf.MoveTowards(currentReelSpeed, 0, delta * maxReelSpeed * reelDeceleration);
+                CurrentReelSpeed = Mathf.MoveTowards(CurrentReelSpeed, 0, delta * MaxReelSpeed * reelDeceleration);
             }
 
-            fishBody.velocity = direction * currentReelSpeed;
+            fishBody.velocity = direction * CurrentReelSpeed;
 
             if (FishInRange(transform.position, fishBody.position))
             {

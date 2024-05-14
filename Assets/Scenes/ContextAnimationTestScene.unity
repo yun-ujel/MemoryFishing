@@ -1127,13 +1127,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272734873}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 402366068}
   - {fileID: 1495639486}
   - {fileID: 214990951}
-  - {fileID: 304917810}
   m_Father: {fileID: 543450653307282840}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1266,8 +1266,10 @@ MonoBehaviour:
   animator: {fileID: 304917811}
   playerManager: {fileID: 1623768385}
   fishingManager: {fileID: 2006554647}
+  orientation: {fileID: 402366068}
   direction: {fileID: 1623768384}
-  playerOrientation: {fileID: 543450653307282840}
+  rotationSpeed: 0.1
+  step: 180
 --- !u!1 &324355307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1383,11 +1385,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 272734874}
+    m_TransformParent: {fileID: 402366068}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ebd19cfd0e4f58a43a7f2b091cbca71c, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebd19cfd0e4f58a43a7f2b091cbca71c, type: 3}
       propertyPath: m_LocalScale.x
@@ -1407,11 +1409,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebd19cfd0e4f58a43a7f2b091cbca71c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.2
+      value: 0.20000005
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebd19cfd0e4f58a43a7f2b091cbca71c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebd19cfd0e4f58a43a7f2b091cbca71c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1419,7 +1421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebd19cfd0e4f58a43a7f2b091cbca71c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebd19cfd0e4f58a43a7f2b091cbca71c, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1427,7 +1429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebd19cfd0e4f58a43a7f2b091cbca71c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebd19cfd0e4f58a43a7f2b091cbca71c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1489,6 +1491,38 @@ Transform:
   - {fileID: 7345085980724133907}
   - {fileID: 3870963814114665794}
   m_Father: {fileID: 584952862}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &402366067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 402366068}
+  m_Layer: 0
+  m_Name: Orientation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &402366068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402366067}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: -1.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 304917810}
+  m_Father: {fileID: 272734874}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &425940480
@@ -5004,18 +5038,18 @@ MonoBehaviour:
   speedMultiplier: 1.07
   body: {fileID: 919132149589081891}
   samplePoints:
-  - {x: 0, y: 1.2, z: 3.5}
-  - {x: 0.625, y: 1.4, z: 2.5}
-  - {x: -0.625, y: 1.4, z: 2.5}
-  - {x: 0, y: 0.7, z: 1.75}
-  - {x: 0.875, y: 1.25, z: 0.875}
-  - {x: -0.875, y: 1.25, z: 0.875}
-  - {x: 0, y: 0.5, z: 0}
-  - {x: 0.875, y: 1.2, z: -1}
-  - {x: -0.875, y: 1.2, z: -1}
-  - {x: 0, y: 0.5, z: -1.75}
-  - {x: 0, y: 0.5, z: -3.5}
-  height: 0.5
+  - {x: 0, y: 1.7, z: 3.5}
+  - {x: 0.625, y: 1.9, z: 2.5}
+  - {x: -0.625, y: 1.9, z: 2.5}
+  - {x: 0, y: 1.2, z: 1.75}
+  - {x: 0.875, y: 1.75, z: 0.875}
+  - {x: -0.875, y: 1.75, z: 0.875}
+  - {x: 0, y: 1, z: 0}
+  - {x: 0.875, y: 1.7, z: -1}
+  - {x: -0.875, y: 1.7, z: -1}
+  - {x: 0, y: 1, z: -1.75}
+  - {x: 0, y: 1, z: -3.5}
+  height: 1
   volume: 40
   minimumDrag: 0
   minimumAngularDrag: 0.05
