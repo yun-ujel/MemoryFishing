@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 using MemoryFishing.Gameplay.Fishing.Player;
 using MemoryFishing.Gameplay.Fishing.Fish;
-using MemoryFishing.Utilities;
 using MemoryFishing.Gameplay;
 using MemoryFishing.Gameplay.Fishing.Player.EventArgs;
 
