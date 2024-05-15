@@ -120,21 +120,25 @@ namespace MemoryFishing.FX.Animation
 
             if (!isBobberOut)
             {
-                RotateTowards(0f, Time.fixedDeltaTime);
+                RotateTowards(orientation.parent.eulerAngles.y, Time.fixedDeltaTime);
                 return;
             }
         }
 
         private void RotateTowards(float targetYRotation, float delta)
         {
-            Vector3 currentRotation = orientation.localRotation.eulerAngles;
+            Vector3 currentRotation = orientation.eulerAngles;
             float yRotation = currentRotation.y;
 
             yRotation = Mathf.SmoothDampAngle(yRotation, targetYRotation, ref rotationVelocity, delta / rotationSpeed);
             SetFloat("Step", Mathf.Abs(rotationVelocity) / step);
 
             currentRotation.y = yRotation;
-            orientation.localRotation = Quaternion.Euler(currentRotation);
+            Quaternion target = Quaternion.Euler(currentRotation);
+            target.x = 0f;
+            target.z = 0f;
+
+            orientation.rotation = target;
         }
 
         private void UpdateFighting()
