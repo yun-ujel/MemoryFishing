@@ -14,6 +14,7 @@ namespace MemoryFishing.FX.Animation
     {
         [Header("<u>References</u>")]
         [SerializeField] private Animator animator;
+        [SerializeField] private Animator rodAnimator;
 
         [Header("<u>Fishing</u>")]
         [SerializeField] private PlayerFishingManager fishingManager;
@@ -62,17 +63,17 @@ namespace MemoryFishing.FX.Animation
             isBobberOut = false;
             isExhausted = false;
 
-            animator.SetBool("BobberOut", false);
-            animator.SetBool("Exhausted", false);
+            SetBool("BobberOut", false);
+            SetBool("Exhausted", false);
 
-            animator.SetFloat("Reeling", 0f);
-            animator.SetFloat("ReelingSpeed", minReelSpeed);
+            SetFloat("Reeling", 0f);
+            SetFloat("ReelingSpeed", minReelSpeed);
         }
 
         private void OnStartFighting(object sender, OnStartFightingEventArgs args)
         {
             isFighting = true;
-            animator.SetBool("Fighting", true);
+            SetBool("Fighting", true);
 
             fish = args.FishBehaviour;
         }
@@ -82,8 +83,8 @@ namespace MemoryFishing.FX.Animation
             isFighting = false;
             isExhausted = true;
 
-            animator.SetBool("Fighting", false);
-            animator.SetBool("Exhausted", true);
+            SetBool("Fighting", false);
+            SetBool("Exhausted", true);
         }
 
         private void FixedUpdate()
@@ -105,8 +106,8 @@ namespace MemoryFishing.FX.Animation
             {
                 float t = reelingController.CurrentReelSpeed / reelingController.MaxReelSpeed;
                 float reelingSpeed = Mathf.Lerp(minReelSpeed, maxReelSpeed, t);
-                animator.SetFloat("Reeling", t);
-                animator.SetFloat("ReelingSpeed", reelingSpeed);
+                SetFloat("Reeling", t);
+                SetFloat("ReelingSpeed", reelingSpeed);
 
                 return;
             }
@@ -114,6 +115,12 @@ namespace MemoryFishing.FX.Animation
             if (isFighting)
             {
                 UpdateFighting();
+                return;
+            }
+
+            if (!isBobberOut)
+            {
+                RotateTowards(0f, Time.fixedDeltaTime);
                 return;
             }
         }
@@ -124,7 +131,7 @@ namespace MemoryFishing.FX.Animation
             float yRotation = currentRotation.y;
 
             yRotation = Mathf.SmoothDampAngle(yRotation, targetYRotation, ref rotationVelocity, delta / rotationSpeed);
-            animator.SetFloat("Step", Mathf.Abs(rotationVelocity) / step);
+            SetFloat("Step", Mathf.Abs(rotationVelocity) / step);
 
             currentRotation.y = yRotation;
             orientation.localRotation = Quaternion.Euler(currentRotation);
@@ -140,8 +147,8 @@ namespace MemoryFishing.FX.Animation
             float x = Vector3.Dot(dir, right);
             float y = Vector3.Dot(dir, forward);
 
-            animator.SetFloat("X", x);
-            animator.SetFloat("Y", y);
+            SetFloat("X", x);
+            SetFloat("Y", y);
         }
 
         private void OnRecall(object sender, OnRecallBobberEventArgs args)
@@ -149,35 +156,53 @@ namespace MemoryFishing.FX.Animation
             isBobberOut = false;
             isExhausted = false;
 
-            animator.SetTrigger("Recall");
-            animator.SetBool("BobberOut", false);
-            animator.SetBool("Exhausted", false);
+            SetTrigger("Recall");
+            SetBool("BobberOut", false);
+            SetBool("Exhausted", false);
         }
 
         private void OnStartWindUp(object sender, OnStartWindUpEventArgs args)
         {
-            animator.SetTrigger("WindUp");
+            SetTrigger("WindUp");
         }
 
         private void OnCastBobber(object sender, OnCastBobberEventArgs args)
         {
             isBobberOut = true;
 
-            animator.SetBool("BobberOut", true);
+            SetBool("BobberOut", true);
         }
 
         private void OnEnableFishing(object sender, OnEnableFishingEventArgs args)
         {
             isFishing = true;
 
-            animator.SetBool("FishingState", true);
+            SetBool("FishingState", true);
         }
 
         private void OnDisableFishing(object sender, OnEnableFishingEventArgs args)
         {
             isFishing = false;
 
-            animator.SetBool("FishingState", false);
+            SetBool("FishingState", false);
+        }
+
+        private void SetBool(string name, bool value)
+        {
+            animator.SetBool(name, value);
+            rodAnimator.SetBool(name, value);
+        }
+
+        private void SetFloat(string name, float value)
+        {
+            animator.SetFloat(name, value);
+            rodAnimator.SetFloat(name, value);
+        }
+
+        private void SetTrigger(string name)
+        {
+            animator.SetTrigger(name);
+            rodAnimator.SetTrigger(name);
         }
     }
 }
