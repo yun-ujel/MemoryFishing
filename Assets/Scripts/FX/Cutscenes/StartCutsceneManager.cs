@@ -61,6 +61,7 @@ namespace MemoryFishing.FX.Cutscenes
             playerManager.SwitchToEmptyState();
             playerManager.EnablePlayerStateSwitching = false;
 
+            fishingManager.OnEndFightingEvent += OnEndFighting;
             fishingManager.OnCatchFishEvent += OnPaulFishCaught;
 
             guyAnimation.enabled = false;
@@ -72,11 +73,17 @@ namespace MemoryFishing.FX.Cutscenes
             _ = StartCoroutine(PlayCutscene());
         }
 
+        private void OnEndFighting(object sender, OnEndFightingEventArgs args)
+        {
+            ferrymanAnimation.EndFighting();
+
+            fishingManager.OnEndFightingEvent -= OnEndFighting;
+        }
+
         private void OnPaulFishCaught(object sender, OnCatchFishEventArgs args)
         {
             dialogueController.ReadDialogue(startDialogue.dialogue);
 
-            ferrymanAnimation.EndFighting();
             ferrymanAnimation.CatchFish();
             ferrymanAnimation.DisableFishing();
 
@@ -102,6 +109,7 @@ namespace MemoryFishing.FX.Cutscenes
         private IEnumerator PlayCutscene()
         {
             boat.SetMoveInput(new(0, 1));
+            ferrymanAnimation.SetRotateTarget(Vector3.zero);
 
             yield return new WaitForSeconds(6f);
 
