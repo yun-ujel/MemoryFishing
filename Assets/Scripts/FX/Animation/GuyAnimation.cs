@@ -13,52 +13,52 @@ namespace MemoryFishing.FX.Animation
     public class GuyAnimation : MonoBehaviour
     {
         [Header("<u>References</u>")]
-        [SerializeField] private Animator animator;
-        [SerializeField] private Animator rodAnimator;
+        [SerializeField] protected Animator animator;
+        [SerializeField] protected Animator rodAnimator;
 
         [Header("<u>Fishing</u>")]
-        [SerializeField] private PlayerFishingManager fishingManager;
-        private ReelingController reelingController;
-        private FishBehaviour fish;
+        [SerializeField] protected PlayerFishingManager fishingManager;
+        protected ReelingController reelingController;
+        protected FishBehaviour fish;
 
         [Header("<u>Rotation</u>")]
-        [SerializeField] private Transform orientation;
-        [SerializeField] private PlayerDirection direction;
+        [SerializeField] protected Transform orientation;
+        [SerializeField] protected PlayerDirection direction;
 
-        [Space, SerializeField, Range(0f, 1f)] private float rotationSpeed;
+        [Space, SerializeField, Range(0f, 1f)] protected float rotationSpeed;
 
         [Header("<u>Reeling</u>")]
-        [SerializeField] private float minReelSpeed = 0.5f;
-        [SerializeField] private float maxReelSpeed = 2.5f;
+        [SerializeField] protected float minReelSpeed = 0.5f;
+        [SerializeField] protected float maxReelSpeed = 2.5f;
 
         [Header("<u>Step</u>")]
-        [SerializeField] private float step;
+        [SerializeField] protected float step;
 
-        private float rotationVelocity;
+        protected float rotationVelocity;
 
-        private bool isFishing;
-        private bool isFighting;
-        private bool isBobberOut;
-        private bool isExhausted;
+        protected bool isFishing;
+        protected bool isFighting;
+        protected bool isBobberOut;
+        protected bool isExhausted;
 
-        private void Start()
+        protected virtual void Start()
         {
             reelingController = fishingManager.GetComponent<ReelingController>();
 
-            fishingManager.OnDisableFishingEvent += OnDisableFishing;
-            fishingManager.OnEnableFishingEvent += OnEnableFishing;
+            fishingManager.OnDisableFishingEvent += (s, a) => OnDisableFishing();
+            fishingManager.OnEnableFishingEvent += (s, a) => OnEnableFishing();
 
-            fishingManager.OnStartWindUpEvent += OnStartWindUp;
-            fishingManager.OnCastBobberEvent += OnCastBobber;
+            fishingManager.OnStartWindUpEvent += (s, a) => OnStartWindUp();
+            fishingManager.OnCastBobberEvent += (s, a) => OnCastBobber();
 
-            fishingManager.OnStartFightingEvent += OnStartFighting;
-            fishingManager.OnEndFightingEvent += OnEndFighting;
+            fishingManager.OnStartFightingEvent += (s, a) => OnStartFighting(a.FishBehaviour);
+            fishingManager.OnEndFightingEvent += (s, a) => OnEndFighting();
 
-            fishingManager.OnRecallBobberEvent += OnRecall;
-            fishingManager.OnCatchFishEvent += OnCatchFish;
+            fishingManager.OnRecallBobberEvent += (s, a) => OnRecall();
+            fishingManager.OnCatchFishEvent += (s, a) => OnCatchFish();
         }
 
-        private void OnCatchFish(object sender, OnCatchFishEventArgs args)
+        protected virtual void OnCatchFish()
         {
             isBobberOut = false;
             isExhausted = false;
@@ -70,15 +70,15 @@ namespace MemoryFishing.FX.Animation
             SetFloat("ReelingSpeed", minReelSpeed);
         }
 
-        private void OnStartFighting(object sender, OnStartFightingEventArgs args)
+        protected virtual void OnStartFighting(FishBehaviour fishBehaviour)
         {
             isFighting = true;
             SetBool("Fighting", true);
 
-            fish = args.FishBehaviour;
+            fish = fishBehaviour;
         }
 
-        private void OnEndFighting(object sender, OnEndFightingEventArgs args)
+        protected virtual void OnEndFighting()
         {
             isFighting = false;
             isExhausted = true;
@@ -87,11 +87,16 @@ namespace MemoryFishing.FX.Animation
             SetBool("Exhausted", true);
         }
 
-        private void FixedUpdate()
+        protected virtual Vector3 GetRotateDirection()
+        {
+            return direction.GetLookDirection(transform.position);
+        }
+
+        protected virtual void FixedUpdate()
         {
             if (isFishing && !isBobberOut)
             {
-                Vector3 dir = Quaternion.Euler(0, 90, 0) * direction.GetLookDirection(transform.position);
+                Vector3 dir = Quaternion.Euler(0, 90, 0) * GetRotateDirection();
                 float angle = VectorToDegrees(dir);
 
                 bool flipAngle = dir.z > 0f;
@@ -125,7 +130,7 @@ namespace MemoryFishing.FX.Animation
             }
         }
 
-        private void RotateTowards(float targetYRotation, float delta)
+        protected virtual void RotateTowards(float targetYRotation, float delta)
         {
             Vector3 currentRotation = orientation.eulerAngles;
             float yRotation = currentRotation.y;
@@ -141,7 +146,7 @@ namespace MemoryFishing.FX.Animation
             orientation.rotation = target;
         }
 
-        private void UpdateFighting()
+        protected virtual void UpdateFighting()
         {
             Vector3 dir = direction.GetLookDirection(fish.transform.position);
 
@@ -155,7 +160,7 @@ namespace MemoryFishing.FX.Animation
             SetFloat("Y", y);
         }
 
-        private void OnRecall(object sender, OnRecallBobberEventArgs args)
+        protected virtual void OnRecall()
         {
             isBobberOut = false;
             isExhausted = false;
@@ -165,45 +170,45 @@ namespace MemoryFishing.FX.Animation
             SetBool("Exhausted", false);
         }
 
-        private void OnStartWindUp(object sender, OnStartWindUpEventArgs args)
+        protected virtual void OnStartWindUp()
         {
             SetTrigger("WindUp");
         }
 
-        private void OnCastBobber(object sender, OnCastBobberEventArgs args)
+        protected virtual void OnCastBobber()
         {
             isBobberOut = true;
 
             SetBool("BobberOut", true);
         }
 
-        private void OnEnableFishing(object sender, OnEnableFishingEventArgs args)
+        protected virtual void OnEnableFishing()
         {
             isFishing = true;
 
             SetBool("FishingState", true);
         }
 
-        private void OnDisableFishing(object sender, OnEnableFishingEventArgs args)
+        protected virtual void OnDisableFishing()
         {
             isFishing = false;
 
             SetBool("FishingState", false);
         }
 
-        private void SetBool(string name, bool value)
+        protected virtual void SetBool(string name, bool value)
         {
             animator.SetBool(name, value);
             rodAnimator.SetBool(name, value);
         }
 
-        private void SetFloat(string name, float value)
+        protected virtual void SetFloat(string name, float value)
         {
             animator.SetFloat(name, value);
             rodAnimator.SetFloat(name, value);
         }
 
-        private void SetTrigger(string name)
+        protected virtual void SetTrigger(string name)
         {
             animator.SetTrigger(name);
             rodAnimator.SetTrigger(name);
