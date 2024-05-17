@@ -23,7 +23,8 @@ namespace MemoryFishing.FX.Cutscenes
 
         [Space]
 
-        [Space, SerializeField] private DSDialogue startDialogue;
+        [SerializeField] private DSDialogue startDialogue;
+        [SerializeField] private DSDialogue tossRodDialogue;
 
         [Header("References")]
         [SerializeField] private PlayerFishingManager fishingManager;
@@ -32,7 +33,9 @@ namespace MemoryFishing.FX.Cutscenes
         private BobberCastController bobberCaster;
         private FishFightController fishFighter;
 
-        [Space, SerializeField] private PaulFish paulFish;
+        [Space]
+
+        [SerializeField] private PaulFish paulFish;
         [SerializeField] private BoatMovement boat;
         [SerializeField] private StartCutsceneCameraTracker cutsceneCameraTracker;
 
@@ -49,12 +52,16 @@ namespace MemoryFishing.FX.Cutscenes
         [Space]
 
         [SerializeField] private Animator guyAnimator;
-        [SerializeField] private Transform rodTransform;
+        [SerializeField] private Animator rodAnimator;
+
+        [Space, SerializeField] private Transform rodTransform;
 
         private void Start()
         {
             bobberCaster = fishingManager.GetComponent<BobberCastController>();
             fishFighter = fishingManager.GetComponent<FishFightController>();
+
+            rodAnimator.GetBehaviour<OnTossFinished>().OnTossFinishedEvent += OnTossFinished;
 
             boat.transform.SetPositionAndRotation(boatStartPosition, Quaternion.Euler(boatStartRotation));
 
@@ -73,6 +80,11 @@ namespace MemoryFishing.FX.Cutscenes
             _ = StartCoroutine(PlayCutscene());
         }
 
+        private void OnTossFinished(object sender, System.EventArgs args)
+        {
+            rodTransform.SetParent(guyAnimator.transform.parent, false);
+        }
+
         private void OnEndFighting(object sender, OnEndFightingEventArgs args)
         {
             ferrymanAnimation.EndFighting();
@@ -85,7 +97,7 @@ namespace MemoryFishing.FX.Cutscenes
             dialogueController.ReadDialogue(startDialogue.dialogue);
 
             ferrymanAnimation.CatchFish();
-            ferrymanAnimation.DisableFishing();
+            ferrymanAnimation.SetRotateTarget(guyAnimation.transform.position);
 
             guyAnimator.Play("ClimbUp");
             guyAnimation.enabled = true;
@@ -94,16 +106,28 @@ namespace MemoryFishing.FX.Cutscenes
             playerManager.SwitchToBoatState();
 
             fishingManager.OnCatchFishEvent -= OnPaulFishCaught;
-            dialogueController.OnCloseDialogueEvent += OnStartDialogueClosed;
+            
+            dialogueController.OnStartDialogueEvent += OnReadDialogue;
+            dialogueController.OnCloseDialogueEvent += OnIntroDialogueClosed;
         }
 
-        private void OnStartDialogueClosed(object sender, DialogueController.OnCloseDialogueEventArgs args)
+        private void OnReadDialogue(object sender, DialogueController.OnStartDialogueEventArgs args)
+        {
+            if (args.Dialogue != tossRodDialogue.dialogue)
+            {
+                return;
+            }
+
+            ferrymanAnimation.TossRod();
+        }
+
+        private void OnIntroDialogueClosed(object sender, DialogueController.OnCloseDialogueEventArgs args)
         {
             fishingSpots.SetActive(true);
+            ferrymanAnimation.DisableFishing();
 
-            rodTransform.SetParent(guyAnimator.transform.parent, false);
-
-            dialogueController.OnCloseDialogueEvent -= OnStartDialogueClosed;
+            dialogueController.OnStartDialogueEvent -= OnReadDialogue;
+            dialogueController.OnCloseDialogueEvent -= OnIntroDialogueClosed;
         }
 
         private IEnumerator PlayCutscene()

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8a45880a6fc5a488fcd566e8b7ea92, type: 3}
+  m_Name: FastDialogueGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: FastDialogue
+  <Groups>k__BackingField: []
+  <Nodes>k__BackingField:
+  - <GUID>k__BackingField: b9e6dd16-db33-45c9-af32-645e60629711
+    <Name>k__BackingField: Log0
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: Catch this, idiot!
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 6d8944f9-960a-465b-aaff-d6080593109d
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 373, y: 337}
+  - <GUID>k__BackingField: 6d8944f9-960a-465b-aaff-d6080593109d
+    <Name>k__BackingField: Log1
+    <Title>k__BackingField: You
+    <Text>k__BackingField: <b>AAAHHHH!!!!</b>
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: d4ec90d3-3ff6-4973-8ef4-38ed7239b674
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 676, y: 337}
+  - <GUID>k__BackingField: d4ec90d3-3ff6-4973-8ef4-38ed7239b674
+    <Name>k__BackingField: Log2
+    <Title>k__BackingField: Click to add title
+    <Text>k__BackingField: Click to add text
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 979, y: 337}
+  <OldGroupNames>k__BackingField: []
+  <OldUngroupedNodeNames>k__BackingField:
+  - Log0
+  - Log1
+  - Log2
+  <OldGroupedNodeNames>k__BackingField:
+    list: []

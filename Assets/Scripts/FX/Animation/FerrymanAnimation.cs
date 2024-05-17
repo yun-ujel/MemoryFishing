@@ -1,59 +1,69 @@
-using MemoryFishing.FX.Animation;
 using MemoryFishing.Gameplay.Fishing.Fish;
 using MemoryFishing.Gameplay.Fishing.Player;
 using UnityEngine;
 
-public class FerrymanAnimation : GuyAnimation
+namespace MemoryFishing.FX.Animation
 {
-    private Vector3 rotateDir;
-
-    protected override void Start()
+    public class FerrymanAnimation : GuyAnimation
     {
-        reelingController = fishingManager.GetComponent<ReelingController>();
-    }
+        private Vector3 rotateDir;
 
-    public void CatchFish()
-    {
-        OnCatchFish();
-    }
+        protected override void Start()
+        {
+            reelingController = fishingManager.GetComponent<ReelingController>();
+        }
 
-    public void StartFighting(FishBehaviour fishBehaviour)
-    {
-        OnStartFighting(fishBehaviour);
-    }
+        public void TossRod()
+        {
+            SetTrigger("Toss");
 
-    public void EndFighting()
-    {
-        OnEndFighting();
-    }
+            SetBool("FishingState", false);
+            ResetTrigger("WindUp");
+        }
 
-    public void StartWindUp()
-    {
-        OnStartWindUp();
-    }
+        public void CatchFish()
+        {
+            OnCatchFish();
+        }
 
-    public void CastBobber()
-    {
-        OnCastBobber();
-    }
+        public void StartFighting(FishBehaviour fishBehaviour)
+        {
+            OnStartFighting(fishBehaviour);
+        }
 
-    public void EnableFishing()
-    {
-        OnEnableFishing();
-    }
+        public void EndFighting()
+        {
+            OnEndFighting();
+        }
 
-    public void DisableFishing()
-    {
-        OnDisableFishing();
-    }
+        public void StartWindUp()
+        {
+            OnStartWindUp();
+        }
 
-    public void SetRotateTarget(Vector3 target)
-    {
-        rotateDir = (target - transform.position).normalized;
-    }
+        public void CastBobber()
+        {
+            OnCastBobber();
+        }
 
-    protected override Vector3 GetRotateDirection()
-    {
-        return rotateDir;
+        public void EnableFishing()
+        {
+            OnEnableFishing();
+        }
+
+        public void DisableFishing()
+        {
+            OnDisableFishing();
+        }
+
+        public void SetRotateTarget(Vector3 target)
+        {
+            rotateDir = (target - transform.position).normalized;
+        }
+
+        protected override Vector3 GetRotateDirection()
+        {
+            return rotateDir;
+        }
     }
 }

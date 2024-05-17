@@ -482,7 +482,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  castDelay: 0
+  castDelay: 0.3
   recallCurve:
     serializedVersion: 2
     m_Curve:
@@ -2467,6 +2467,7 @@ GameObject:
   - component: {fileID: 667121192}
   - component: {fileID: 667121193}
   - component: {fileID: 667121194}
+  - component: {fileID: 667121195}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -2518,6 +2519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueController: {fileID: 1889483131}
   startDialogue: {fileID: 667121194}
+  tossRodDialogue: {fileID: 667121195}
   fishingManager: {fileID: 562208156}
   playerManager: {fileID: 1531117833}
   paulFish: {fileID: 184156956}
@@ -2529,6 +2531,7 @@ MonoBehaviour:
   guyAnimation: {fileID: 1537681439}
   ferrymanAnimation: {fileID: 1157258915}
   guyAnimator: {fileID: 1537681440}
+  rodAnimator: {fileID: 1436503883}
   rodTransform: {fileID: 1436503882}
 --- !u!114 &667121194
 MonoBehaviour:
@@ -2549,6 +2552,25 @@ MonoBehaviour:
   startingDialoguesOnly: 1
   selectedDialogueGroupIndex: 0
   selectedDialogueIndex: 0
+--- !u!114 &667121195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667121190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8ca0475c20dc84896ac0d875ff2ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueContainer: {fileID: 11400000, guid: 3bb93285ba09dc346afc98ab5e145279, type: 2}
+  dialogueGroup: {fileID: 0}
+  dialogue: {fileID: 11400000, guid: 789785e4588acc245ba11df51e7fed59, type: 2}
+  groupedDialogues: 0
+  startingDialoguesOnly: 0
+  selectedDialogueGroupIndex: 0
+  selectedDialogueIndex: 25
 --- !u!1 &677617944
 GameObject:
   m_ObjectHideFlags: 0
@@ -5159,7 +5181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnAcceleration: 2
-  turnRate: 3
+  turnRate: 2
   moveAcceleration: 2
   maxForwardSpeed: 10
   maxReverseSpeed: 8

@@ -139,7 +139,12 @@ namespace MemoryFishing.FX.Animation
             SetFloat("Step", Mathf.Abs(rotationVelocity) / step);
 
             currentRotation.y = yRotation;
-            Quaternion target = Quaternion.Euler(currentRotation);
+            SetRotation(currentRotation);
+        }
+
+        protected void SetRotation(Vector3 targetEuler)
+        {
+            Quaternion target = Quaternion.Euler(targetEuler);
             target.x = 0f;
             target.z = 0f;
 
@@ -148,6 +153,12 @@ namespace MemoryFishing.FX.Animation
 
         protected virtual void UpdateFighting()
         {
+            if (fish == null)
+            {
+                isFighting = false;
+                return;
+            }
+
             Vector3 dir = direction.GetLookDirection(fish.transform.position);
 
             Vector3 forward = orientation.transform.forward.ExcludeYAxis().normalized;
@@ -164,6 +175,7 @@ namespace MemoryFishing.FX.Animation
         {
             isBobberOut = false;
             isExhausted = false;
+            isFighting = false;
 
             SetTrigger("Recall");
             SetBool("BobberOut", false);
@@ -194,6 +206,7 @@ namespace MemoryFishing.FX.Animation
             isFishing = false;
 
             SetBool("FishingState", false);
+            ResetTrigger("WindUp");
         }
 
         protected virtual void SetBool(string name, bool value)
@@ -212,6 +225,12 @@ namespace MemoryFishing.FX.Animation
         {
             animator.SetTrigger(name);
             rodAnimator.SetTrigger(name);
+        }
+
+        protected virtual void ResetTrigger(string name)
+        {
+            animator.ResetTrigger(name);
+            rodAnimator.ResetTrigger(name);
         }
     }
 }
