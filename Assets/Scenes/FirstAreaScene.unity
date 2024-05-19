@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.002731743, g: 0.014443844, b: 0.017641952, a: 1}
+  m_AmbientSkyColor: {r: 0.12855999, g: 0.254717, b: 0.254717, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -2632,7 +2632,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.7411765, g: 1, b: 0.9308251, a: 1}
+  m_Color: {r: 0.7411765, g: 1, b: 0.99239767, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -2690,14 +2690,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.69427204, y: -0.27165377, z: 0.32374436, w: 0.58256346}
+  m_LocalRotation: {x: 0, y: 0.9659258, z: -0.2588191, w: 0}
   m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 584952862}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 100, y: -50, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 180, z: 0}
 --- !u!114 &705507996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3426,7 +3426,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 50d6f9d80ad5a7a4baf71a218d27d2b8, type: 2}
+  - {fileID: 2100000, guid: 2975d05d71db2934eb6f3ba784381911, type: 2}
+  - {fileID: 2100000, guid: 3646c6965d1b6b54596244b2e22aeafb, type: 2}
+  - {fileID: 2100000, guid: c245a2c50a68fe2478be31bf8ebdadbb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3451,7 +3453,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: -2114226759022618299, guid: 026a370d695f9c24d8989fa6af8f1726, type: 3}
+  m_Mesh: {fileID: -2114226759022618299, guid: 645b2acd03ff7a245a11d443193ac82c, type: 3}
   m_Bones:
   - {fileID: 1623465328}
   - {fileID: 168726144}
@@ -4793,7 +4795,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215877144}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -4805,7 +4807,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 5dd77836f7e047a4fad283c8aa82f080, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5094,8 +5096,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322381882}
-  m_LocalRotation: {x: -0, y: -0.976296, z: -0, w: 0.2164397}
-  m_LocalPosition: {x: 21, y: 0, z: 23}
+  m_LocalRotation: {x: 0, y: -0.976296, z: 0, w: 0.2164397}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5103,7 +5105,7 @@ Transform:
   - {fileID: 562208160}
   m_Father: {fileID: 1531117834}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -155, z: 0}
 --- !u!54 &1322381884
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6380,7 +6382,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6d6ba1968b8c2ab438fa344bc843caf1, type: 2}
+  - {fileID: 2100000, guid: df1b738d71f74e2458677d72ae5d88dd, type: 2}
+  - {fileID: 2100000, guid: 3dfd1b17bcb3d07429dffa38f256a236, type: 2}
+  - {fileID: 2100000, guid: 7d5670a29f2cb184289a2743d7b351d6, type: 2}
+  - {fileID: 2100000, guid: 3713fe94e5359164f935614c4208b92f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
