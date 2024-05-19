@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6af19cb731ba1e4e8fe3bfb664a7a14, type: 3}
+  m_Name: BrokenGlasses
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: BrokenGlasses
+  <DialogueGroups>k__BackingField:
+    list: []
+  <UngroupedDialogues>k__BackingField:
+  - {fileID: 11400000, guid: 309990e5987c5444185e2a5e96e81d2d, type: 2}
+  - {fileID: 11400000, guid: 777f63691a53a8148bf9c14c394b2cdc, type: 2}
+  - {fileID: 11400000, guid: 0c168bf0de8dd5f478b065bfedec14c6, type: 2}
+  - {fileID: 11400000, guid: 0e58c63b265644f44a9884c30fd74470, type: 2}
+  - {fileID: 11400000, guid: 3eaefa5b8aef23047b2d38c9e683f47d, type: 2}
+  - {fileID: 11400000, guid: edbcdb266380b5549a3f7dbe529b06e5, type: 2}
+  - {fileID: 11400000, guid: 3809249962e15fa47995674aeeade2ab, type: 2}
+  - {fileID: 11400000, guid: 2b7f2dda843980442834ff6572d6a12d, type: 2}
+  - {fileID: 11400000, guid: 713e183f9063bb8478f28f193861fca4, type: 2}
+  - {fileID: 11400000, guid: 15c7b592aa6fd4a4083105a06433a65b, type: 2}
+  - {fileID: 11400000, guid: 80bd7af3a1bbd1c4db1a637cb27fcd3e, type: 2}
+  - {fileID: 11400000, guid: 2b619fb445116d54081ae85bd068c826, type: 2}
+  - {fileID: 11400000, guid: 688f3d0eb229f32408b38d69920d310b, type: 2}
+  - {fileID: 11400000, guid: 7190dd3a69ef51849ac9a0965c52418d, type: 2}

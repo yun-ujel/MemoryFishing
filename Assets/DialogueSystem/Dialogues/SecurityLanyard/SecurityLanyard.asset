@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6af19cb731ba1e4e8fe3bfb664a7a14, type: 3}
+  m_Name: SecurityLanyard
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: SecurityLanyard
+  <DialogueGroups>k__BackingField:
+    list: []
+  <UngroupedDialogues>k__BackingField:
+  - {fileID: 11400000, guid: 02dd8375a3fe0e04eab83d851b4268f3, type: 2}
+  - {fileID: 11400000, guid: a3f19f0021232674e836bdb38149a723, type: 2}
+  - {fileID: 11400000, guid: 4c626cbbe5d674e40ac280442595abf4, type: 2}
+  - {fileID: 11400000, guid: 065c271d83b1b5841b599f4a03c583f3, type: 2}
+  - {fileID: 11400000, guid: 9a05ea6e477752241996e3f79d166d99, type: 2}
+  - {fileID: 11400000, guid: 9aae18da4df197342a0abe00df01840f, type: 2}
+  - {fileID: 11400000, guid: de7d1c1442fe76744a9fd037e4c04137, type: 2}
+  - {fileID: 11400000, guid: 18d7e809f8befe74aab0316ed3aa7890, type: 2}
+  - {fileID: 11400000, guid: d0c73f4308d54e540a421cb98d409ba0, type: 2}
+  - {fileID: 11400000, guid: 97c89261af3871f489097ad86dcff73d, type: 2}
+  - {fileID: 11400000, guid: 065f886bc67e6a64f9b5d1ed977a725c, type: 2}

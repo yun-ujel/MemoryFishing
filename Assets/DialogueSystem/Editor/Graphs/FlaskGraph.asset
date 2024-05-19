@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8a45880a6fc5a488fcd566e8b7ea92, type: 3}
+  m_Name: FlaskGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: Flask
+  <Groups>k__BackingField: []
+  <Nodes>k__BackingField:
+  - <GUID>k__BackingField: 53edbdd5-92ce-4435-bc46-af365dae2670
+    <Name>k__BackingField: P0
+    <Title>k__BackingField: Paul
+    <Text>k__BackingField: Here it is! Was looking for this, and not a scratch on
+      her. Perfect.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 6d5edbfa-b0e6-4bdd-a183-6259d9d908c7
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 39, y: 868}
+  - <GUID>k__BackingField: 6d5edbfa-b0e6-4bdd-a183-6259d9d908c7
+    <Name>k__BackingField: F0
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: Your flask... is a girl?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: a716e54e-702a-40c7-a9b4-3b4ffa77b84e
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 681, y: 868}
+  - <GUID>k__BackingField: a716e54e-702a-40c7-a9b4-3b4ffa77b84e
+    <Name>k__BackingField: P1
+    <Title>k__BackingField: Paul
+    <Text>k__BackingField: Yup, the only woman in my life that I need.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 984, y: 868}
+  <OldGroupNames>k__BackingField: []
+  <OldUngroupedNodeNames>k__BackingField:
+  - P0
+  - F0
+  - P1
+  <OldGroupedNodeNames>k__BackingField:
+    list: []

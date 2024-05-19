@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6af19cb731ba1e4e8fe3bfb664a7a14, type: 3}
+  m_Name: IDCard
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: IDCard
+  <DialogueGroups>k__BackingField:
+    list: []
+  <UngroupedDialogues>k__BackingField:
+  - {fileID: 11400000, guid: 95ec67ab87158a2479f17fefdb9cadab, type: 2}
+  - {fileID: 11400000, guid: 5b4caa491290549499a3f94b63e6516e, type: 2}
+  - {fileID: 11400000, guid: d799393380c87e54ebd99313e393c7e9, type: 2}
+  - {fileID: 11400000, guid: d045d762613c8fd4da8e8b8a8120bc30, type: 2}
+  - {fileID: 11400000, guid: 724890b671b42054bbbc454d6b2a536b, type: 2}

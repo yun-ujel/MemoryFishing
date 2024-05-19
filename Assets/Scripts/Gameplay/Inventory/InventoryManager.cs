@@ -41,13 +41,6 @@ namespace MemoryFishing.Gameplay.Inventory
             inventory = new Inventory(8);
         }
 
-        public override void Start()
-        {
-            base.Start();
-
-            fishingManager.OnCatchFishEvent += OnCatchFish;
-        }
-
         public override void SubscribeToInputActions()
         {
             playerInput.actions["Player/Inventory"].performed += PlayerInventoryInput;
@@ -75,17 +68,7 @@ namespace MemoryFishing.Gameplay.Inventory
             playerInput.SwitchCurrentActionMap("Player");
         }
 
-        private void OnCatchFish(object sender, OnCatchFishEventArgs args)
-        {
-            if (args.Item == null)
-            {
-                return;
-            }
-
-            PickupItem(args.Item);
-        }
-
-        private void PickupItem(InventoryItem item)
+        public void PickupItem(InventoryItem item)
         {
             if (inventory.TryAddItem(item, out int slot))
             {

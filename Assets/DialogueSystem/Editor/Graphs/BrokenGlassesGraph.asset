@@ -1,0 +1,203 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8a45880a6fc5a488fcd566e8b7ea92, type: 3}
+  m_Name: BrokenGlassesGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: BrokenGlasses
+  <Groups>k__BackingField: []
+  <Nodes>k__BackingField:
+  - <GUID>k__BackingField: 475f011e-2942-4a62-9be3-0238d14035d5
+    <Name>k__BackingField: P0
+    <Title>k__BackingField: Paul
+    <Text>k__BackingField: Oh this is a great one!
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 01c08e6c-fd41-4e39-8d01-27e8e4cc276b
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 84, y: 885}
+  - <GUID>k__BackingField: 01c08e6c-fd41-4e39-8d01-27e8e4cc276b
+    <Name>k__BackingField: F0
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: "I didn\u2019t think you wore glasses."
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 7000b38e-6ef5-404d-b352-05bd99fb02b2
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 387, y: 885}
+  - <GUID>k__BackingField: 7000b38e-6ef5-404d-b352-05bd99fb02b2
+    <Name>k__BackingField: P1
+    <Title>k__BackingField: Paul
+    <Text>k__BackingField: No, no. You see, this guy tried comin' into the pub, lanky
+      weirdo, sorta looked like you.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: db176a05-a257-4851-8fe4-bf339536510e
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 1029, y: 885}
+  - <GUID>k__BackingField: db176a05-a257-4851-8fe4-bf339536510e
+    <Name>k__BackingField: F1
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: ... Thanks?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: edfba601-e348-4397-9743-2a68a16f4ff2
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 1671, y: 885}
+  - <GUID>k__BackingField: edfba601-e348-4397-9743-2a68a16f4ff2
+    <Name>k__BackingField: P2
+    <Title>k__BackingField: Paul
+    <Text>k__BackingField: "Anyways anyways, he\u2026"
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: <b>LIE:</b> He attacked me.
+      <TargetGUID>k__BackingField: eea2d9eb-bb64-463c-9210-8b89e6a3724f
+    - <Text>k__BackingField: <b>TRUTH:</b> I didn't like his vibe.
+      <TargetGUID>k__BackingField: a2737c98-c32b-4367-81b0-47827601e00d
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 1
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 1999, y: 861}
+  - <GUID>k__BackingField: eea2d9eb-bb64-463c-9210-8b89e6a3724f
+    <Name>k__BackingField: LP0
+    <Title>k__BackingField: Paul
+    <Text>k__BackingField: "He\u2026 got annoyed and threw his glasses at me!...
+      I just put them in my pocket and carried on with my shift. Guess I forgot to
+      take them out\u2026"
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 2d934ba4-89bf-457c-8272-f5c006017114
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 2683, y: 738}
+  - <GUID>k__BackingField: 2d934ba4-89bf-457c-8272-f5c006017114
+    <Name>k__BackingField: LF0
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: ... Right.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 3325, y: 738}
+  - <GUID>k__BackingField: a2737c98-c32b-4367-81b0-47827601e00d
+    <Name>k__BackingField: TP0
+    <Title>k__BackingField: Paul
+    <Text>k__BackingField: "I tell him don't come in. I don't like the vibe of him.
+      He tries to argue with me. Telling me he's got friends in there or somethin\u2019...
+      Terrible liar."
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: fe4cea07-530e-4d00-b286-19a897b59221
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 2683, y: 984}
+  - <GUID>k__BackingField: fe4cea07-530e-4d00-b286-19a897b59221
+    <Name>k__BackingField: TP1
+    <Title>k__BackingField: Paul
+    <Text>k__BackingField: "So I went to punch him and the poor guy was so scared
+      he ran for the hills before it could connect! Haha! Stupid runt didn\u2019t
+      even pick up his glasses when they fell on the floor!"
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 579b2ad4-8676-4a49-a6c5-6073deec0dc6
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 3325, y: 984}
+  - <GUID>k__BackingField: 579b2ad4-8676-4a49-a6c5-6073deec0dc6
+    <Name>k__BackingField: TF0
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: That's hardly kind, Paul.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Feel Remorse
+      <TargetGUID>k__BackingField: 07aa4a7e-e36e-49c9-91af-08e6c68e305a
+    - <Text>k__BackingField: Double Down
+      <TargetGUID>k__BackingField: 0b1da521-1be1-4c66-8313-ee0c1fdfe278
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 1
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 3967, y: 960}
+  - <GUID>k__BackingField: 07aa4a7e-e36e-49c9-91af-08e6c68e305a
+    <Name>k__BackingField: RP0
+    <Title>k__BackingField: Paul
+    <Text>k__BackingField: Yeah. I guess it was kinda shitty looking back on it.
+      Was just a very long shift I suppose.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 7aef49ee-21bb-4b7c-88be-b9e07334ecdd
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 4655, y: 863}
+  - <GUID>k__BackingField: 7aef49ee-21bb-4b7c-88be-b9e07334ecdd
+    <Name>k__BackingField: FP0
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: "Well at least you\u2019ve got some type of remorse. That's
+      good to know."
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 5297, y: 863}
+  - <GUID>k__BackingField: 0b1da521-1be1-4c66-8313-ee0c1fdfe278
+    <Name>k__BackingField: DP0
+    <Title>k__BackingField: Paul
+    <Text>k__BackingField: "Hey, \u2018kind\u2019 was never in my job description.
+      I was doing what I was paid to do."
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: afd655f5-4e07-4572-a835-fe72862d7cee
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 4655, y: 1109}
+  - <GUID>k__BackingField: afd655f5-4e07-4572-a835-fe72862d7cee
+    <Name>k__BackingField: DF0
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: Dangerous job.. That's good to know.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 5297, y: 1109}
+  <OldGroupNames>k__BackingField: []
+  <OldUngroupedNodeNames>k__BackingField:
+  - P0
+  - F0
+  - P1
+  - F1
+  - P2
+  - LP0
+  - LF0
+  - TP0
+  - TP1
+  - TF0
+  - RP0
+  - FP0
+  - DP0
+  - DF0
+  <OldGroupedNodeNames>k__BackingField:
+    list: []

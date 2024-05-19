@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8a45880a6fc5a488fcd566e8b7ea92, type: 3}
+  m_Name: SecurityLanyardGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: SecurityLanyard
+  <Groups>k__BackingField: []
+  <Nodes>k__BackingField:
+  - <GUID>k__BackingField: 573175af-3642-4fdb-8e58-29968e24e03e
+    <Name>k__BackingField: F0
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: Nice catch.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 09462951-808e-4f62-b8c2-c2d41e570d57
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 38, y: 350}
+  - <GUID>k__BackingField: 64e0b824-cbde-48dd-b1f0-14b823878307
+    <Name>k__BackingField: F1
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: I figured you'd know. Whatever happened to <i>"I'll remember
+      eventually"</i>?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 143b8b5f-7a24-465d-b68a-d18ec85c45a0
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 644, y: 350}
+  - <GUID>k__BackingField: 09462951-808e-4f62-b8c2-c2d41e570d57
+    <Name>k__BackingField: Y0
+    <Title>k__BackingField: You
+    <Text>k__BackingField: What the hell is this?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 64e0b824-cbde-48dd-b1f0-14b823878307
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 341, y: 350}
+  - <GUID>k__BackingField: 143b8b5f-7a24-465d-b68a-d18ec85c45a0
+    <Name>k__BackingField: Y1
+    <Title>k__BackingField: You
+    <Text>k__BackingField: Answer my question.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 33746d18-6a52-4020-9641-6603cdf6beaf
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 1286, y: 350}
+  - <GUID>k__BackingField: 33746d18-6a52-4020-9641-6603cdf6beaf
+    <Name>k__BackingField: F2
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: It's from your lifetime. Something to help remember who
+      you were. Looks like you were a security guard.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 0e749a4c-1a26-4331-9f13-daff8d6ae466
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 1589, y: 350}
+  - <GUID>k__BackingField: 0e749a4c-1a26-4331-9f13-daff8d6ae466
+    <Name>k__BackingField: Y2
+    <Title>k__BackingField: You
+    <Text>k__BackingField: y-Yeah! Yeah I was. Brilliant job that was.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 1113cc8c-7307-45dc-b6fe-a39cd0b7de51
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 2231, y: 350}
+  - <GUID>k__BackingField: 1113cc8c-7307-45dc-b6fe-a39cd0b7de51
+    <Name>k__BackingField: F3
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: What were you securing? Some celebrity? Some elite club?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 7a5248d5-1c21-44cd-b18a-52193445c72a
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 2873, y: 350}
+  - <GUID>k__BackingField: 7a5248d5-1c21-44cd-b18a-52193445c72a
+    <Name>k__BackingField: Y3
+    <Title>k__BackingField: You
+    <Text>k__BackingField: "Nah, Old Maiden\u2019s. Best pub in the city."
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 5ebf23db-2665-4090-8946-4aa43739f9e3
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 3515, y: 350}
+  - <GUID>k__BackingField: 5ebf23db-2665-4090-8946-4aa43739f9e3
+    <Name>k__BackingField: F4
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: "Right\u2026I assume you liked the job?"
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 49259345-2cac-4387-9852-85cb59437edf
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 4157, y: 350}
+  - <GUID>k__BackingField: 49259345-2cac-4387-9852-85cb59437edf
+    <Name>k__BackingField: P4
+    <Title>k__BackingField: You
+    <Text>k__BackingField: Oh yeah, only place could punch someone's teeth out and
+      keep the job. Pretty great huh?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 41b6e690-738f-4322-a80e-b1ee1634dcb9
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 4799, y: 350}
+  - <GUID>k__BackingField: 41b6e690-738f-4322-a80e-b1ee1634dcb9
+    <Name>k__BackingField: F5
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: ... Sure.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 5441, y: 350}
+  <OldGroupNames>k__BackingField: []
+  <OldUngroupedNodeNames>k__BackingField:
+  - F0
+  - F1
+  - Y0
+  - Y1
+  - F2
+  - Y2
+  - F3
+  - Y3
+  - F4
+  - P4
+  - F5
+  <OldGroupedNodeNames>k__BackingField:
+    list: []

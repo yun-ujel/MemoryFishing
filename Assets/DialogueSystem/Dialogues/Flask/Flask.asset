@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6af19cb731ba1e4e8fe3bfb664a7a14, type: 3}
+  m_Name: Flask
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: Flask
+  <DialogueGroups>k__BackingField:
+    list: []
+  <UngroupedDialogues>k__BackingField:
+  - {fileID: 11400000, guid: b758c41e5e836da4ab40e368523640be, type: 2}
+  - {fileID: 11400000, guid: 306720b998abe9b4c80b58531c795671, type: 2}
+  - {fileID: 11400000, guid: 2daeaa5b7cb4c6948a9ff88a4aba715d, type: 2}

@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8a45880a6fc5a488fcd566e8b7ea92, type: 3}
+  m_Name: IDCardGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: IDCard
+  <Groups>k__BackingField: []
+  <Nodes>k__BackingField:
+  - <GUID>k__BackingField: a76b4bf4-19a9-4147-b49c-c58f4080560e
+    <Name>k__BackingField: Y0
+    <Title>k__BackingField: You
+    <Text>k__BackingField: "Here it is! <b>\u2018Paul Bradford\u2019</b>. Thats my
+      name, told you it'd come back to me."
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 940ed378-648a-4c83-9c38-92a4f60067d0
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: -24, y: 944}
+  - <GUID>k__BackingField: 940ed378-648a-4c83-9c38-92a4f60067d0
+    <Name>k__BackingField: F0
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: ... Right. You didn't take very good care of the card
+      though, <b>Paul</b>. The photo's scratched off.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: c9567bd1-e4c1-4770-90bf-6abcaba2576b
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 618, y: 944}
+  - <GUID>k__BackingField: c9567bd1-e4c1-4770-90bf-6abcaba2576b
+    <Name>k__BackingField: P1
+    <Title>k__BackingField: Paul
+    <Text>k__BackingField: Nah, that's intentional. I was never a photogenic guy.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: fd2445c7-83dd-40a7-87f4-8a2bcde36670
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 1260, y: 944}
+  - <GUID>k__BackingField: fd2445c7-83dd-40a7-87f4-8a2bcde36670
+    <Name>k__BackingField: F1
+    <Title>k__BackingField: Ferryman
+    <Text>k__BackingField: "Surely that's not safe if they can\u2019t tell who you
+      are."
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: ff8da8da-20dd-4d32-b88d-1427ee01e8b6
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 1902, y: 944}
+  - <GUID>k__BackingField: ff8da8da-20dd-4d32-b88d-1427ee01e8b6
+    <Name>k__BackingField: P2
+    <Title>k__BackingField: Paul
+    <Text>k__BackingField: Still safer than not having a security guard!
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 2544, y: 944}
+  <OldGroupNames>k__BackingField: []
+  <OldUngroupedNodeNames>k__BackingField:
+  - Y0
+  - F0
+  - P1
+  - F1
+  - P2
+  <OldGroupedNodeNames>k__BackingField:
+    list: []
