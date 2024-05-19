@@ -1,17 +1,13 @@
 using UnityEngine;
 
 using MemoryFishing.Utilities;
-using MemoryFishing.Gameplay.Inventory;
 
 namespace MemoryFishing.Gameplay.Fishing.Fish
 {
     [RequireComponent(typeof(Rigidbody))]
     public class BasicFish : FishBehaviour
     {
-        private static int fishCaught = -1;
         private Rigidbody body;
-
-        [SerializeField] private InventoryItem[] items;
 
         [Header("Direction")]
         [SerializeField, Range(0f, 720f)] private float maxAngleRange = 270f;
@@ -183,21 +179,6 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
             Debug.Log($"Fish-Player: {distanceLeft}; Target: ({startingDistance} / {reawakenStages} Max Stages) * {stagesLeft} Stages Left = {targetDistance}; T: {t}");
 
             return Mathf.Lerp(0f, 1f, t);
-        }
-
-        #endregion
-
-        #region Catching
-
-        public override InventoryItem GetItem()
-        {
-            fishCaught++;
-            if (fishCaught >= items.Length)
-            {
-                fishCaught = 0;
-            }
-
-            return items[fishCaught];
         }
 
         #endregion

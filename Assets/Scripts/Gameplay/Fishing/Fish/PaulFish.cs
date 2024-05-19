@@ -105,11 +105,6 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
             return 1f;
         }
 
-        public override InventoryItem GetItem()
-        {
-            return null;
-        }
-
         #endregion
 
         #endregion

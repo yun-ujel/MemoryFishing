@@ -31,8 +31,8 @@ Material:
     m_Floats:
     - _Amplitude: 1
     - _AmplitudeMultiplier: 0.6
-    - _DiffuseNormalStrength: 80
-    - _DiffuseReflectance: 1
+    - _DiffuseNormalStrength: 30
+    - _DiffuseReflectance: 1.5
     - _EnableFoam: 0
     - _FoamMultiplier: 0.7
     - _FoamPower: 3
@@ -46,7 +46,7 @@ Material:
     - _SeedIteration: 0.4
     - _Smoothness: 70
     - _SpecularNormalStrength: 30
-    - _SpecularReflectance: 1
+    - _SpecularReflectance: 2
     - _Speed: 1
     - _SpeedMultiplier: 1.07
     - _TimeOffset: -1

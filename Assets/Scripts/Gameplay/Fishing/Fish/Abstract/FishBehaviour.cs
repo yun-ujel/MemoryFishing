@@ -46,11 +46,5 @@ namespace MemoryFishing.Gameplay.Fishing.Fish
         public abstract float UpdateReawakenDuration(float startingDistance, float distanceLeft, float delta);
 
         #endregion
-
-        #region Catching
-
-        public abstract InventoryItem GetItem();
-
-        #endregion
     }
 }
