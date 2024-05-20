@@ -70,6 +70,12 @@ namespace MemoryFishing.UI.Dialogue
             }
 
             textComponent.text = currentText;
+
+            if (IsTextFinished)
+            {
+                OnTextFinishedEvent?.Invoke(this, new OnTextFinishedEventArgs());
+                return;
+            }
         }
 
         private void Update()

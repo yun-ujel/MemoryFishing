@@ -198,7 +198,7 @@ MonoBehaviour:
   speed: 4
   acceleration: 20
   idleFriction: 0.2
-  positiveExhaustMultiplier: 1
+  positiveExhaustMultiplier: 0.2
   negativeExhaustMultiplier: 0.3
   reawakenStages: 1
   minReawakenDistance: 2
