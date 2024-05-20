@@ -23,7 +23,11 @@ namespace MemoryFishing.UI.Dialogue
         }
         public class OnCloseDialogueEventArgs : System.EventArgs { }
 
-        [Space, SerializeField] private TextReader textReader;
+        [Header("References")]
+        [SerializeField] private PlayerManager playerManager;
+
+        [Header("Dialogue Display")]
+        [SerializeField] private TextReader textReader;
         [SerializeField] private DialogueOptionController optionController;
 
         private DSDialogueSO currentDialogue;
@@ -61,8 +65,6 @@ namespace MemoryFishing.UI.Dialogue
 
         private void OnTextFinished(object sender, TextReader.OnTextFinishedEventArgs args)
         {
-            Debug.Log("Text Finished");
-
             if (currentDialogue.DialogueType == DSDialogueType.MultipleChoice)
             {
                 optionController.LoadOptions(currentDialogue);
