@@ -128,9 +128,9 @@ MonoBehaviour:
     <Title>k__BackingField: Ferryman
     <Text>k__BackingField: That's hardly kind, Paul.
     <Choices>k__BackingField:
-    - <Text>k__BackingField: Feel Remorse
+    - <Text>k__BackingField: <b>REMORSE:</b> Agreed.
       <TargetGUID>k__BackingField: 07aa4a7e-e36e-49c9-91af-08e6c68e305a
-    - <Text>k__BackingField: Double Down
+    - <Text>k__BackingField: <b>DOUBLE DOWN:</b> I was doing my job.
       <TargetGUID>k__BackingField: 0b1da521-1be1-4c66-8313-ee0c1fdfe278
     <GroupGUID>k__BackingField: 
     <DialogueType>k__BackingField: 1

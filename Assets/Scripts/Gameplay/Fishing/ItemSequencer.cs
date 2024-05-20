@@ -7,6 +7,7 @@ using MemoryFishing.UI.Dialogue;
 
 using DS;
 using DS.ScriptableObjects;
+using MemoryFishing.Gameplay.Fishing.Fish;
 
 namespace MemoryFishing.Gameplay
 {
@@ -46,8 +47,17 @@ namespace MemoryFishing.Gameplay
                 return;
             }
 
+            if (args.Fish.GetType() == typeof(PaulFish))
+            {
+                return;
+            }
+
+            Debug.Log($"Pickup Item {currentItem}");
+
             inventoryManager.PickupItem(catches[currentItem].Item);
             dialogueController.ReadDialogue(catches[currentItem].DialogueSO);
+
+            currentItem++;
         }
     }
 }

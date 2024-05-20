@@ -24,6 +24,7 @@ namespace MemoryFishing.UI.Dialogue
         public class OnCloseDialogueEventArgs : System.EventArgs { }
 
         [Space, SerializeField] private TextReader textReader;
+        [SerializeField] private DialogueOptionController optionController;
 
         private DSDialogueSO currentDialogue;
 
@@ -49,6 +50,23 @@ namespace MemoryFishing.UI.Dialogue
         {
             base.Start();
             CloseWindow();
+            textReader.OnTextFinishedEvent += OnTextFinished;
+            optionController.OnOptionSelectEvent += OnOptionSelected;
+        }
+
+        private void OnOptionSelected(object sender, DialogueOptionController.OnOptionSelectEventArgs args)
+        {
+            GoToNextDialogue(args.SelectedOptionIndex);
+        }
+
+        private void OnTextFinished(object sender, TextReader.OnTextFinishedEventArgs args)
+        {
+            Debug.Log("Text Finished");
+
+            if (currentDialogue.DialogueType == DSDialogueType.MultipleChoice)
+            {
+                optionController.LoadOptions(currentDialogue);
+            }
         }
 
         private void ReceiveSubmitInput(InputAction.CallbackContext ctx)

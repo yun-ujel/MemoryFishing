@@ -17,9 +17,9 @@ MonoBehaviour:
   <Title>k__BackingField: Ferryman
   <Text>k__BackingField: That's hardly kind, Paul.
   <Choices>k__BackingField:
-  - <Text>k__BackingField: Feel Remorse
+  - <Text>k__BackingField: <b>REMORSE:</b> Agreed.
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: 80bd7af3a1bbd1c4db1a637cb27fcd3e, type: 2}
-  - <Text>k__BackingField: Double Down
+  - <Text>k__BackingField: <b>DOUBLE DOWN:</b> I was doing my job.
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: 688f3d0eb229f32408b38d69920d310b, type: 2}
   <DialogueType>k__BackingField: 1
   <IsStartingDialogue>k__BackingField: 0

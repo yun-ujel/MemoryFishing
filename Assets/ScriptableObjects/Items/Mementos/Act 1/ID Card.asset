@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: ID Card
   m_EditorClassIdentifier: 
   <Texture>k__BackingField: {fileID: 2800000, guid: b86f9bebb7aca384d93ac980d8880992, type: 3}
-  <Description>k__BackingField: "A wallet. It's stuffed with old lottery tickets,
-    liquor store receipts and expired gift cards. I should clear it out soon.\r"
+  <Description>k__BackingField: "An old bouncer\u2019s licence card, the name states
+    Paul Bradford. I\u2019ve scratched off the picture with my keys. Must\u2019ve
+    been a bad picture.\r"
