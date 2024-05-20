@@ -109,9 +109,9 @@ MonoBehaviour:
   - <GUID>k__BackingField: f3a1ec3b-f2f3-4e78-9388-45f6a05e18c7
     <Name>k__BackingField: Log10
     <Title>k__BackingField: ???
-    <Text>k__BackingField: Well most of the time when solo rides are requested. It's
+    <Text>k__BackingField: Well most of the time when solo rides are requested, it's
       because they're household names, so well known, that they couldn't have the
-      tranquil ride that they wanted. But you..
+      tranquil ride that they wanted. But you...
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
       <TargetGUID>k__BackingField: 1d991766-fd1d-462f-9c15-fbbbae5db9d1
@@ -143,18 +143,6 @@ MonoBehaviour:
     <DialogueType>k__BackingField: 0
     <Texture>k__BackingField: {fileID: 0}
     <Position>k__BackingField: {x: 7157, y: 68}
-  - <GUID>k__BackingField: 9373e977-04fc-481d-81cc-ad76a08ed468
-    <Name>k__BackingField: Log14
-    <Title>k__BackingField: ???
-    <Text>k__BackingField: "This is all you\u2019re entitled to. Sorry, it's not
-      my job to decide who gets what. I'm just a <b>Ferryman</b>."
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <TargetGUID>k__BackingField: b3efb89b-25d2-4418-a5bc-72001e92cbe1
-    <GroupGUID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Texture>k__BackingField: {fileID: 0}
-    <Position>k__BackingField: {x: 7799, y: 68}
   - <GUID>k__BackingField: d3b0e06d-583e-47ac-9c46-f3eeca4fb7ae
     <Name>k__BackingField: Entry
     <Title>k__BackingField: You
@@ -228,8 +216,8 @@ MonoBehaviour:
   - <GUID>k__BackingField: ff683515-0b7e-4ceb-a5ec-8ba3db59e37c
     <Name>k__BackingField: Log21
     <Title>k__BackingField: Ferryman
-    <Text>k__BackingField: "If that's your choice then go ahead, if you want to be
-      permanently rotting in the river for eternity, that's up to you. But it\u2019ll
+    <Text>k__BackingField: "If that's your choice, then go ahead. If you want to
+      be permanently rotting in the river for eternity, that's up to you. But it\u2019ll
       be painful, depressing and extremely boring after a couple years."
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
@@ -241,8 +229,8 @@ MonoBehaviour:
   - <GUID>k__BackingField: 5d486239-d2da-42e8-ada6-178cf75c236f
     <Name>k__BackingField: Log22
     <Title>k__BackingField: Ferryman
-    <Text>k__BackingField: "But they won't let you in unless you\u2019ve got a good
-      grasp on who you were and what you did. That's kind of the whole point."
+    <Text>k__BackingField: "Plus they won't let you in unless you\u2019ve got a good
+      grasp on who you were and what you did. That's the whole point of all this."
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
       <TargetGUID>k__BackingField: 19f95ebe-0c23-440a-9db2-2a7952160110
@@ -278,7 +266,7 @@ MonoBehaviour:
     <Name>k__BackingField: Log20
     <Title>k__BackingField: You
     <Text>k__BackingField: "And what if I don't?! Surely I\u2019ll remember eventually.
-      Just old man brain, probably"
+      Just my old man brain, probably."
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
       <TargetGUID>k__BackingField: ff683515-0b7e-4ceb-a5ec-8ba3db59e37c
@@ -320,6 +308,18 @@ MonoBehaviour:
     <DialogueType>k__BackingField: 0
     <Texture>k__BackingField: {fileID: 0}
     <Position>k__BackingField: {x: 8441, y: 68}
+  - <GUID>k__BackingField: 9373e977-04fc-481d-81cc-ad76a08ed468
+    <Name>k__BackingField: Log14
+    <Title>k__BackingField: ???
+    <Text>k__BackingField: "This is all you\u2019re entitled to. Sorry, it's not
+      my job to decide who gets what. I'm just a\n<b>Ferryman</b>."
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: b3efb89b-25d2-4418-a5bc-72001e92cbe1
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 7799, y: 68}
   <OldGroupNames>k__BackingField: []
   <OldUngroupedNodeNames>k__BackingField:
   - Log2
@@ -333,7 +333,6 @@ MonoBehaviour:
   - Log10
   - Log12
   - Log13
-  - Log14
   - Entry
   - Log0
   - Log1
@@ -348,5 +347,6 @@ MonoBehaviour:
   - Log24
   - Log23
   - Log15
+  - Log14
   <OldGroupedNodeNames>k__BackingField:
     list: []

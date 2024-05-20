@@ -15,8 +15,8 @@ MonoBehaviour:
   <Texture>k__BackingField: {fileID: 0}
   <DialogueName>k__BackingField: Log22
   <Title>k__BackingField: Ferryman
-  <Text>k__BackingField: "But they won't let you in unless you\u2019ve got a good
-    grasp on who you were and what you did. That's kind of the whole point."
+  <Text>k__BackingField: "Plus they won't let you in unless you\u2019ve got a good
+    grasp on who you were and what you did. That's the whole point of all this."
   <Choices>k__BackingField:
   - <Text>k__BackingField: Next Dialogue
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: f53c7810a256c5948bc35e27a5d9d29f, type: 2}

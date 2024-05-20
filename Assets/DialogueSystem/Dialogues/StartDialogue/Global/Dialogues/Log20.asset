@@ -16,7 +16,7 @@ MonoBehaviour:
   <DialogueName>k__BackingField: Log20
   <Title>k__BackingField: You
   <Text>k__BackingField: "And what if I don't?! Surely I\u2019ll remember eventually.
-    Just old man brain, probably"
+    Just my old man brain, probably."
   <Choices>k__BackingField:
   - <Text>k__BackingField: Next Dialogue
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: db49553529a5087449176c29499d6cdb, type: 2}

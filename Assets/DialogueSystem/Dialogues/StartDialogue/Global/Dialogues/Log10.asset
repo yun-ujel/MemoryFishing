@@ -15,9 +15,9 @@ MonoBehaviour:
   <Texture>k__BackingField: {fileID: 0}
   <DialogueName>k__BackingField: Log10
   <Title>k__BackingField: ???
-  <Text>k__BackingField: Well most of the time when solo rides are requested. It's
+  <Text>k__BackingField: Well most of the time when solo rides are requested, it's
     because they're household names, so well known, that they couldn't have the tranquil
-    ride that they wanted. But you..
+    ride that they wanted. But you...
   <Choices>k__BackingField:
   - <Text>k__BackingField: Next Dialogue
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: 2e11a750aedfb3145b2323cae97569d5, type: 2}
