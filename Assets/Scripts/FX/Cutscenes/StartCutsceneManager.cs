@@ -102,6 +102,10 @@ namespace MemoryFishing.FX.Cutscenes
             guyAnimator.Play("ClimbUp");
             guyAnimation.enabled = true;
 
+            cutsceneCameraTracker.VirtualCam.m_Lens.OrthographicSize = 8;
+            cutsceneCameraTracker.Target = boat.transform.position;
+            cutsceneCameraTracker.UseTracker = true;
+
             playerManager.EnablePlayerStateSwitching = true;
             playerManager.SwitchToBoatState();
 
@@ -126,6 +130,7 @@ namespace MemoryFishing.FX.Cutscenes
             fishingSpots.SetActive(true);
             ferrymanAnimation.DisableFishing();
 
+            cutsceneCameraTracker.UseTracker = false;
             dialogueController.OnStartDialogueEvent -= OnReadDialogue;
             dialogueController.OnCloseDialogueEvent -= OnIntroDialogueClosed;
         }

@@ -858,7 +858,7 @@ MonoBehaviour:
   frequencyMultiplier: 1.4
   amplitude: 1
   amplitudeMultiplier: 0.6
-  speed: 1
+  speed: 0.5
   speedMultiplier: 1.07
   body: {fileID: 184156953}
   samplePoints:
@@ -2973,7 +2973,7 @@ MonoBehaviour:
   groupedDialogues: 0
   startingDialoguesOnly: 0
   selectedDialogueGroupIndex: 0
-  selectedDialogueIndex: 25
+  selectedDialogueIndex: 24
 --- !u!1 &677617944
 GameObject:
   m_ObjectHideFlags: 0
@@ -3093,14 +3093,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0, y: 0.9659258, z: -0.2588191, w: 0}
+  m_LocalRotation: {x: 0, y: 0.9063079, z: -0.42261827, w: 0}
   m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 584952862}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 30, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 180, z: 0}
 --- !u!114 &705507996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4056,7 +4056,9 @@ MonoBehaviour:
   - <Item>k__BackingField: {fileID: 11400000, guid: 7f0af7c512162074b82156a9f35242d6, type: 2}
     <Dialogue>k__BackingField: {fileID: 300938971}
   screenBlackout: {fileID: 316877498}
+  blackoutColor: {r: 0, g: 0, b: 0, a: 0.2}
   itemIcon: {fileID: 78319689}
+  fadeTime: 0.5
 --- !u!1 &920535094
 GameObject:
   m_ObjectHideFlags: 0
@@ -5708,7 +5710,7 @@ MonoBehaviour:
   frequencyMultiplier: 1.4
   amplitude: 1
   amplitudeMultiplier: 0.6
-  speed: 1
+  speed: 0.5
   speedMultiplier: 1.07
   body: {fileID: 1322381884}
   samplePoints:
@@ -6482,7 +6484,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595744149}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
